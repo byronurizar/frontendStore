@@ -38,4 +38,8 @@ registrarCategoria(json){
   return this.http.post("http://127.0.0.1:3333/apiStore/v1/categorias/registro",json,httpOptions)
 }
 
+listar(){
+  return this.http.get("http://127.0.0.1:3333/apiStore/v1/categorias/registro",httpOptions)
+}
+
 }
