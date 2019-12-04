@@ -1,0 +1,77 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Categoria
+                    <small>Gestión de categorias</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Basicos </li>
+                    <li class="breadcrumb-item">Categorias </li>
+                    <li class="breadcrumb-item active">Registrar</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->
+
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Registrar</h5>
+                </div>
+                <div class="card-body">
+
+                    <form #regCategoriaForm="ngForm" (ngSubmit)="registrarCategoria(regCategoriaForm)">
+                        <div class="needs-validation">
+                            <div class="form-row">
+                                <div class="col-md-9 mb-3">
+                                    <label for="txtDescripcion">Descripción</label>
+                                    <input type="text" name="descripcion" class="form-control" #descripcion="ngModel"
+                                        [(ngModel)]="categoria.descripcion"
+                                        [ngClass]="{'is-invalid': descripcion.errors && descripcion.touched}" required
+                                        minlength="2">
+                                    <div [hidden]="!descripcion.errors?.required" class="text text-danger">
+                                        Nombre requerido
+                                    </div>
+                                    <div [hidden]="!descripcion.errors?.minlength" class="text text-danger">
+                                        Debe de contener al menos 2 caracteres
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mb-3">
+                                    <label for="ltaEstado">Estado</label>
+                                    <select name="idEstado" class="form-control custom-select"  [(ngModel)]="categoria.estado" #estado="ngModel" [ngClass]="{'is-invalid': estado.errors && estado.touched}" required
+                                    minlength="1"
+                                    >
+                                        <option value="" selected="true">Seleccionar</option>
+                                        <option value="1">Activo</option>
+                                        <option value="2">Inactivo</option>
+                                    </select>
+                                    <div [hidden]="!estado.errors?.required" class="text text-danger">
+                                            Deve de seleccionar un estado
+                                        </div>
+                                        <div [hidden]="!estado.errors?.minlength" class="text text-danger">
+                                            Seleccione un elemento de la lista
+                                        </div>
+
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary" type="submit">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->

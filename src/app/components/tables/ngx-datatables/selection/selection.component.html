@@ -1,0 +1,48 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Selection Tables
+                    <small>Universal Admin Panel</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item">Ngx Datatables</li>
+                    <li class="breadcrumb-item active">Selection Tables</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Selection Table</h5>
+                </div>
+                <div class="card-body custom-datatable">
+                    <ngx-datatable class="bootstrap" [rows]="rows" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="50" [rowHeight]="'auto'" [limit]="5" [selected]="selected"
+                        [selectionType]="'checkbox'" [selectAllRowsOnPage]="false" (select)='onSelect($event)'>
+                        <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false"
+                            [draggable]="false" [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Name"></ngx-datatable-column>
+                        <ngx-datatable-column name="Gender"></ngx-datatable-column>
+                        <ngx-datatable-column name="Company"></ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends -->

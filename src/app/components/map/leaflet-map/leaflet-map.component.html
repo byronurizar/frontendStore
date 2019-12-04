@@ -1,0 +1,67 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Leaflet Map
+                    <small>Universal Admin Panel</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Map</li>
+                    <li class="breadcrumb-item">Leaflet Map</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->
+<div class="container-fluid">
+  <div class="row leaflet-custom">
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Simple Map</h5>
+        </div>
+        <div class="card-body">
+          <div class="map-js-height" leaflet [leafletOptions]="options1">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Map with specify layer</h5>
+        </div>
+        <div class="card-body">
+          <div class="map-js-height" leaflet [leafletOptions]="options2" [leafletLayersControl]="layersControl">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Map with polygon</h5>
+        </div>
+        <div class="card-body">
+          <div class="map-js-height" leaflet [leafletOptions]="options3" (leafletMapReady)="onMapReady($event)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="card">
+        <div class="card-header">
+          <h5>Map with Marker</h5>
+        </div>
+        <div class="card-body">
+          <div class="map-js-height" leaflet [leafletOptions]="options4" (leafletMapReady)="onMapReady4($event)"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <div class="page-header">
+    <div class="row">
+      <div class="col-lg-6">
+        <h3>NGX-Wizard
+          <small>Universal Admin panel</small>
+        </h3>
+      </div>
+      <div class="col-lg-6">
+        <ol class="breadcrumb pull-right">
+          <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+          </li>
+          <li class="breadcrumb-item">Forms </li>
+          <li class="breadcrumb-item active">NGX-Wizard</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Form Wizard with icon</h5>
+        </div>
+        <div class="card-body step-indicator">
+          <aw-wizard navBarLayout="large-filled-symbols">
+            <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome ' }"
+              stepTitle="Registration">
+              <app-registration></app-registration>
+            </aw-wizard-step>
+            <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf084;', fontFamily: 'FontAwesome' }" stepTitle="Email">
+              <app-email></app-email>
+            </aw-wizard-step>
+            <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf099;', fontFamily: 'FontAwesome' }"
+              stepTitle="Birth Date">
+              <app-birth-date></app-birth-date>
+            </aw-wizard-step>
+          </aw-wizard>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

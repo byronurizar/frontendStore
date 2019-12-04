@@ -1,0 +1,65 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Ngx Toastr
+                    <small>Universal Admin panel</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right mb-0">
+                    <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Advance </li>
+                    <li class="breadcrumb-item active">Ngx Toastr</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Types</h5>
+                </div>
+                <div class="card-body btn-showcase">
+                    <button type="button" class="btn btn-warning" (click)="warning()">Warning</button>
+                    <button type="button" class="btn btn-success" (click)="success()">Success</button>
+                    <button type="button" class="btn btn-info" (click)="info()">Information</button>
+                    <button type="button" class="btn btn-danger" (click)="danger()">Danger</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Dissmiss Options</h5>
+                </div>
+                <div class="card-body btn-showcase">
+                    <button type="button" class="btn btn-danger" (click)="timeout()">Show Toast</button>
+                    <button type="button" class="btn btn-info" (click)="dismissToastOnClick()">Clear Toast On
+                        Click</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Advanced Options</h5>
+                </div>
+                <div class="card-body btn-showcase">
+                    <button type="button" class="btn btn-danger" (click)="showCloseButton()">With Close Icon</button>
+                    <button type="button" class="btn btn-dark" (click)="showProgressbar()">With Progressbar</button>
+                    <button type="button" class="btn btn-info" (click)="titleClass()">Title Class</button>
+                    <button type="button" class="btn btn-success" (click)="messageClass()">Message Class</button>
+                    <button type="button" class="btn btn-primary" (click)="enableHtml()">HTML Enabled</button>
+                    <button type="button" class="btn btn-secondary" (click)="position()">Toastr Position</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

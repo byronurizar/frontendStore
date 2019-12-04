@@ -1,0 +1,470 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Chart Widget
+                    <small>Universal Admin panel</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item">Widgets </li>
+                    <li class="breadcrumb-item active">Chart Widget</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <!--Chart widget top Start -->
+    <div class="row">
+        <div class="col-xl-4 col-md-12">
+            <div class="card">
+                <div class="chart-widget-top bg-primary">
+                    <div class="row card-body">
+                        <div class="col-5">
+                            <h5>SALE</h5>
+                            <span class="num"><span class="total-num counter" [CountTo]="90" [from]="0"
+                                    [duration]="2"></span>%<i class="icon-angle-up f-12 ml-1"></i></span>
+                        </div>
+                        <div class="col-7 text-right">
+                            <h4 class="num total-value">$ <span class="total-num counter" [CountTo]="365" [from]="0"
+                                    [duration]="2"></span>.00</h4>
+                        </div>
+                    </div>
+                    <div>
+                        <x-chartist class="flot-chart-placeholder" [data]="salesWidget.data" [type]="salesWidget.type"
+                            [options]="salesWidget.options">
+                        </x-chartist>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-12">
+            <div class="card">
+                <div class="chart-widget-top bg-secondary">
+                    <div class="row card-body">
+                        <div class="col-7">
+                            <h5>PROJECTS</h5>
+                            <span class="num"><span class="total-num counter" [CountTo]="30" [from]="0"
+                                    [duration]="2"></span>%<i class="icon-angle-up f-12 ml-1"></i></span>
+                        </div>
+                        <div class="col-5 text-right">
+                            <h4 class="total-num counter" [CountTo]="154" [from]="0" [duration]="2"></h4>
+                        </div>
+                    </div>
+                    <div>
+                        <x-chartist class="flot-chart-placeholder" [data]="projectWidget.data"
+                            [type]="projectWidget.type" [options]="projectWidget.options"></x-chartist>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-md-12">
+            <div class="card">
+                <div class="chart-widget-top bg-success">
+                    <div class="row card-body">
+                        <div class="col-7">
+                            <h5>PRODUCTS</h5>
+                            <span class="num"><span class="total-num counter" [CountTo]="68" [from]="0"
+                                    [duration]="2"></span>%<i class="icon-angle-up f-12 ml-1"></i></span>
+                        </div>
+                        <div class="col-5 text-right">
+                            <h4 class="num total-value"><span class="total-num counter" [CountTo]="96" [from]="0"
+                                    [duration]="2"></span>M</h4>
+                        </div>
+                    </div>
+                    <div>
+                        <x-chartist class="flot-chart-placeholder" [data]="productWidget.data"
+                            [type]="productWidget.type" [options]="productWidget.options"></x-chartist>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Chart widget top Ends -->
+
+    <!--Chart widget with bar chart Start-->
+    <div class="row">
+        <div class="col-xl-6 col-md-12">
+            <div class="card o-hidden">
+                <div class="bar-chart-widget">
+                    <div class="top-content bg-primary">
+                        <div class="row">
+                            <div class="col-7">
+                                <x-chartist [data]="WidgetBarChart1.data" [type]="WidgetBarChart1.type"
+                                    [options]="WidgetBarChart1.options">
+                                </x-chartist>
+                            </div>
+                            <div class="col-5">
+                                <div class="earning-details">
+                                    <div class="text-left">
+                                        <span>Marketing Expenses</span>
+                                        <h4 class="mt-1 num mb-0">$ <span class="total-num counter" [CountTo]="365"
+                                                [from]="0" [duration]="2"></span></h4>
+                                    </div>
+                                    <i class="icon-announcement"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-content card-body">
+                        <div class="row">
+                            <div class="col-4 b-r-light">
+                                <div>
+                                    <span class="num font-primary">12%<i class="icon-angle-up f-12 ml-1"></i></span>
+                                    <span class="text-muted mt-2 mb-2 block-bottom">Marketing</span>
+                                    <h4 class="num m-0">$<span class="total-num counter" [CountTo]="931" [from]="0"
+                                            [duration]="2"></span></h4>
+                                </div>
+                            </div>
+                            <div class="col-4 b-r-light">
+                                <div>
+                                    <span class="num font-secondary">15%<i class="icon-angle-up f-12 ml-1"></i></span>
+                                    <span class="text-muted mt-2 mb-2 block-bottom">Affiliate</span>
+                                    <h4 class="num m-0">$<span class="total-num counter" [CountTo]="231" [from]="0"
+                                            [duration]="2"></span></h4>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div>
+                                    <span class="num font-success">34%<i class="icon-angle-up f-12 ml-1"></i></span>
+                                    <span class="text-muted  mt-2 mb-2 block-bottom">Advertise</span>
+                                    <h4 class="num m-0">$<span class="total-num counter" [CountTo]="421" [from]="0"
+                                            [duration]="2"></span></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12">
+            <div class="card o-hidden">
+                <div class="bar-chart-widget">
+                    <div class="top-content bg-secondary">
+                        <div class="row">
+                            <div class="col-7">
+                                <x-chartist [data]="WidgetBarChart2.data" [type]="WidgetBarChart2.type"
+                                    [options]="WidgetBarChart2.options">
+                                </x-chartist>
+                            </div>
+                            <div class="col-5">
+                                <div class="earning-details">
+                                    <div class="text-left">
+                                        <span>Total Earning</span>
+                                        <h4 class="mt-1 num mb-0"><span class="total-num counter" [CountTo]="365"
+                                                [from]="0" [duration]="2"></span> M
+                                        </h4>
+                                    </div>
+                                    <i class="icofont icofont-coins"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-content card-body">
+                        <div class="row">
+                            <div class="col-4 b-r-light">
+                                <div>
+                                    <span class="num font-primary">12%<i class="icon-angle-up f-12 ml-1"></i></span>
+                                    <span class="text-muted mt-2 mb-2 block-bottom">Year</span>
+                                    <h4 class="num m-0"><span class="total-num counter" [CountTo]="365" [from]="0"
+                                            [duration]="2"></span>M</h4>
+                                </div>
+                            </div>
+                            <div class="col-4 b-r-light">
+                                <div>
+                                    <span class="num font-secondary">15%<i class="icon-angle-up f-12 ml-1"></i></span>
+                                    <span class="text-muted mt-2 mb-2 block-bottom">Month</span>
+                                    <h4 class="num m-0"><span class="total-num counter" [CountTo]="698" [from]="0"
+                                            [duration]="2"></span>M</h4>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div>
+                                    <span class="num font-success">34%<i class="icon-angle-up f-12 ml-1"></i></span>
+                                    <span class="text-muted mt-2 mb-2 block-bottom">Today</span>
+                                    <h4 class="num m-0"><span class="total-num counter" [CountTo]="9631" [from]="0"
+                                            [duration]="2"></span>M</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Chart widget with bar chart Ends-->
+
+    <!--small widgets Start-->
+    <div class="row">
+
+        <!--Live Product chart widget Start-->
+        <div class="xl-50 col-md-6">
+            <div class="small-chart-widget chart-widgets-small">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Live Products</h5>
+                    </div>
+                    <div class="card-body bg-info">
+                        <div class="chart-container">
+                            <x-chartist class="live-products" [data]="liveProductChart.data"
+                                [type]="liveProductChart.type" [options]="liveProductChart.options"
+                                [events]="liveProductChart.events"></x-chartist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Live Product chart widget Ends-->
+
+        <!--Turnover chart widget Start-->
+        <div class="xl-50 col-md-6">
+            <div class="small-chart-widget chart-widgets-small">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Turnover</h5>
+
+                    </div>
+                    <div class="card-body bg-success">
+                        <div class="chart-container">
+                            <x-chartist class="turnover" [data]="turnOverChart.data" [type]="turnOverChart.type"
+                                [options]="turnOverChart.options"></x-chartist>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Turnover chart widget Ends-->
+
+        <!--Monthly Sale chart widget Start-->
+        <div class="xl-50 col-md-6">
+            <div class="small-chart-widget chart-widgets-small">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Monthly Sales</h5>
+                    </div>
+                    <div class="card-body bg-danger">
+                        <div class="chart-container">
+                            <x-chartist class="monthly" [data]="monthlyChart.data" [type]="monthlyChart.type"
+                                [options]="monthlyChart.options"></x-chartist>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Monthly Sale chart widget Ends-->
+
+        <!--Uses chart widget Start-->
+        <div class="xl-50 col-md-6">
+            <div class="small-chart-widget chart-widgets-small">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Uses</h5>
+                    </div>
+                    <div class="card-body bg-primary">
+                        <div class="chart-container">
+                            <x-chartist class="uses" [data]="usesChart.data" [type]="usesChart.type"
+                                [options]="usesChart.options"></x-chartist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Uses chart widget Ends-->
+
+    </div>
+    <!--small widgets Ends-->
+
+    <!--status widget Start -->
+    <div class="row">
+        <div class="col-xl-4 col-lg-12">
+            <div class="status-widget">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-9">
+                                <h5>Finance Status</h5>
+                            </div>
+                            <div class="col-3 text-sm-right">
+                                <i class="icofont icofont-growth f-20 text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="status-details">
+                            <div class="row">
+                                <div class="col-4 text-center">
+                                    <span>Investor</span>
+                                    <h4 class="total-num counter" [CountTo]="256" [from]="0" [duration]="2"></h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span>Money</span>
+                                    <h4 class="mb-0">$<span class="total-num counter" [CountTo]="362" [from]="0"
+                                            [duration]="2"></span></h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span>Earning</span>
+                                    <h4 class="mb-0"><span class="total-num counter" [CountTo]="86" [from]="0"
+                                            [duration]="2"></span>%</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="status-chart bg-primary">
+                        <div class="chart-container">
+                            <x-chartist class="flot-chart-placeholder" [data]="financeWidget.data"
+                                [type]="financeWidget.type" [options]="financeWidget.options">
+                            </x-chartist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-12">
+            <div class="status-widget">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-9">
+                                <h5>Order Status</h5>
+                            </div>
+                            <div class="col-3 text-sm-right">
+                                <i class="icofont icofont-bag f-20 text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="status-details">
+                            <div class="row">
+                                <div class="col-4 text-center">
+                                    <span>Complete</span>
+                                    <h4 class="mb-0"><span class="total-num counter" [CountTo]="62" [from]="0"
+                                            [duration]="2"></span>%</h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span>Pending</span>
+                                    <h4 class="mb-0"><span class="total-num counter" [CountTo]="36" [from]="0"
+                                            [duration]="2"></span>%</h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span>Cancle</span>
+                                    <h4 class="mb-0"><span class="total-num counter" [CountTo]="20" [from]="0"
+                                            [duration]="2"></span>%</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="status-chart bg-secondary">
+                        <div class="chart-container">
+                            <x-chartist class="flot-chart-placeholder" [data]="orderStatusWidget.data"
+                                [type]="orderStatusWidget.type" [options]="orderStatusWidget.options">
+                            </x-chartist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-12">
+            <div class="status-widget">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-9">
+                                <h5>Skill Status</h5>
+                            </div>
+                            <div class="col-3 text-sm-right">
+                                <i class="icofont icofont-architecture-alt f-20 text-muted"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="status-details">
+                            <div class="row">
+                                <div class="col-4 text-center">
+                                    <span>Design</span>
+                                    <h4 class="mb-0"><span class="total-num counter" [CountTo]="25" [from]="0"
+                                            [duration]="2"></span>%</h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span>Market</span>
+                                    <h4 class="mb-0"><span class="total-num counter" [CountTo]="40" [from]="0"
+                                            [duration]="2"></span>%</h4>
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span>Converse</span>
+                                    <h4 class="mb-0"><span class="total-num counter" [CountTo]="35" [from]="0"
+                                            [duration]="2"></span>%</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="status-chart bg-success">
+                        <div class="chart-container">
+                            <x-chartist class="flot-chart-placeholder" [data]="skillWidget.data"
+                                [type]="skillWidget.type" [options]="skillWidget.options">
+                            </x-chartist>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--status widget Ends -->
+
+    <!--Browser uses and website visiter widget Start-->
+    <div class="row">
+
+        <!--Monthly  Visiter widget chart Start-->
+        <div class="col-sm-6">
+            <div class="donut-chart-widget">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Monthly Visiter</h5>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas baseChart class="chart flot-chart-placeholder" [legend]="monthlyChartLegend"
+                                [data]="monthlyChartData" [labels]="monthlyChartLabels" [options]="monthlyChartOptions"
+                                [chartType]="monthlyChartType" [colors]="monthlyChartColors" height="300"></canvas>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Monthly Visiter widget chart Ends-->
+
+        <!--Daily visiter widget Start-->
+        <div class="col-sm-6">
+            <div class="donut-chart-widget">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Daily Visiter</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="chart-container">
+                            <canvas baseChart class="chart flot-chart-placeholder" [legend]="dailyChartLegend"
+                                [data]="dailyChartData" [labels]="dailyChartLabels" [options]="dailyChartOptions"
+                                [chartType]="dailyChartType" [colors]="dailyChartColors" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Daily visiter widget Ends-->
+
+    </div>
+    <!--Browser uses and website visiter widget Ends-->
+
+</div>
+<!-- Container-fluid Ends -->

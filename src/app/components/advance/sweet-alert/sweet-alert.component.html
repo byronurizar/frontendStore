@@ -1,0 +1,84 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Sweet Alert
+                    <small>Universal Admin panel</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right mb-0">
+                    <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Advance </li>
+                    <li class="breadcrumb-item active">sweet Alert</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Basic</h5>
+                </div>
+                <div class="card-body btn-showcase">
+                    <button type="button" class="btn btn-light" (click)="basicAlert()">Basic</button>
+                    <button type="button" class="btn btn-warning" (click)="withTitle()">With Title alert</button>
+                    <button type="button" class="btn btn-info" (click)="withImage()">With Image alert</button>
+                    <button type="button" class="btn btn-danger" (click)="error()">Error</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>States</h5>
+                </div>
+                <div class="card-body btn-showcase">
+                    <button type="button" class="btn btn-warning" (click)="warning()">Warning</button>
+                    <button type="button" class="btn btn-success" (click)="success()">Success</button>
+                    <button type="button" class="btn btn-info" (click)="info()">Information</button>
+                    <button type="button" class="btn btn-danger" (click)="danger()">Danger</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Types</h5>
+                </div>
+                <div class="card-body btn-showcase">
+                    <button type="button" class="btn btn-danger" (click)="customAlert()">Custom Alert</button>
+                    <button type="button" class="btn btn-primary" (click)="customHTML()">Custom HTML</button>
+                    <button type="button" class="btn btn-info" (click)="customAnimation()">Custom Animation</button>
+                    <button type="button" class="btn btn-warning" (click)="customPosition()">Custom Positioned</button>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Advanced</h5>
+                </div>
+                <div class="card-body btn-showcase">
+                    <button type="button" class="btn btn-success" (click)="withConfirmation()">With
+                        Confirmation</button>
+                    <button type="button" class="btn btn-danger" (click)="withCancelled()">With Cancelled</button>
+                    <button type="button" class="btn btn-info" (click)="autoClose()">Auto Close</button>
+                    <button type="button" class="btn btn-warning" (click)="withAjax()">With Ajax</button>
+                    <button type="button" class="btn btn-primary" (click)="stepsAlert()">Step Alert</button>
+                    <button type="button" class="btn btn-secondary" (click)="dynamicQueue()">Dynamic Queue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

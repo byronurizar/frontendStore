@@ -1,0 +1,288 @@
+<div class="floated-customizer-btn third-floated-btn" (click)="open=!open">
+  <div class="icon-w"> <i class="fa fa-cog fa-spin"></i> </div><span>Customizer</span>
+</div>
+<div class="floated-customizer-panel" [class.active]="open">
+  <div class="fcp-content">
+    <div class="close-customizer-btn"><i class="icon-close" (click)="open = !open"></i></div>
+    <div class="customizer-title">
+      <h5>THEME CUSTOMIZER</h5>
+      <p class="mb-0">Customize & Preview in Real Time</p>
+      <button class="btn btn-primary plus-popup mt-2 " (click)="copyConfig(popup,data)">Configuration</button>
+      <ng-template #popup let-modal>
+        <div class="modal-header modal-copy-header">
+           <h5 class="headerTitle mb-0">Customizer configuration</h5>
+           <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+           </button>
+        </div>
+        <div class="modal-body">
+           <div class="modal-header config-popup">
+              <p>To replace our design with your desired theme. Please do configuration as mention </p>
+              <p> <b> Path : shared > data > config > config.ts </b> </p>
+           <div>
+           <pre>
+<code>
+export class ConfigDB &#123;
+static data = &#123;
+  mainThemeLayout&#58; '{{customize.data.mainThemeLayout}}',
+  menuLayout&#58; '{{customize.data.menuLayout}}',
+  scroll&#58; '{{customize.data.borderNavigation}}',
+  borderNavigation&#58; '{{customize.data.borderNavigation}}',
+  rightSidebarIcon&#58; '{{customize.data.rightSidebarIcon}}',
+  backgroungImage&#58; '{{customize.data.backgroungImage}}',
+  defaultNavigation&#58; '{{customize.data.defaultNavigation}}',
+  header&#58;  &#123;
+     semiLightbgColor&#58; '{{customize.data.header.semiLightbgColor}}',
+     headerBgColor&#58; '{{customize.data.header.headerBgColor}}'
+  &#125;,
+&#125;
+&#125;
+</code>
+              </pre>
+              </div>
+              <button class="btn btn-primary mt-2" (click)="copyText(this.customize.data)">Copy Json</button>
+           </div>
+        </div>
+     </ng-template>
+      
+    </div>
+    <div class="fcp-group">
+      <div class="fcp-group-contents">
+        <div class="main-option">
+          <div class="row">
+            <div class="col">
+              <div class="main-theme-layout-container"> <a class="main-theme-layout"
+                  theme-layout="main-theme-layout-5" title="Light Layout" (click)="layout('main-theme-layout-5')"><img class="img"
+                    src="assets/images/customizer/light.png"  alt="Light Layout"></a> <a
+                  class="main-theme-layout" theme-layout="main-theme-layout-1" title="Dark Sidebar"><img class="img"
+                    src="assets/images/customizer/sidebar-dark.png" (click)="layout('main-theme-layout-1')" alt="Dark Sidebar"></a> <a
+                  class="main-theme-layout" theme-layout="main-theme-layout-2" title="Dark Page-body"><img class="img"
+                    src="assets/images/customizer/page-bosy-dark.png" (click)="layout('main-theme-layout-2')" alt="Dark Page-body"></a> <a
+                  class="main-theme-layout" theme-layout="main-theme-layout-3" title="Dark Page-body & Sidebar"><img class="img"
+                    src="assets/images/customizer/page-body-sidebar.png" (click)="layout('main-theme-layout-3')" alt="Dark Page-body & Sidebar"></a> <a
+                  class="main-theme-layout" theme-layout="main-theme-layout-4" title="Dark Layout"><img class="img"
+                    src="assets/images/customizer/dark.png" (click)="layout('main-theme-layout-4')" alt="Dark Layout"></a> </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div CLASS="fcp-options">
+      <div class="fcp-group">
+        <div class="fcp-group-contents">
+          <div class="layout-option">
+            <ul class="nav nav-tabs nav-material nav-primary" id="top-tab" role="tablist">
+              <li class="nav-item"> <a class="nav-link active" id="top-home-tab" data-toggle="tab"
+                  role="tab" aria-controls="nav_Layouts" aria-selected="true" [ngClass]="{'active show': layoutSetting == 'bodyLayout' }"
+                  (click)="sublayoutSetting('bodyLayout')"> Layouts</a></li>
+              <li class="nav-item"> <a class="nav-link" id="profile-top-tab1" data-toggle="tab"
+                  role="tab" aria-controls="nav_navigation" aria-selected="false" [ngClass]="{'active show': layoutSetting == 'sidebar' }"
+                  (click)="sublayoutSetting('sidebar')">Sidebar</a></li>
+            </ul>
+            <div class="tab-content" id="top-tabContent1">
+              <div class="tab-pane fade active show" id="nav_Layouts" role="tabpanel" [ngClass]="{'active show': layoutSetting == 'bodyLayout' }">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group mb-0">
+                      <div class="radio radio-primary m-t-5 m-b-5"> <input type="radio" name="menu-layouts"
+                          id="default_menu" value="menu-layout-default" (click)="menuLayout('default')"> <label for="default_menu">Default</label>
+                      </div>
+                      <div class="radio radio-primary"> <input type="radio" name="menu-layouts" id="collapsed_menu"
+                          value="menu-layout-collapsed" (click)="menuLayout('sidebar-close')"> <label for="collapsed_menu">Collapsed Menu</label> </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav_navigation" role="tabpanel" aria-labelledby="profile-top-tab" [ngClass]="{'active show': layoutSetting == 'sidebar' }">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="form-group mb-0">
+                      <div class="checkbox checkbox-primary m-squar"> <input id="navigation_scroll_check"
+                          type="checkbox" name="naviagationLayoutCheckbox" value="native-scroll" (click)="sidebarLayout('native-scroll')" [checked]="checked" [disabled]="disableOthers"> <label
+                          for="navigation_scroll_check" class="mt-0">Nativ Scroll</label> </div>
+                      <div class="checkbox checkbox-primary m-squar"> <input id="navigation_bordered_check"
+                          type="checkbox" name="naviagation-layout-checkbox" (click)="sidebarNavLayout('navigation-bordered')" value="navigation-bordered" [checked]="checked" [disabled]="disableOthers"> <label
+                          for="navigation_bordered_check">Bordered Navigation</label> </div>
+                      <div class="checkbox checkbox-primary m-squar"> <input id="navigation_rightside_check"
+                          type="checkbox" name="naviagation-layout-checkbox" value="navigation-rightside" (click)="rightSidebarIconLayout('navigation-rightside')" [checked]="checked" [disabled]="disableOthers"> <label
+                          for="navigation_rightside_check" >Right Side Icons</label> </div>
+                      <div class="checkbox checkbox-primary m-squar"> <input id="navigation_back_image_check"
+                          type="checkbox" name="naviagation-layout-checkbox" value="native-image-bg" (click)="backgroungImageLayout('native-image-bg')" [checked]="checked" [disabled]="disableOthers"> <label
+                          for="navigation_back_image_check">Background Image</label> </div>
+                      <div class="checkbox checkbox-primary m-squar"> <input id="navigation_default_check"
+                          type="checkbox" name="naviagation-layout-checkbox" value="native-default" (change)="checkSelected($event)"  [checked]="!checked" (click)="defaultLayout('native-default')"> <label
+                          for="navigation_default_check">Default Navigation</label>
+                        <p class="mb-0"><b>Note : </b>For trying other option need to please uncheck all option</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fcp-group">
+        <div class="fcp-group-header">Header Color Options</div>
+        <div class="fcp-group-contents">
+          <div class="navigation-color-option">
+            <ul class="nav nav-tabs nav-material nav-primary" id="top-tab1" role="tablist">
+              <li class="nav-item"> <a class="nav-link active" id="contact-top-tab" data-toggle="tab"
+                 role="tab" aria-controls="fullnav_dark" aria-selected="false" (click)="headerLayoutSetting('header')"  [ngClass]="{'active show': headerSetting == 'header' }">Header</a></li>
+              <li class="nav-item"> <a class="nav-link" id="top-home-tab1" data-toggle="tab"
+                  role="tab" aria-controls="semi_light" aria-selected="true" (click)="headerLayoutSetting('brand')"  [ngClass]="{'active show': headerSetting == 'brand' }"> Brand</a></li>
+              <li class="nav-item"> <a class="nav-link" id="profile-top-tab" data-toggle="tab"
+                  role="tab" aria-controls="semi_dark" aria-selected="false"  (click)="headerLayoutSetting('onlyNav')"  [ngClass]="{'active show': headerSetting == 'onlyNav' }">Only nav</a></li>
+            </ul>
+            <div class="tab-content" id="top-tabContent">
+              <div class="tab-pane fade" id="semi_light" role="tabpanel" aria-labelledby="top-home-tab" [ngClass]="{'active show': headerSetting == 'header' }">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <div class="fcp-group-header-sub">Light Version</div>
+                      <div class="radio radio-default"> <input type="radio" name="semi-light" id="semi_light_default"
+                          value="bg-default" (click)="headerLayout('bg-default')"> <label for="semi_light_default"></label> </div>
+                      <div class="radio radio-primary"> <input type="radio" name="semi-light" id="semi_light_primary"
+                          value="bg-primary" (click)="headerLayout('bg-primary')"> <label for="semi_light_primary"></label> </div>
+                      <div class="radio radio-secondary"> <input type="radio" name="semi-light"
+                          id="semi_light_secondary" value="bg-secondary" (click)="headerLayout('bg-secondary')"> <label for="semi_light_secondary"></label>
+                      </div>
+                      <div class="radio radio-danger"> <input type="radio" name="semi-light" id="semi_light_danger"
+                          value="bg-danger" (click)="headerLayout('bg-danger')"> <label for="semi_light_danger"></label> </div>
+                      <div class="radio radio-success"> <input type="radio" name="semi-light" id="semi_light_success"
+                          value="bg-success" (click)="headerLayout('bg-success')"> <label for="semi_light_success"></label> </div>
+                      <div class="radio radio-info"> <input type="radio" name="semi-light" id="semi_light_info"
+                          value="bg-info" (click)="headerLayout('bg-info')"> <label for="semi_light_info"></label> </div>
+                    
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div>
+                      <div class="fcp-group-header-sub">Dark Version</div>
+                      <div class="radio radio-default" (click)="headerLayout('bg-default-light-color')"> <input type="radio" name="semi-light"
+                          id="semi_light_default_light" value="bg-default-light-color"> <label
+                          for="semi_light_default_light"></label> </div>
+                      <div class="radio radio-primary"> <input type="radio" name="semi-light"
+                          id="semi_light_primary_light" value="bg-primary-light-color"  (click)="headerLayout('bg-primary-light-color')"> <label
+                          for="semi_light_primary_light"></label> </div>
+                      <div class="radio radio-secondary"> <input type="radio" name="semi-light"
+                          id="semi_light_secondary_light" value="bg-secondary-light-color" (click)="headerLayout('bg-secondary-light-color')"> <label
+                          for="semi_light_secondary_light"></label> </div>
+                      <div class="radio radio-danger"> <input type="radio" name="semi-light"
+                          id="semi_light_danger_light" value="bg-danger-light-color" (click)="headerLayout('bg-danger-light-color')"> <label
+                          for="semi_light_danger_light"></label> </div>
+                      <div class="radio radio-success"> <input type="radio" name="semi-light"
+                          id="semi_light_success_light" value="bg-success-light-color" (click)="headerLayout('bg-success-light-color')"> <label
+                          for="semi_light_success_light"></label> </div>
+                      <div class="radio radio-info"> <input type="radio" name="semi-light" id="semi_light_info_light"
+                          value="bg-info-light-color" (click)="headerLayout('bg-info-light-color')"> <label for="semi_light_info_light" ></label> </div>
+                    
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="semi_dark" role="tabpanel" aria-labelledby="profile-top-tab" [ngClass]="{'active show': headerSetting == 'brand' }">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <div class="fcp-group-header-sub">Light Version</div>
+                      <div class="radio radio-default"> <input type="radio" name="header-light"
+                          id="header_light_default"  (click)="brandLayout('bg-default')" value="bg-default"> <label for="header_light_default"></label>
+                      </div>
+                      <div class="radio radio-primary"> <input type="radio" name="header-light"
+                          id="header_light_primary"  (click)="brandLayout('bg-primary')" value="bg-primary"> <label for="header_light_primary"></label>
+                      </div>
+                      <div class="radio radio-secondary"> <input type="radio" name="header-light"
+                          id="header_light_secondary"  (click)="brandLayout('bg-secondary')" value="bg-secondary"> <label for="header_light_secondary"></label>
+                      </div>
+                      <div class="radio radio-danger"> <input type="radio" name="header-light" id="header_light_danger"
+                           (click)="brandLayout('bg-danger')" value="bg-danger"> <label for="header_light_danger"></label> </div>
+                      <div class="radio radio-success"> <input type="radio" name="header-light"
+                          id="header_light_success"  (click)="brandLayout('bg-success')" value="bg-success"> <label for="header_light_success"></label>
+                      </div>
+                      <div class="radio radio-info"> <input type="radio" name="header-light" id="header_light_info"
+                           (click)="brandLayout('bg-info')" value="bg-info"> <label for="header_light_info"></label> </div>
+                          <div class="radio radio-light"> <input type="radio" name="semi-light" id="semi_light_light"
+                             (click)="brandLayout('bg-light')" value="bg-light"> <label for="semi_light_light"></label> </div>
+                    </div>
+
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <div class="fcp-group-header-sub">Dark Version</div>
+                      <div class="radio radio-default"> <input type="radio" name="header-light"
+                          id="header_light_default_light"  (click)="brandLayout('bg-default-light-color')" value="bg-default-light-color"> <label
+                          for="header_light_default_light"></label> </div>
+                      <div class="radio radio-primary"> <input type="radio" name="header-light"
+                          id="header_light_primary_light"  (click)="brandLayout('bg-primary-light-color')" value="bg-primary-light-color"> <label
+                          for="header_light_primary_light"></label> </div>
+                      <div class="radio radio-secondary"> <input type="radio" name="header-light"
+                          id="header_light_secondary_light"  (click)="brandLayout('bg-secondary-light-color')" value="bg-secondary-light-color"> <label
+                          for="header_light_secondary_light"></label> </div>
+                      <div class="radio radio-danger"> <input type="radio" name="header-light"
+                          id="header_light_danger_light"  (click)="brandLayout('bg-danger-light-color')" value="bg-danger-light-color"> <label
+                          for="header_light_danger_light"></label> </div>
+                      <div class="radio radio-success"> <input type="radio" name="header-light"
+                          id="header_light_success_light"  (click)="brandLayout('bg-success-light-color')" value="bg-success-light-color"> <label
+                          for="header_light_success_light"></label> </div>
+                      <div class="radio radio-info"> <input type="radio" name="header-light"
+                          id="header_light_info_light"  (click)="brandLayout('bg-info-light-color')" value="bg-info-light-color"> <label
+                          for="header_light_info_light"></label> </div>
+                          <div class="radio radio-light"> <input type="radio" name="semi-light" id="semi_light_light_light"
+                             (click)="brandLayout('bg-light-light-color')" value="bg-light-light-color"> <label for="semi_light_light_light"></label> </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade active show" id="fullnav_dark" role="tabpanel"
+                aria-labelledby="contact-top-tab" [ngClass]="{'active show': headerSetting == 'onlyNav' }">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="fcp-group-header-sub">Light Version</div>
+                    <div class="form-group">
+                      <div class="radio radio-default"> <input type="radio" name="navu-light" id="nav_light_default"
+                           (click)="navLayout('bg-default')" value="bg-default"> <label for="nav_light_default"></label> </div>
+                      <div class="radio radio-primary"> <input type="radio" name="navu-light" id="nav_light_primary"
+                           (click)="navLayout('bg-primary')" value="bg-primary"> <label for="nav_light_primary"></label> </div>
+                      <div class="radio radio-secondary"> <input type="radio" name="navu-light" id="nav_light_secondary"
+                           (click)="navLayout('bg-secondary')" value="bg-secondary"> <label for="nav_light_secondary"></label> </div>
+                      <div class="radio radio-danger"> <input type="radio" name="navu-light" id="nav_light_danger"
+                           (click)="navLayout('bg-danger')" value="bg-danger"> <label for="nav_light_danger"></label> </div>
+                      <div class="radio radio-success"> <input type="radio" name="navu-light" id="nav_light_success"
+                           (click)="navLayout('bg-default')" value="bg-success"> <label for="nav_light_success"></label> </div>
+                      <div class="radio radio-info"> <input type="radio" name="navu-light" id="nav_light_info"
+                           (click)="navLayout('bg-info')" value="bg-info"> <label for="nav_light_info"></label> </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="fcp-group-header-sub">Dark Version</div>
+                    <div class="form-group">
+                      <div class="radio radio-default"> <input type="radio" name="navu-light"
+                          id="nav_light_default_light_color"  (click)="navLayout('bg-default-light-color')" value="bg-default-light-colo"> <label
+                          for="nav_light_default_light_color"></label> </div>
+                      <div class="radio radio-primary"> <input type="radio" name="navu-light"
+                          id="nav_light_primary_light_color"  (click)="navLayout('bg-primary-light-color')" value="bg-primary-light-color"> <label
+                          for="nav_light_primary_light_color"></label> </div>
+                      <div class="radio radio-secondary"> <input type="radio" name="navu-light"
+                          id="nav_light_secondary_light_color"  (click)="navLayout('bg-secondary-light-color')" value="bg-secondary-light-color"> <label
+                          for="nav_light_secondary_light_color"></label> </div>
+                      <div class="radio radio-danger"> <input type="radio" name="navu-light"
+                          id="nav_light_danger_light_color"  (click)="navLayout('bg-danger-light-color')" value="bg-danger-light-color"> <label
+                          for="nav_light_danger_light_color"></label> </div>
+                      <div class="radio radio-success"> <input type="radio" name="navu-light"
+                          id="nav_light_success_light_color"  (click)="navLayout('bg-success-light-color')" value="bg-success-light-color"> <label
+                          for="nav_light_success_light_color"></label> </div>
+                      <div class="radio radio-info"> <input type="radio" name="navu-light"
+                          id="nav_light_info_light_color"  (click)="navLayout('bg-info-light-color')" value="bg-info-light-color"> <label
+                          for="nav_light_info_light_color"></label> </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

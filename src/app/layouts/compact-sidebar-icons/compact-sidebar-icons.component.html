@@ -1,0 +1,16 @@
+<!--page-wrapper Start-->
+<div class="page-wrapper compact-page">
+    <app-header (toggleEvent)="receiveToggle($event)"></app-header>
+    <!--Page Body Start-->
+    <div class="page-body-wrapper " [class.sidebar-hover]="hoverToggle">
+        <div class="page-sidebar custom-scrollbar">
+            <app-compact-sidebar-icons></app-compact-sidebar-icons>
+        </div>
+        <div class="page-body">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+    <!--Page Body End-->
+    <app-chat-sidebar></app-chat-sidebar>
+</div>
+<!--page-wrapper End-->

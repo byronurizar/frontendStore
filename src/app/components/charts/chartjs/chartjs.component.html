@@ -1,0 +1,105 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>ChartJS Chart
+                    <small>Universal Admin panel</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Charts</li>
+                    <li class="breadcrumb-item active">Chartjs Chart</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->
+
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xl-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Bar Chart</h5>
+                </div>
+                <div class="card-body chart-block">
+                    <canvas baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels"
+                        [options]="barChartOptions" [colors]="barChartColors" [legend]="barChartLegend"
+                        [chartType]="barChartType" (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Line Graph</h5>
+                </div>
+                <div class="card-body chart-block">
+                    <canvas baseChart class="chart" [datasets]="lineGraphData" [labels]="lineGraphLabels"
+                        [options]="lineGraphOptions" [colors]="lineGraphColors" [legend]="lineGraphLegend"
+                        [chartType]="lineGraphType" (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Radar Graph</h5>
+                </div>
+                <div class="card-body chart-block">
+                    <canvas baseChart class="chart" [datasets]="radarGraphData" [labels]="radarGraphLabels"
+                        [options]="radarGraphOptions" [colors]="radarGraphColors" [legend]="radarGraphLegend"
+                        [chartType]="radarGraphType" (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Line Chart</h5>
+                </div>
+                <div class="card-body chart-block">
+                    <canvas baseChart class="chart" [datasets]="lineChartData" [labels]="lineChartLabels"
+                        [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend"
+                        [chartType]="lineChartType" (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Doughnut Chart</h5>
+                </div>
+                <div class="card-body chart-block chart-vertical-center">
+                    <canvas baseChart class="chart" [data]="doughnutChartData" [labels]="doughnutChartLabels"
+                        [options]="doughnutChartOptions" [chartType]="doughnutChartType" [colors]="doughnutChartColors"
+                        (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Polar Chart</h5>
+                </div>
+                <div class="card-body chart-block chart-vertical-center">
+                    <canvas baseChart class="chart" [data]="polarAreaChartData" [options]="polarChartOptions"
+                        [labels]="polarAreaChartLabels" [legend]="polarAreaLegend" [chartType]="polarAreaChartType"
+                        [colors]="ploarChartColors" (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->

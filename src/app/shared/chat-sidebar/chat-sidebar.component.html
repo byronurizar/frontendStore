@@ -1,0 +1,73 @@
+<div class="quickview-wrapper" [class.open]="open" id="quickview-wrapper">
+   <div>
+      <ul class="nav nav-tabs nav-material nav-primary border-0 mb-0" role="tablist">
+         <li class="nav-item quickview-box"> <a class="nav-link quickview-box-toggle" id="friend-list-tab"
+               data-toggle="tab" [routerLink]="['/chat/app']" role="tab" aria-selected="true"> <i
+                  class="icon-comments m-0"></i> </a> </li>
+         <li class="nav-item quickview-recent-activity"> <a class="nav-link quickview-box-toggle"
+               id="recent-activity-tab" data-toggle="tab" (click)="openActivity()" role="tab" aria-selected="false"> <i
+                  class="icon-user m-0"></i> </a> </li>
+      </ul>
+      <div class="tab-content">
+         <div class="tab-pane fade show active" id="friendlist-tab" role="tabpanel" aria-labelledby="friend-list-tab">
+            <div>
+               <div class="container p-0">
+                  <div class="modal-header p-l-20 p-r-20">
+                     <div class="col-sm-8 p-0">
+                        <h6 class="modal-title font-weight-bold">RECENT ACTIVITY</h6>
+                     </div>
+                     <div class="col-sm-4 text-right p-0"> <i class="icon-settings mr-2"></i> <i
+                           class="icon-close destroy" (click)="open=!open"></i> </div>
+                  </div>
+               </div>
+               <div class="p-15">
+                  <div class="recent-activity">
+                     <div class="text-left ml-4 ml-md-0">
+                        <div class="user-first-letter"> <span class="bg-primary">H</span> </div>
+                        <div class="activity-content">
+                           <h6>Hileri Jecno</h6>
+                           <p>Hileri Jecno Recentely like your Photo</p>
+                           <hr>
+                           <p>25 July 2018, 2:40 Am</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="recent-activity">
+                     <div class="text-left ml-4 ml-md-0">
+                        <div class="user-first-letter"> <span class="bg-secondary">J</span> </div>
+                        <div class="activity-content">
+                           <h6>Jerik Lopa</h6>
+                           <p>Jerik Lopa Recentely like your Photo</p>
+                           <hr>
+                           <p>25 July 2018, 2:40 Am</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="recent-activity">
+                     <div class="text-left ml-4 ml-md-0">
+                        <div class="user-first-letter"> <span class="bg-danger">K</span> </div>
+                        <div class="activity-content">
+                           <h6>Kopila Relis</h6>
+                           <p>Kopila Lopa Recentely like your Photo</p>
+                           <hr>
+                           <p>25 July 2018, 2:40 Am</p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="recent-activity">
+                     <div class="text-left ml-4 ml-md-0">
+                        <div class="user-first-letter"> <span class="bg-info">L</span> </div>
+                        <div class="activity-content">
+                           <h6>Luis Potpo</h6>
+                           <p>Luis Lopa Recentely like your Photo</p>
+                           <hr>
+                           <p>25 July 2018, 2:40 Am</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

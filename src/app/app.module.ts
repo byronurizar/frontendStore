@@ -1,0 +1,73 @@
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from "./shared/shared.module";
+import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+
+import { AppComponent } from './app.component';
+import { LandingComponent } from './landing/landing.component';
+import { FullWidthComponent } from './layouts/full-width/full-width.component';
+import { ContentComponent } from './layouts/content/content.component';
+import { CompactSidebarComponent } from './layouts/compact-sidebar/compact-sidebar.component';
+import { CompactSidebarIconsComponent } from './layouts/compact-sidebar-icons/compact-sidebar-icons.component';
+
+// import ngx-translate and the http loader
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { environment } from 'src/environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AuthService } from './shared/service/firebase/auth.service';
+import { AdminGuard } from './shared/guard/admin.guard';
+import { SecureInnerPagesGuard } from './shared/guard/SecureInnerPagesGuard.guard';
+import { CookieService } from 'ngx-cookie-service';
+import { LoginComponent } from './auth/login/login.component';
+import { EnterpriseComponent } from './layouts/enterprise/enterprise.component';
+import { CategoriaService } from './servicios/categoria.service';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    LandingComponent,
+    FullWidthComponent,
+    ContentComponent,
+    CompactSidebarComponent,
+    CompactSidebarIconsComponent,
+    LoginComponent,
+    EnterpriseComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    SharedModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    ToastrModule.forRoot(), // ToastrModule added
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule
+  ],
+  providers: [AuthService, AdminGuard, SecureInnerPagesGuard, CookieService,CategoriaService],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+// required for AOT compilation

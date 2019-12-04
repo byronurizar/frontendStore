@@ -1,0 +1,47 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Fullscreen Tables
+                    <small>Universal Admin Panel</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item">Ngx Datatables</li>
+                    <li class="breadcrumb-item active">Fullscreen Tables</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Fullscreen Table</h5>
+                </div>
+                <div class="card-body custom-datatable">
+                    <ngx-datatable class="bootstrap fullscreen" [columnMode]="'force'" [headerHeight]="50"
+                        [footerHeight]="0" [rowHeight]="50" [scrollbarV]="false" [scrollbarH]="false" [rows]="rows">
+                        <ngx-datatable-column name="Id" [width]="80"></ngx-datatable-column>
+                        <ngx-datatable-column name="Name" [width]="300"></ngx-datatable-column>
+                        <ngx-datatable-column name="Gender"></ngx-datatable-column>
+                        <ngx-datatable-column name="Age"></ngx-datatable-column>
+                        <ngx-datatable-column name="City" [width]="300" prop="address.city"></ngx-datatable-column>
+                        <ngx-datatable-column name="State" [width]="300" prop="address.state"></ngx-datatable-column>
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends -->

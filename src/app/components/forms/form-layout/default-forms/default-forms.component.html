@@ -1,0 +1,251 @@
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Default Forms
+                    <small>Universal Admin panel</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Forms </li>
+                    <li class="breadcrumb-item active">Default Forms</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Default Form Layout</h5>
+                            <span>Using the <a href="javascript:void(0)">card</a> component, you can extend the default
+                                collapse behavior to create an accordion.</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1" class="col-form-label pt-0">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1"
+                                        aria-describedby="emailHelp" placeholder="Enter email">
+                                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                        anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1"
+                                        placeholder="Password">
+                                </div>
+                                <div class="checkbox p-0">
+                                    <input id="dafault-checkbox" type="checkbox">
+                                    <label for="dafault-checkbox" class="mb-0">Remember my preference</label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary mr-1">Submit</button>
+                            <button class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Horizontal Form Layout</h5>
+                            <span>Using the <a href="javascript:void(0)">card</a> component, you can extend the default
+                                collapse behavior to create an accordion.</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form">
+                                <div class="form-group row">
+                                    <label for="inputEmail3" class="col-sm-3 col-form-label">Email</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword3" class="col-sm-3 col-form-label">Password</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="inputPassword3"
+                                            placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword3" class="col-sm-3 col-form-label">Contact Number</label>
+                                    <div class="col-sm-9">
+                                        <input type="number" class="form-control" id="inputnumber"
+                                            placeholder="Contact">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword3" class="col-sm-3 col-form-label">Company name</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="url" placeholder="Company name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="inputPassword3" class="col-sm-3 col-form-label">Website</label>
+                                    <div class="col-sm-9">
+                                        <input type="url" class="form-control" id="Website" placeholder="Website">
+                                    </div>
+                                </div>
+                                <fieldset class="form-group">
+                                    <div class="row">
+                                        <label class="col-form-label col-sm-3 pt-0">Radios</label>
+                                        <div class="col-sm-9">
+                                            <div class="radio radio-primary">
+                                                <input type="radio" name="radio1" id="radio11" value="option1">
+                                                <label for="radio11">Option 1</label>
+                                            </div>
+                                            <div class="radio radio-primary">
+                                                <input type="radio" name="radio1" id="radio22" value="option1">
+                                                <label for="radio22">Option 2</label>
+                                            </div>
+                                            <div class="radio radio-primary">
+                                                <input type="radio" name="radio1" id="radio33" value="option1"
+                                                    disabled="">
+                                                <label for="radio33">Disabled</label>
+                                            </div>
+                                            <div class="radio radio-primary">
+                                                <input type="radio" name="radio1" id="radio44" value="option1"
+                                                    checked="">
+                                                <label for="radio44">Option 3</label>
+                                            </div>
+                                            <div class="radio radio-primary">
+                                                <input type="radio" name="radio1" id="radio55" value="option1"
+                                                    checked="">
+                                                <label for="radio44">Option 4</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="form-group row mb-0">
+                                    <label class="col-sm-3 col-form-label pb-0">Checkboxes</label>
+                                    <div class="col-sm-9">
+                                        <div class="form-group m-checkbox-inline mb-0">
+                                            <div class="checkbox checkbox-primary">
+                                                <input id="inline-form-1" type="checkbox">
+                                                <label for="inline-form-1" class="mb-0">Option 1</label>
+                                            </div>
+                                            <div class="checkbox checkbox-primary">
+                                                <input id="inline-form-2" type="checkbox">
+                                                <label for="inline-form-2" class="mb-0">Option 1</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary mr-1">Submit</button>
+                            <button class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Mega form</h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form mega-form">
+                                <h6>Account Information</h6>
+                                <div class="form-group">
+                                    <label class="col-form-label">Your Name</label>
+                                    <input type="text" class="form-control" placeholder="your Name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Email Address</label>
+                                    <input type="email" class="form-control" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Contact Number</label>
+                                    <input type="Number" class="form-control" placeholder="Enter contact number">
+                                </div>
+                                <hr class="mt-4 mb-4">
+                                <h6>Company Information</h6>
+                                <div class="form-group">
+                                    <label class="col-form-label">Company Name</label>
+                                    <input type="text" class="form-control" placeholder="Company Name">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label">Website</label>
+                                    <input type="text" class="form-control" placeholder="Website">
+                                </div>
+                            </form>
+                            <hr class="mt-4 mb-4">
+                            <h6 class="pb-4">Billing Information</h6>
+                            <form class="form-inline theme-form">
+                                <div class="form-group mb-0 billing-xs-mb">
+                                    <input type="text" class="form-control" placeholder="Name On Card">
+                                </div>
+                                <div class="form-group mb-0 billing-xs-mb">
+                                    <input type="text" class="form-control" name="inputPassword"
+                                        placeholder="Card Number">
+                                </div>
+                                <div class="form-group mb-0 billing-xs-mb">
+                                    <input type="text" class="form-control" name="inputPassword" placeholder="Zip Code">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary mr-1">Submit</button>
+                            <button class="btn btn-secondary">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Inline Form</h5>
+                            <span>Use<code>.form-inline</code>class in the form to style with inline fields.</span>
+                        </div>
+                        <div class="card-body">
+                            <h6>Inline Form with Label</h6>
+                            <form class="form-inline theme-form mt-3">
+                                <div class="form-group">
+                                    <label class="col-form-label" for="inputInlineUsername">Username</label>
+                                    <input type="text" class="form-control" id="inputInlineUsername"
+                                        name="inputUsername" placeholder="Username" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label" for="inputInlinePassword">Password</label>
+                                    <input type="password" class="form-control" id="inputInlinePassword"
+                                        name="inputPassword" placeholder="Password" autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary">Login</button>
+                                </div>
+                            </form>
+                            <h6>Inline Form without Label</h6>
+                            <form class="form-inline theme-form mt-3">
+                                <div class="form-group mb-0 billing-xs-mb">
+                                    <input type="text" class="form-control" name="inputUnlabelUsername"
+                                        placeholder="Username" autocomplete="off">
+                                </div>
+                                <div class="form-group mb-0 billing-xs-mb">
+                                    <input type="password" class="form-control" id="inputUnlabelPassword"
+                                        name="inputPassword" placeholder="Password" autocomplete="off">
+                                </div>
+                                <div class="form-group mb-0">
+                                    <button class="btn btn-secondary">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

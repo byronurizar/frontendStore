@@ -1,0 +1,43 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="page-header">
+        <div class="row">
+            <div class="col-lg-6">
+                <h3>Basic Tables
+                    <small>Universal Admin Panel</small>
+                </h3>
+            </div>
+            <div class="col-lg-6">
+                <ol class="breadcrumb pull-right">
+                    <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+                    </li>
+                    <li class="breadcrumb-item">Tables</li>
+                    <li class="breadcrumb-item">Ngx Datatables</li>
+                    <li class="breadcrumb-item active">Basic Tables</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Basic Table</h5>
+                </div>
+                <div class="card-body custom-datatable">
+                    <ngx-datatable class="bootstrap" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                        [columns]="columns" [columnMode]="'force'" [headerHeight]="40" [summaryRow]="true"
+                        [summaryPosition]="'bottom'" [footerHeight]="40" [rowHeight]="'auto'"
+                        [reorderable]="reorderable">
+                    </ngx-datatable>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Container-fluid Ends -->
