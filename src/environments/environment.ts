@@ -12,7 +12,8 @@ export const environment = {
     storageBucket: "ENTER_YOUR_STORAGE_BUCKET",
     messagingSenderId: "ENTER_YOUR_ID",
     appId: "ENTER_YOUR_API_ID"
-  }
+  },
+  urlBase:'http://35.226.44.211/apiStore/v1/'
 };
 
 

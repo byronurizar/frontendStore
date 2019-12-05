@@ -30,6 +30,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoginComponent } from './auth/login/login.component';
 import { EnterpriseComponent } from './layouts/enterprise/enterprise.component';
 import { CategoriaService } from './servicios/categoria.service';
+import { ConectorApi } from './servicios/conectorApi.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -66,7 +67,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [AuthService, AdminGuard, SecureInnerPagesGuard, CookieService,CategoriaService],
+  providers: [AuthService, AdminGuard, SecureInnerPagesGuard, CookieService,CategoriaService,ConectorApi],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
