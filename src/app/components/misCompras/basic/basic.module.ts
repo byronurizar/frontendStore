@@ -7,9 +7,10 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { RegCataloComponent } from './reg-catalo/reg-catalo.component';
 import { GsCategoriaComponent } from './gs-categoria/gs-categoria.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { GsEstadoComponent } from './gs-estado/gs-estado.component';
 
 @NgModule({
-  declarations: [CategoriaComponent, RegCataloComponent, GsCategoriaComponent],
+  declarations: [CategoriaComponent, RegCataloComponent, GsCategoriaComponent, GsEstadoComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

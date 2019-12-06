@@ -41,7 +41,9 @@ export class NavService {
     },
     {
       title: 'Mantenimientos', icon: 'icon-desktop', type: 'sub', active: false, children: [
-        { path: '/basic/categoria', title: 'Categorias', type: 'link' }
+        { path: '/basic/categoria', title: 'Categorias', type: 'link' },
+        { path: '/basic/gsCategoria', title: 'Gestión Categoria', type: 'link' },
+        { path: '/basic/gsEstado', title: 'Gestión Estado', type: 'link' }
       ]
     },
     {

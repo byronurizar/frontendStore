@@ -13,11 +13,12 @@ export const environment = {
     messagingSenderId: "ENTER_YOUR_ID",
     appId: "ENTER_YOUR_API_ID"
   },
-  urlBase:'http://35.226.44.211/apiStore/v1/'
+  urlBase:'http://127.0.0.1:3333/apiStore/v1/'
 };
 
 
 /*
+urlBase:'http://35.226.44.211/apiStore/v1/'
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
  *

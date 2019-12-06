@@ -3,8 +3,8 @@ import { ApiRest } from 'src/app/modelos/apiResponse.model';
 import { Categoria } from 'src/app/modelos/categoria.model';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ToastrService } from 'ngx-toastr';
-import { IfStmt } from '@angular/compiler';
-
+declare var require
+const Swal = require('sweetalert2')
 @Component({
   selector: 'app-gs-categoria',
   templateUrl: './gs-categoria.component.html',
@@ -13,13 +13,29 @@ import { IfStmt } from '@angular/compiler';
 export class GsCategoriaComponent implements OnInit {
   
   constructor(private conectorApi: ConectorApi,private toastrService: ToastrService) { }
-  info: any[];
+  info:any[];
 
   ngOnInit() {
     this.cargarInformacion();
   }
 
   settings = {
+    mode: 'inline', // inline|external|click-to-edit
+    selectMode: 'single', // single|multi
+    hideHeader: false,
+    hideSubHeader: false,
+    actions: {
+      columnTitle: 'Acciones',
+      add: true,
+      edit: true,
+      delete: true,
+      custom: [{ name: 'ourCustomAction', title: '<i class="nb-compose"></i>' }],
+      position: 'left'
+    },
+    pager:{
+      display:true,
+      perPage:10
+    },
     add: {
       confirmCreate: true
     },
@@ -32,22 +48,33 @@ export class GsCategoriaComponent implements OnInit {
     columns: {
       descripcion: {
         title: 'Descripción'
-      },
-      idEstado: {
+      },      idEstado: {
         title: 'Estado',
+        required:true,
+        filter: {
+          type: 'list',
+          config: {
+            selectText: 'Todos',
+            list: [
+              { value: '1', title: 'Activo' },
+              { value: '2', title: 'Inactivo' }
+            ]
+          }
+        },
         editor: {
           type: 'list',
           config: {
             selectText: 'Select',
             list: [
-              { value: 1, title: 'Activo' },
-              { value: 2, title: 'Inactivo' }
+              { value: '1', title: 'Activo' },
+              { value: '2', title: 'Inactivo' }
             ]
           }
         },
         type: 'number',
       }
-    }
+    },
+    noDataMessage: 'No existen registros',
   };
 
   cargarInformacion() {
@@ -56,67 +83,130 @@ export class GsCategoriaComponent implements OnInit {
         let dat = data as ApiRest;
         this.info = dat.data;
       },
-      (error) => {
-        console.log(error);
+      (dataError) => {
+        this.toastrService.success(dataError.error, 'Alerta!');
       }
     )
+    
   }
 
-  onRegistrar(event): void {
-    try{
-    if (event.newData) {
-      if (event.newData["descripcion"].length > 5) {
-        this.conectorApi.Post('categorias/registro', event.newData).subscribe(
-          (data) => {
-            let apiResult=data as ApiRest;
-            if(apiResult.codigo==0){
-              this.toastrService.success(apiResult.respuesta, 'Información!');
-              this.cargarInformacion();
-            }else{
-              this.toastrService.success(apiResult.respuesta, 'Alerta!');
+  onRegistrar(event):void {
+    try {
+      if (event.newData) {
+        if (event.newData["descripcion"].trim().length > 5) {
+          this.conectorApi.Post('categorias/registro', event.newData).subscribe(
+            (data) => {
+              let apiResult = data as ApiRest;
+              if (apiResult.codigo == 0) {
+                this.toastrService.success(apiResult.respuesta, 'Información!');
+                event.confirm.resolve(event.newData);
+                this.cargarInformacion();
+              } else {
+                this.toastrService.success(apiResult.respuesta, 'Alerta!');
+                event.confirm.reject();
+              }
+            },
+            (dataError) => {
+              let apiResult = dataError.error as ApiRest;
+              this.toastrService.error(apiResult.respuesta, 'Alerta!');
+              event.confirm.reject();
             }
-          },
-          (dataError) => {
-            let apiResult=dataError.error as ApiRest;
-            this.toastrService.error(apiResult.respuesta, 'Alerta!');
-          }
-        );
+          );
+        } else {
+          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+        }
       } else {
-        console.log("Alertar ");
+        this.toastrService.error("No existe información", 'Alerta!');
       }
-    } else {
-      console.log("No existe informacion");
-    }
-    console.log("Registrar Nueva Cátegoria", event.newData);
-  }catch(error) {
-    this.toastrService.error(error, 'Alerta!');
-  }
+    } catch (error) {
+      this.toastrService.error(error, 'Alerta!');
+   
+     } 
   }
 
 
   onActualizar(event): void {
-    console.log("Actualizar Cátegoria",event);
-    if (event.newData) {
-      if (event.newData["descripcion"].length > 5) {
-        this.conectorApi.Patch(`categorias/actualizar/${event.data["id"]}`, event.newData).subscribe(
-          (data) => {
-            console.log("Registro", data);
-            this.cargarInformacion();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+    try {
+      if (event.newData) {
+        if (event.newData["descripcion"].trim().length > 5) {
+          this.conectorApi.Patch(`categorias/actualizar/${event.data["id"]}`, event.newData).subscribe(
+            (data) => {
+              let apiResult = data as ApiRest;
+              if (apiResult.codigo == 0) {
+                this.toastrService.success(apiResult.respuesta, 'Información!');
+                event.confirm.resolve(event.newData);
+                this.cargarInformacion();
+              } else {
+                this.toastrService.success(apiResult.respuesta, 'Alerta!');
+                event.confirm.reject();
+              }
+            },
+            (dataError) => {
+              let apiResult = dataError.error as ApiRest;
+              this.toastrService.error(apiResult.respuesta, 'Alerta!');
+            }
+          );
+        } else {
+          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+        }
       } else {
-        console.log("Alertar ");
+        this.toastrService.error("No existe información", 'Alerta!');
       }
-    } else {
-      console.log("No existe informacion");
+    } catch (error) {
+      this.toastrService.error(error, 'Alerta!');
     }
   }
 
-  onElimnar(event): void {
-    console.log("Eliminar categorias");
+  onElimnar1(event) {
+    Swal.fire({
+      title: 'Alerta',
+      text: "Esta seguro de eliminar la fila?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'No, cancelar!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+  
+        try {
+          if (event.data) {
+            event.data["idEstado"] = '3';
+            this.conectorApi.Patch(`categorias/actualizar/${event.data["id"]}`, event.data).subscribe(
+              (data) => {
+                let apiResult = data as ApiRest;
+                if (apiResult.codigo == 0) {
+                  this.toastrService.success("Fila eliminada exitosamente", 'Información!');
+                  //this.cargarInformacion();
+                  event.confirm.resolve();
+                } else {
+                  this.toastrService.success(apiResult.respuesta, 'Alerta!');
+                  event.confirm.reject();
+                }
+              },
+              (dataError) => {
+                let apiResult = dataError.error as ApiRest;
+                this.toastrService.error(apiResult.respuesta, 'Alerta!');
+              }
+            );
+          } else {
+            this.toastrService.error("No existe información", 'Alerta!');
+          }
+        } catch (error) {
+          this.toastrService.error(error, 'Alerta!');
+        }
+      } else if (
+        // Read more about handling dismissals
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+
+      }
+    });
   }
 
 }

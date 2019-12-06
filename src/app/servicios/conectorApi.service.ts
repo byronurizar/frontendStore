@@ -7,7 +7,7 @@ const urlBase = environment.urlBase;
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjYsImlhdCI6MTU3NTUwMDUyMX0.YTtTUDe_RUO0UZ3EE412gibI-IB-yqwir50hAsNFbHI'
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTY1NjAxMX0.Sjo4lIvYGwqZK8hWg8MtQUlKr7uSCZiWVAvqnwbs2tk'
   })
 };
 
@@ -32,6 +32,7 @@ Get(ruta){
 }
 
 Patch(ruta,jsonSolicitud){
+  console.log("Ruta patch",ruta);
     return this.http.patch(urlBase+ruta,jsonSolicitud,httpOptions);
 }
 
