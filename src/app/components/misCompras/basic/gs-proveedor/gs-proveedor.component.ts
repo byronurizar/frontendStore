@@ -1,16 +1,16 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
-import { ApiRest } from 'src/app/modelos/apiResponse.model';
-import { Categoria } from 'src/app/modelos/categoria.model';
+import { Component, OnInit } from '@angular/core';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ToastrService } from 'ngx-toastr';
+import { ApiRest } from 'src/app/modelos/apiResponse.model';
 declare var require
 const Swal = require('sweetalert2')
 @Component({
-  selector: 'app-gs-categoria',
-  templateUrl: './gs-categoria.component.html',
-  styleUrls: ['./gs-categoria.component.scss']
+  selector: 'app-gs-proveedor',
+  templateUrl: './gs-proveedor.component.html',
+  styleUrls: ['./gs-proveedor.component.scss']
 })
-export class GsCategoriaComponent implements OnInit {
+export class GsProveedorComponent implements OnInit {
+
   
   constructor(private conectorApi: ConectorApi,private toastrService: ToastrService) { }
   info:any[];
@@ -46,11 +46,17 @@ export class GsCategoriaComponent implements OnInit {
       confirmDelete: true
     },
     columns: {
+      nombre: {
+        title: 'Nombre'
+      },      
       descripcion: {
         title: 'Descripción'
-      },      idEstado: {
+      },      
+      direccion: {
+        title: 'Dirección'
+      },      
+      idEstado: {
         title: 'Estado',
-        required:true,
         filter: {
           type: 'list',
           config: {
@@ -79,7 +85,7 @@ export class GsCategoriaComponent implements OnInit {
 
   cargarInformacion() {
     try{
-    this.conectorApi.Get('categorias/listar').subscribe(
+    this.conectorApi.Get('proveedores/listar').subscribe(
       (data) => {
         let dat = data as ApiRest;
         this.info = dat.data;
@@ -98,7 +104,7 @@ export class GsCategoriaComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 5) {
-          this.conectorApi.Post('categorias/registro', event.newData).subscribe(
+          this.conectorApi.Post('proveedores/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
               if (apiResult.codigo == 0) {
@@ -133,7 +139,7 @@ export class GsCategoriaComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 5) {
-          this.conectorApi.Patch(`categorias/actualizar/${event.data["id"]}`, event.newData).subscribe(
+          this.conectorApi.Patch(`proveedores/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
               if (apiResult.codigo == 0) {
@@ -180,8 +186,8 @@ export class GsCategoriaComponent implements OnInit {
   
         try {
           if (event.data) {
-            event.data["idEstado"] = '3';
-            this.conectorApi.Patch(`categorias/actualizar/${event.data["id"]}`, event.data).subscribe(
+            let json=JSON.stringify({id:event.data['id'],idEstado:3});
+            this.conectorApi.Patch(`proveedores/actualizar/${event.data["id"]}`, json).subscribe(
               (data) => {
                 let apiResult = data as ApiRest;
                 if (apiResult.codigo == 0) {

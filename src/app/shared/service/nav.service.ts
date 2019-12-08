@@ -43,7 +43,12 @@ export class NavService {
       title: 'Mantenimientos', icon: 'icon-desktop', type: 'sub', active: false, children: [
         { path: '/basic/categoria', title: 'Categorias', type: 'link' },
         { path: '/basic/gsCategoria', title: 'Gestión Categoria', type: 'link' },
-        { path: '/basic/gsEstado', title: 'Gestión Estado', type: 'link' }
+        { path: '/basic/gsEstado', title: 'Gestión Estado', type: 'link' },
+        { path: '/basic/gsGeneros', title: 'Gestión Genero', type: 'link' },
+        { path: '/basic/gsDepartamentos', title: 'Gestión Departamento', type: 'link' },
+        { path: '/basic/gsMunicipios', title: 'Gestión Municipio', type: 'link' },
+        { path: '/basic/gsRoles', title: 'Gestión Roles', type: 'link' },
+        { path: '/basic/gsProveedor', title: 'Gestión Proveedores', type: 'link' }
       ]
     },
     {

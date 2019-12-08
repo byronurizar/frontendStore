@@ -15,10 +15,6 @@ const Swal = require('sweetalert2')
 export class GsEstadoComponent implements OnInit {
   info: any[];
   constructor(private conectorApi: ConectorApi, private toastrService: ToastrService,private router:Router) { }
-  @Output() deleteConfirm = new EventEmitter<any>();
-  @Output() editConfirm = new EventEmitter<any>();
-  @Output() createConfirm = new EventEmitter<any>();
-  
   ngOnInit() {
     this.cargarInformacion();
   }
@@ -32,7 +28,7 @@ export class GsEstadoComponent implements OnInit {
       columnTitle: 'Acciones',
       add: true,
       edit: true,
-      delete: true,
+      delete: false,
       custom: [{ name: 'ourCustomAction', title: '<i class="nb-compose"></i>' }],
       position: 'left'
     },
@@ -65,7 +61,7 @@ export class GsEstadoComponent implements OnInit {
         this.info = dat.data;
       },
       (dataError) => {
-        this.toastrService.success(dataError.error, 'Alerta!');
+        this.toastrService.error(dataError.error, 'Alerta!');
       }
     )
     
