@@ -6,32 +6,32 @@ import { ElementoLista } from 'src/app/modelos/elementoLista.model';
 declare var require
 const Swal = require('sweetalert2')
 @Component({
-  selector: 'app-gs-municipio',
-  templateUrl: './gs-municipio.component.html',
-  styleUrls: ['./gs-municipio.component.scss']
+  selector: 'app-gs-telefono-proveedor',
+  templateUrl: './gs-telefono-proveedor.component.html',
+  styleUrls: ['./gs-telefono-proveedor.component.scss']
 })
-export class GsMunicipioComponent implements OnInit {
+export class GsTelefonoProveedorComponent implements OnInit {
   info: any[];
   public configuracion: Object;
-  departamentos: ElementoLista[] = [];
-  departamentosFiltro: ElementoLista[] = [];
+  proveedores: ElementoLista[] = [];
+  proveedoresFiltro: ElementoLista[] = [];
   constructor(private conectorApi: ConectorApi, private toastrService: ToastrService) {
-    this.listarDepartamentos();
+    this.listarProveedores();
   }
 
   ngOnInit() {
     this.cargarInformacion();
   }
-  async listarDepartamentos() {
+  async listarProveedores() {
     try {
-      this.conectorApi.Get('departamentos/listar').subscribe(
+      this.conectorApi.Get('proveedores/listar').subscribe(
         async (data) => {
           let dat = data as ApiRest;
           console.log("Todos los departamentos",dat.data);
         await  dat.data.forEach(departamento => {
             //this.departamentos.push(new ElementoLista(departamento.id, departamento.descripcion));
-            this.departamentos.push(new ElementoLista(departamento.id, departamento.descripcion))
-            this.departamentosFiltro.push(new ElementoLista(departamento.descripcion, departamento.descripcion))
+            this.proveedores.push(new ElementoLista(departamento.id, departamento.nombre))
+            this.proveedoresFiltro.push(new ElementoLista(departamento.nombre, departamento.nombre))
 
           });
           this.configuracion = {
@@ -61,26 +61,26 @@ export class GsMunicipioComponent implements OnInit {
               confirmDelete: true
             },
             columns: {
-              idDepartamento: {
-                title: 'Departamento',
+              idProveedor: {
+                title: 'Proveedor',
                 filter: {
                   type: 'list',
                   config: {
                     selectText: 'Todos',
-                    list: this.departamentosFiltro
+                    list: this.proveedoresFiltro
                   }
                 },
                 editor: {
                   type: 'list',
                   config: {
                     selectText: 'Select',
-                    list: this.departamentos
+                    list: this.proveedores
                   }
                 },
                 type: 'number',
               },
-              descripcion: {
-                title: 'Descripción'
+              telefono: {
+                title: 'Telefono'
               },
               idEstado: {
                 title: 'Estado',
@@ -121,7 +121,7 @@ export class GsMunicipioComponent implements OnInit {
 
   cargarInformacion() {
     try {
-      this.conectorApi.Get('municipios/listar').subscribe(
+      this.conectorApi.Get('proveedores/telefonos/listar').subscribe(
         (data) => {
           let dat = data as ApiRest;
           this.info = dat.data;
@@ -139,8 +139,8 @@ export class GsMunicipioComponent implements OnInit {
   onRegistrar(event): void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
-          this.conectorApi.Post('municipios/registro', event.newData).subscribe(
+        if (event.newData["telefono"].trim().length > 7) {
+          this.conectorApi.Post('proveedores/telefonos/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
               if (apiResult.codigo == 0) {
@@ -159,7 +159,7 @@ export class GsMunicipioComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("El telefono debe de contener por lo menos 8 caracteres", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
@@ -174,8 +174,8 @@ export class GsMunicipioComponent implements OnInit {
   onActualizar(event): void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
-          this.conectorApi.Patch(`municipios/actualizar/${event.data["id"]}`, event.newData).subscribe(
+        if (event.newData["telefono"].trim().length > 7) {
+          this.conectorApi.Patch(`proveedores/telefonos/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
               if (apiResult.codigo == 0) {
@@ -193,7 +193,7 @@ export class GsMunicipioComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("El teléfono debe de contener por lo menos 8 caracteres", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
@@ -224,7 +224,7 @@ export class GsMunicipioComponent implements OnInit {
           if (event.data) {
 
             let json=JSON.stringify({id:event.data['id'],idEstado:3});
-            this.conectorApi.Patch(`municipios/actualizar/${event.data["id"]}`, json).subscribe(
+            this.conectorApi.Patch(`proveedores/telefonos/actualizar/${event.data["id"]}`, json).subscribe(
               (data) => {
                 let apiResult = data as ApiRest;
                 if (apiResult.codigo == 0) {

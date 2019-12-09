@@ -8,6 +8,11 @@ import { GsDepartamentoComponent } from './gs-departamento/gs-departamento.compo
 import { GsMunicipioComponent } from './gs-municipio/gs-municipio.component';
 import { GsRolComponent } from './gs-rol/gs-rol.component';
 import { GsProveedorComponent } from './gs-proveedor/gs-proveedor.component';
+import { GsTelefonoProveedorComponent } from './gs-telefono-proveedor/gs-telefono-proveedor.component';
+import { GsEtiquetaComponent } from './gs-etiqueta/gs-etiqueta.component';
+import { GsTallasComponent } from './gs-tallas/gs-tallas.component';
+import { GsColoresComponent } from './gs-colores/gs-colores.component';
+import { GsCatalogoComponent } from './gs-catalogo/gs-catalogo.component';
 const routes: Routes = [{
   path:'',
   children:[
@@ -42,6 +47,26 @@ const routes: Routes = [{
     {
       path:'gsProveedor',
       component:GsProveedorComponent
+    },
+    {
+      path:'gsTelefonosProveedores',
+      component:GsTelefonoProveedorComponent
+    },
+    {
+      path:'gsEtiquetas',
+      component:GsEtiquetaComponent
+    },
+    {
+      path:'gsTallas',
+      component:GsTallasComponent
+    },
+    {
+      path:'gsColores',
+      component:GsColoresComponent
+    },
+    {
+      path:'gsCatalogos',
+      component:GsCatalogoComponent
     }
   ]
 }];

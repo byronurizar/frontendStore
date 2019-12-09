@@ -1,5 +1,5 @@
 export class ElementoLista{
-    constructor(public value:number,public title:String){
+    constructor(public value:String,public title:String){
         
     }
 }

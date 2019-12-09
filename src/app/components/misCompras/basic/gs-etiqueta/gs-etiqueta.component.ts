@@ -5,11 +5,11 @@ import { ApiRest } from 'src/app/modelos/apiResponse.model';
 declare var require
 const Swal = require('sweetalert2')
 @Component({
-  selector: 'app-gs-rol',
-  templateUrl: './gs-rol.component.html',
-  styleUrls: ['./gs-rol.component.scss']
+  selector: 'app-gs-etiqueta',
+  templateUrl: './gs-etiqueta.component.html',
+  styleUrls: ['./gs-etiqueta.component.scss']
 })
-export class GsRolComponent implements OnInit {
+export class GsEtiquetaComponent implements OnInit {
 
   
   constructor(private conectorApi: ConectorApi,private toastrService: ToastrService) { }
@@ -65,8 +65,8 @@ export class GsRolComponent implements OnInit {
           config: {
             selectText: 'Select',
             list: [
-              { value: 1, title: 'Activo' },
-              { value: 2, title: 'Inactivo' }
+              { value: '1', title: 'Activo' },
+              { value: '2', title: 'Inactivo' }
             ]
           }
         },
@@ -78,7 +78,7 @@ export class GsRolComponent implements OnInit {
 
   cargarInformacion() {
     try{
-    this.conectorApi.Get('roles/listar').subscribe(
+    this.conectorApi.Get('etiquetas/listar').subscribe(
       (data) => {
         let dat = data as ApiRest;
         this.info = dat.data;
@@ -96,8 +96,8 @@ export class GsRolComponent implements OnInit {
   onRegistrar(event):void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
-          this.conectorApi.Post('roles/registro', event.newData).subscribe(
+        if (event.newData["descripcion"].trim().length > 3) {
+          this.conectorApi.Post('etiquetas/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
               if (apiResult.codigo == 0) {
@@ -116,7 +116,7 @@ export class GsRolComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("La descripción debe de contener por lo menos 4 caracteres", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
@@ -131,8 +131,8 @@ export class GsRolComponent implements OnInit {
   onActualizar(event): void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
-          this.conectorApi.Patch(`roles/actualizar/${event.data["id"]}`, event.newData).subscribe(
+        if (event.newData["descripcion"].trim().length > 3) {
+          this.conectorApi.Patch(`etiquetas/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
               if (apiResult.codigo == 0) {
@@ -150,7 +150,7 @@ export class GsRolComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("La descripción debe de contener por lo menos 4 caracteres", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
@@ -180,7 +180,7 @@ export class GsRolComponent implements OnInit {
         try {
           if (event.data) {
             event.data["idEstado"] = '3';
-            this.conectorApi.Patch(`roles/actualizar/${event.data["id"]}`, event.data).subscribe(
+            this.conectorApi.Patch(`etiquetas/actualizar/${event.data["id"]}`, event.data).subscribe(
               (data) => {
                 let apiResult = data as ApiRest;
                 if (apiResult.codigo == 0) {

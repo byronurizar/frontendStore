@@ -56,8 +56,8 @@ export class GsCategoriaComponent implements OnInit {
           config: {
             selectText: 'Todos',
             list: [
-              { value: '1', title: 'Activo' },
-              { value: '2', title: 'Inactivo' }
+              { value: 'Activo', title: 'Activo' },
+              { value: 'Inactivo', title: 'Inactivo' }
             ]
           }
         },

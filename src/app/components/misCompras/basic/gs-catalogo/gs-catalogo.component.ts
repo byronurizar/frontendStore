@@ -2,83 +2,127 @@ import { Component, OnInit } from '@angular/core';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
+import { ElementoLista } from 'src/app/modelos/elementoLista.model';
 declare var require
 const Swal = require('sweetalert2')
 @Component({
-  selector: 'app-gs-rol',
-  templateUrl: './gs-rol.component.html',
-  styleUrls: ['./gs-rol.component.scss']
+  selector: 'app-gs-catalogo',
+  templateUrl: './gs-catalogo.component.html',
+  styleUrls: ['./gs-catalogo.component.scss']
 })
-export class GsRolComponent implements OnInit {
-
-  
-  constructor(private conectorApi: ConectorApi,private toastrService: ToastrService) { }
+export class GsCatalogoComponent implements OnInit {
   info:any[];
+  public configuracion: Object;
+  proveedores: ElementoLista[] = [];
+  proveedoresFiltro: ElementoLista[] = [];
+  constructor(private conectorApi: ConectorApi,private toastrService: ToastrService) { 
+    this.listarProveedores();
+  }
 
   ngOnInit() {
     this.cargarInformacion();
   }
 
-  settings = {
-    mode: 'inline', // inline|external|click-to-edit
-    selectMode: 'single', // single|multi
-    hideHeader: false,
-    hideSubHeader: false,
-    actions: {
-      columnTitle: 'Acciones',
-      add: true,
-      edit: true,
-      delete: true,
-      custom: [{ name: 'ourCustomAction', title: '<i class="nb-compose"></i>' }],
-      position: 'left'
-    },
-    pager:{
-      display:true,
-      perPage:10
-    },
-    add: {
-      confirmCreate: true
-    },
-    edit: {
-      confirmSave: true
-    },
-    delete: {
-      confirmDelete: true
-    },
-    columns: {
-      descripcion: {
-        title: 'Descripción'
-      },      idEstado: {
-        title: 'Estado',
-        filter: {
-          type: 'list',
-          config: {
-            selectText: 'Todos',
-            list: [
-              { value: 'Activo', title: 'Activo' },
-              { value: 'Inactivo', title: 'Inactivo' }
-            ]
+  async listarProveedores() {
+    try {
+      this.conectorApi.Get('proveedores/listar').subscribe(
+        async (data) => {
+          let dat = data as ApiRest;
+          console.log("Todos los departamentos",dat.data);
+        await  dat.data.forEach(departamento => {
+            //this.departamentos.push(new ElementoLista(departamento.id, departamento.descripcion));
+            this.proveedores.push(new ElementoLista(departamento.id, departamento.nombre))
+            this.proveedoresFiltro.push(new ElementoLista(departamento.nombre, departamento.nombre))
+
+          });
+          this.configuracion = {
+            mode: 'inline', // inline|external|click-to-edit
+            selectMode: 'single', // single|multi
+            hideHeader: false,
+            hideSubHeader: false,
+            actions: {
+              columnTitle: 'Acciones',
+              add: true,
+              edit: true,
+              delete: true,
+              custom: [{ name: 'ourCustomAction', title: '<i class="nb-compose"></i>' }],
+              position: 'left'
+            },
+            pager: {
+              display: true,
+              perPage: 10
+            },
+            add: {
+              confirmCreate: true
+            },
+            edit: {
+              confirmSave: true
+            },
+            delete: {
+              confirmDelete: true
+            },
+            columns: {
+              idProveedor: {
+                title: 'Proveedor',
+                filter: {
+                  type: 'list',
+                  config: {
+                    selectText: 'Todos',
+                    list: this.proveedoresFiltro
+                  }
+                },
+                editor: {
+                  type: 'list',
+                  config: {
+                    selectText: 'Select',
+                    list: this.proveedores
+                  }
+                },
+                type: 'number',
+              },
+              descripcion: {
+                title: 'Descripción'
+              },
+              idEstado: {
+                title: 'Estado',
+                filter: {
+                  type: 'list',
+                  config: {
+                    selectText: 'Todos',
+                    list: [
+                      { value: 'Activo', title: 'Activo' },
+                      { value: 'Inactivo', title: 'Inactivo' }
+                    ]
+                  }
+                },
+                editor: {
+                  type: 'list',
+                  config: {
+                    selectText: 'Select',
+                    list: [
+                      { value: '1', title: 'Activo' },
+                      { value: '2', title: 'Inactivo' }
+                    ]
+                  }
+                },
+                type: 'number',
+              },
+            },
+            noDataMessage: 'No existen registros',
           }
         },
-        editor: {
-          type: 'list',
-          config: {
-            selectText: 'Select',
-            list: [
-              { value: 1, title: 'Activo' },
-              { value: 2, title: 'Inactivo' }
-            ]
-          }
-        },
-        type: 'number',
-      }
-    },
-    noDataMessage: 'No existen registros',
-  };
+        (dataError) => {
+          this.toastrService.error(dataError.error, 'Alerta!');
+        }
+      )
+    } catch (ex) {
+      this.toastrService.error(ex, 'Alerta!');
+    }
+  }
 
   cargarInformacion() {
     try{
-    this.conectorApi.Get('roles/listar').subscribe(
+    this.conectorApi.Get('catalogos/listar').subscribe(
       (data) => {
         let dat = data as ApiRest;
         this.info = dat.data;
@@ -96,8 +140,8 @@ export class GsRolComponent implements OnInit {
   onRegistrar(event):void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
-          this.conectorApi.Post('roles/registro', event.newData).subscribe(
+        if (event.newData["descripcion"].trim().length > 0) {
+          this.conectorApi.Post('catalogos/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
               if (apiResult.codigo == 0) {
@@ -116,7 +160,7 @@ export class GsRolComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("La descripción debe de contener por lo menos 1 caracter", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
@@ -131,8 +175,8 @@ export class GsRolComponent implements OnInit {
   onActualizar(event): void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
-          this.conectorApi.Patch(`roles/actualizar/${event.data["id"]}`, event.newData).subscribe(
+        if (event.newData["descripcion"].trim().length > 0) {
+          this.conectorApi.Patch(`catalogos/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
               if (apiResult.codigo == 0) {
@@ -150,7 +194,7 @@ export class GsRolComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("La descripción debe de contener por lo menos 1 caracter", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
@@ -180,7 +224,7 @@ export class GsRolComponent implements OnInit {
         try {
           if (event.data) {
             event.data["idEstado"] = '3';
-            this.conectorApi.Patch(`roles/actualizar/${event.data["id"]}`, event.data).subscribe(
+            this.conectorApi.Patch(`catalogos/actualizar/${event.data["id"]}`, event.data).subscribe(
               (data) => {
                 let apiResult = data as ApiRest;
                 if (apiResult.codigo == 0) {
@@ -213,3 +257,4 @@ export class GsRolComponent implements OnInit {
   }
 
 }
+

@@ -48,7 +48,13 @@ export class NavService {
         { path: '/basic/gsDepartamentos', title: 'Gestión Departamento', type: 'link' },
         { path: '/basic/gsMunicipios', title: 'Gestión Municipio', type: 'link' },
         { path: '/basic/gsRoles', title: 'Gestión Roles', type: 'link' },
-        { path: '/basic/gsProveedor', title: 'Gestión Proveedores', type: 'link' }
+        { path: '/basic/gsProveedor', title: 'Gestión Proveedores', type: 'link' },
+        {path:'/basic/gsTelefonosProveedores',title: 'Gestión Teléfonos Proveedores', type: 'link' },
+        {path:'/basic/gsEtiquetas',title: 'Gestión Etiquetas de Productos', type: 'link' },
+        {path:'/basic/gsTallas',title: 'Gestión Tallas de Productos', type: 'link' },
+        {path:'/basic/gsColores',title: 'Gestión Colores de Productos', type: 'link' },
+        {path:'/basic/gsCatalogos',title: 'Gestión Catálogos', type: 'link' }
+        
       ]
     },
     {

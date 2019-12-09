@@ -15,6 +15,7 @@ import { full } from "./shared/routes/full.routes";
 import { AdminGuard } from './shared/guard/admin.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { SecureInnerPagesGuard } from './shared/guard/SecureInnerPagesGuard.guard';
+import { IngresoSistemaComponent } from './misCompras/ingreso-sistema/ingreso-sistema.component';
 const appRoutes: Routes = [
   {
     path: '',
@@ -51,6 +52,10 @@ const appRoutes: Routes = [
     path: '',
     component: FullWidthComponent,
     children: full
+  },
+  {
+    path:'ingresosSistema',
+    component:IngresoSistemaComponent
   }
 ];
 
