@@ -103,7 +103,7 @@ export class GsProveedorComponent implements OnInit {
   onRegistrar(event):void {
     try {
       if (event.newData) {
-        if (event.newData["nombre"].trim().length > 5) {
+        if (event.newData["nombre"].trim().length > 0) {
           this.conectorApi.Post('proveedores/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -138,7 +138,7 @@ export class GsProveedorComponent implements OnInit {
   onActualizar(event): void {
     try {
       if (event.newData) {
-        if (event.newData["nombre"].trim().length > 5) {
+        if (event.newData["nombre"].trim().length > 0) {
           this.conectorApi.Patch(`proveedores/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
