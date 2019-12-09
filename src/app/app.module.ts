@@ -32,6 +32,7 @@ import { EnterpriseComponent } from './layouts/enterprise/enterprise.component';
 import { CategoriaService } from './servicios/categoria.service';
 import { ConectorApi } from './servicios/conectorApi.service';
 import { IngresoSistemaComponent } from './misCompras/ingreso-sistema/ingreso-sistema.component';
+import { RegistroComponent } from './misCompras/registro/registro.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -47,7 +48,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CompactSidebarIconsComponent,
     LoginComponent,
     EnterpriseComponent,
-    IngresoSistemaComponent
+    IngresoSistemaComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,

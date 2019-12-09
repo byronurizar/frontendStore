@@ -9,7 +9,7 @@ const urlBase = environment.urlBase;
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTg2MDY0NX0.Ab27axdw85rn3x4wLP6AXlPcDyn00jyijuodczYVd9U'
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NTkxOTgxMn0.o05FXqqVtRO5CPn-5r1z46zUJxpQQLXG7IAyHwsc9sQ'
   })
 };
 

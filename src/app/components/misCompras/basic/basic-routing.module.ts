@@ -13,6 +13,9 @@ import { GsEtiquetaComponent } from './gs-etiqueta/gs-etiqueta.component';
 import { GsTallasComponent } from './gs-tallas/gs-tallas.component';
 import { GsColoresComponent } from './gs-colores/gs-colores.component';
 import { GsCatalogoComponent } from './gs-catalogo/gs-catalogo.component';
+import { GsEstadoPedidoComponent } from './gs-estado-pedido/gs-estado-pedido.component';
+import { GsTipoPagoComponent } from './gs-tipo-pago/gs-tipo-pago.component';
+import { GsDetalleTipoPagoComponent } from './gs-detalle-tipo-pago/gs-detalle-tipo-pago.component';
 const routes: Routes = [{
   path:'',
   children:[
@@ -67,6 +70,17 @@ const routes: Routes = [{
     {
       path:'gsCatalogos',
       component:GsCatalogoComponent
+    },
+    {
+      path:'gsEstadoPedido',
+      component:GsEstadoPedidoComponent
+    },{
+      path:'gsTipoPago',
+      component:GsTipoPagoComponent
+    },
+    {
+      path:'gsDetalleTipopago',
+      component:GsDetalleTipoPagoComponent
     }
   ]
 }];

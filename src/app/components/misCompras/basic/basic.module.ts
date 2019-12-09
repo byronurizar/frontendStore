@@ -18,9 +18,12 @@ import { GsEtiquetaComponent } from './gs-etiqueta/gs-etiqueta.component';
 import { GsTallasComponent } from './gs-tallas/gs-tallas.component';
 import { GsColoresComponent } from './gs-colores/gs-colores.component';
 import { GsCatalogoComponent } from './gs-catalogo/gs-catalogo.component';
+import { GsEstadoPedidoComponent } from './gs-estado-pedido/gs-estado-pedido.component';
+import { GsTipoPagoComponent } from './gs-tipo-pago/gs-tipo-pago.component';
+import { GsDetalleTipoPagoComponent } from './gs-detalle-tipo-pago/gs-detalle-tipo-pago.component';
 
 @NgModule({
-  declarations: [CategoriaComponent, RegCataloComponent, GsCategoriaComponent, GsEstadoComponent, GsGeneroComponent, GsDepartamentoComponent, GsMunicipioComponent, GsRolComponent, GsProveedorComponent, GsTelefonoProveedorComponent, GsEtiquetaComponent, GsTallasComponent, GsColoresComponent, GsCatalogoComponent],
+  declarations: [CategoriaComponent, RegCataloComponent, GsCategoriaComponent, GsEstadoComponent, GsGeneroComponent, GsDepartamentoComponent, GsMunicipioComponent, GsRolComponent, GsProveedorComponent, GsTelefonoProveedorComponent, GsEtiquetaComponent, GsTallasComponent, GsColoresComponent, GsCatalogoComponent, GsEstadoPedidoComponent, GsTipoPagoComponent, GsDetalleTipoPagoComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -49,11 +49,14 @@ export class NavService {
         { path: '/basic/gsMunicipios', title: 'Gestión Municipio', type: 'link' },
         { path: '/basic/gsRoles', title: 'Gestión Roles', type: 'link' },
         { path: '/basic/gsProveedor', title: 'Gestión Proveedores', type: 'link' },
-        {path:'/basic/gsTelefonosProveedores',title: 'Gestión Teléfonos Proveedores', type: 'link' },
-        {path:'/basic/gsEtiquetas',title: 'Gestión Etiquetas de Productos', type: 'link' },
-        {path:'/basic/gsTallas',title: 'Gestión Tallas de Productos', type: 'link' },
-        {path:'/basic/gsColores',title: 'Gestión Colores de Productos', type: 'link' },
-        {path:'/basic/gsCatalogos',title: 'Gestión Catálogos', type: 'link' }
+        { path: '/basic/gsTelefonosProveedores', title: 'Gestión Teléfonos Proveedores', type: 'link' },
+        { path: '/basic/gsEtiquetas', title: 'Gestión Etiquetas de Productos', type: 'link' },
+        { path: '/basic/gsTallas', title: 'Gestión Tallas de Productos', type: 'link' },
+        { path: '/basic/gsColores', title: 'Gestión Colores de Productos', type: 'link' },
+        { path: '/basic/gsCatalogos', title: 'Gestión Catálogos', type: 'link' },
+        { path: '/basic/gsEstadoPedido', title: 'Gestión Estados de Pedido', type: 'link' },
+        { path: '/basic/gsTipoPago', title: 'Gestión Tipos de Pago', type: 'link' },
+        { path: '/basic/gsDetalleTipopago', title: 'Gestión Detalle Tipos de Pago', type: 'link' }
         
       ]
     },
@@ -160,11 +163,11 @@ export class NavService {
       ]
     },
     {
-			title: 'Map', icon: 'icon-location-pin', type: 'sub', active: false, children: [
-				{ path: '/map/google', title: 'Google Map', type: 'link' },
-				{ path: '/map/leaflet', title: 'Leaflet Map', type: 'link' }
-			]
-		},
+      title: 'Map', icon: 'icon-location-pin', type: 'sub', active: false, children: [
+        { path: '/map/google', title: 'Google Map', type: 'link' },
+        { path: '/map/leaflet', title: 'Leaflet Map', type: 'link' }
+      ]
+    },
     {
       title: 'Tables', icon: 'icon-harddrives', type: 'sub', active: false, children: [
         {

@@ -16,6 +16,7 @@ import { AdminGuard } from './shared/guard/admin.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { SecureInnerPagesGuard } from './shared/guard/SecureInnerPagesGuard.guard';
 import { IngresoSistemaComponent } from './misCompras/ingreso-sistema/ingreso-sistema.component';
+import { RegistroComponent } from './misCompras/registro/registro.component';
 const appRoutes: Routes = [
   {
     path: '',
@@ -56,6 +57,10 @@ const appRoutes: Routes = [
   {
     path:'ingresosSistema',
     component:IngresoSistemaComponent
+  },
+  {
+    path:'registrarse',
+    component:RegistroComponent
   }
 ];
 
