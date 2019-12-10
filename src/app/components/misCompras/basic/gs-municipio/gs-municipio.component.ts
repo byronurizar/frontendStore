@@ -139,7 +139,7 @@ export class GsMunicipioComponent implements OnInit {
   onRegistrar(event): void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
+        if (event.newData["descripcion"].trim().length > 0) {
           this.conectorApi.Post('municipios/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -159,7 +159,7 @@ export class GsMunicipioComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("La descripción debe de contener por lo menos 3 caracteres", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
@@ -174,7 +174,7 @@ export class GsMunicipioComponent implements OnInit {
   onActualizar(event): void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
+        if (event.newData["descripcion"].trim().length > 0) {
           this.conectorApi.Patch(`municipios/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -193,7 +193,7 @@ export class GsMunicipioComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("La descripción debe de contener por lo menos 3 caracteres", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
