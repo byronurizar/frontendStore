@@ -5,6 +5,8 @@ import { ElementoLista } from 'src/app/modelos/elementoLista.model';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+
 declare var require
 const Swal = require('sweetalert2')
 @Component({
@@ -28,11 +30,20 @@ export class RegistroComponent implements OnInit {
     contrasenia: ''
 
   }
+
+  model: NgbDateStruct;
+  date: {year: number, month: number};
+
+
   @ViewChild("nuevoUsuario", { static: false }) nuevoUsuario: NgForm;
   public emailForm: FormGroup;
   public form: any;
-  constructor(private conectorApi: ConectorApi, private toastrService: ToastrService) {
+  constructor(private conectorApi: ConectorApi, private toastrService: ToastrService,private calendar: NgbCalendar) {
     this.listarDepartamentos();
+  }
+  
+  selectToday() {
+    this.model = this.calendar.getToday();
   }
 
   async listarDepartamentos() {

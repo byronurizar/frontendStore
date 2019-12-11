@@ -33,6 +33,7 @@ import { CategoriaService } from './servicios/categoria.service';
 import { ConectorApi } from './servicios/conectorApi.service';
 import { IngresoSistemaComponent } from './misCompras/ingreso-sistema/ingreso-sistema.component';
 import { RegistroComponent } from './misCompras/registro/registro.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -69,7 +70,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ToastrModule.forRoot(), // ToastrModule added
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    NgbModule
   ],
   providers: [AuthService, AdminGuard, SecureInnerPagesGuard, CookieService,CategoriaService,ConectorApi],
   bootstrap: [AppComponent]
