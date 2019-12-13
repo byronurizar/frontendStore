@@ -24,62 +24,62 @@ const routes: Routes = [{
       component:CategoriaComponent
     },
     {
-      path:"gsCategoria",
+      path:"gscategoria",
       component:GsCategoriaComponent
     },
     {
-      path:"gsEstado",
+      path:"gsestado",
       component:GsEstadoComponent
     },
     {
-      path:'gsGeneros',
+      path:'gsgeneros',
       component:GsGeneroComponent
     },
     {
-      path:'gsDepartamentos',
+      path:'gsdepartamentos',
       component:GsDepartamentoComponent
     },
     {
-      path:'gsMunicipios',
+      path:'gsmunicipios',
       component:GsMunicipioComponent
     },
     {
-      path:'gsRoles',
+      path:'gsroles',
       component:GsRolComponent
     },
     {
-      path:'gsProveedor',
+      path:'gsproveedor',
       component:GsProveedorComponent
     },
     {
-      path:'gsTelefonosProveedores',
+      path:'gstelefonosproveedores',
       component:GsTelefonoProveedorComponent
     },
     {
-      path:'gsEtiquetas',
+      path:'gsetiquetas',
       component:GsEtiquetaComponent
     },
     {
-      path:'gsTallas',
+      path:'gstallas',
       component:GsTallasComponent
     },
     {
-      path:'gsColores',
+      path:'gscolores',
       component:GsColoresComponent
     },
     {
-      path:'gsCatalogos',
+      path:'gscatalogos',
       component:GsCatalogoComponent
     },
     {
-      path:'gsEstadoPedido',
+      path:'gsestadopedido',
       component:GsEstadoPedidoComponent
     },{
-      path:'gsTipoPago',
+      path:'gstipopago',
       component:GsTipoPagoComponent
     },
     {
-      path:'gsDetalleTipopago',
+      path:'gsdetalletipopago',
       component:GsDetalleTipoPagoComponent
     }
   ]

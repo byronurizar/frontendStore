@@ -5,7 +5,8 @@ import { ElementoLista } from 'src/app/modelos/elementoLista.model';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
-import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct, NgbCalendar, NgbDate, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
+import { async } from 'q';
 
 declare var require
 const Swal = require('sweetalert2')
@@ -31,20 +32,13 @@ export class RegistroComponent implements OnInit {
 
   }
 
-  model: NgbDateStruct;
-  date: {year: number, month: number};
-
-
   @ViewChild("nuevoUsuario", { static: false }) nuevoUsuario: NgForm;
   public emailForm: FormGroup;
   public form: any;
-  constructor(private conectorApi: ConectorApi, private toastrService: ToastrService,private calendar: NgbCalendar) {
+  constructor(private conectorApi: ConectorApi, private toastrService: ToastrService, private calendar: NgbCalendar) {
     this.listarDepartamentos();
   }
-  
-  selectToday() {
-    this.model = this.calendar.getToday();
-  }
+
 
   async listarDepartamentos() {
     try {
@@ -93,10 +87,25 @@ export class RegistroComponent implements OnInit {
   ngOnInit() {
   }
 
-  registrar({ value, valid }: { value: Persona, valid: boolean }) {
+  async registrar({ value, valid }: { value: Persona, valid: boolean }) {
     console.log("Data formulario", value);
-    if (!valid) {
-      return;
+    if (valid) {
+      this.conectorApi.Post("usuario/registrarUsuario", value).subscribe(
+        async (data) => {
+          let dat = data as ApiRest;
+          if (dat.codigo == 0) {
+            this.toastrService.success(dat.respuesta, 'Información!');
+            localStorage.setItem("token", dat.data.token);
+          } else {
+            this.toastrService.error(dat.error, 'Alerta!');
+          }
+        },
+        (dataError) => {
+          this.toastrService.error(dataError.error, 'Alerta!');
+        }
+      )
+    }else{
+      this.toastrService.error("Por favor complete la información requerida por el formulario", 'Alerta!');
     }
   }
 }

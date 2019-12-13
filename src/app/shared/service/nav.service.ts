@@ -42,22 +42,26 @@ export class NavService {
     {
       title: 'Mantenimientos', icon: 'icon-desktop', type: 'sub', active: false, children: [
         { path: '/basic/categoria', title: 'Categorias', type: 'link' },
-        { path: '/basic/gsCategoria', title: 'Gestión Categoria', type: 'link' },
-        { path: '/basic/gsEstado', title: 'Gestión Estado', type: 'link' },
-        { path: '/basic/gsGeneros', title: 'Gestión Genero', type: 'link' },
-        { path: '/basic/gsDepartamentos', title: 'Gestión Departamento', type: 'link' },
-        { path: '/basic/gsMunicipios', title: 'Gestión Municipio', type: 'link' },
-        { path: '/basic/gsRoles', title: 'Gestión Roles', type: 'link' },
-        { path: '/basic/gsProveedor', title: 'Gestión Proveedores', type: 'link' },
-        { path: '/basic/gsTelefonosProveedores', title: 'Gestión Teléfonos Proveedores', type: 'link' },
-        { path: '/basic/gsEtiquetas', title: 'Gestión Etiquetas de Productos', type: 'link' },
-        { path: '/basic/gsTallas', title: 'Gestión Tallas de Productos', type: 'link' },
-        { path: '/basic/gsColores', title: 'Gestión Colores de Productos', type: 'link' },
-        { path: '/basic/gsCatalogos', title: 'Gestión Catálogos', type: 'link' },
-        { path: '/basic/gsEstadoPedido', title: 'Gestión Estados de Pedido', type: 'link' },
-        { path: '/basic/gsTipoPago', title: 'Gestión Tipos de Pago', type: 'link' },
-        { path: '/basic/gsDetalleTipopago', title: 'Gestión Detalle Tipos de Pago', type: 'link' }
-        
+        { path: '/basic/gscategoria', title: 'Gestión Categoria', type: 'link' },
+        { path: '/basic/gsestado', title: 'Gestión Estado', type: 'link' },
+        { path: '/basic/gsgeneros', title: 'Gestión Genero', type: 'link' },
+        { path: '/basic/gsdepartamentos', title: 'Gestión Departamento', type: 'link' },
+        { path: '/basic/gsmunicipios', title: 'Gestión Municipio', type: 'link' },
+        { path: '/basic/gsroles', title: 'Gestión Roles', type: 'link' },
+        { path: '/basic/gsproveedor', title: 'Gestión Proveedores', type: 'link' },
+        { path: '/basic/gstelefonosproveedores', title: 'Gestión Teléfonos Proveedores', type: 'link' },
+        { path: '/basic/gsetiquetas', title: 'Gestión Etiquetas de Productos', type: 'link' },
+        { path: '/basic/gstallas', title: 'Gestión Tallas de Productos', type: 'link' },
+        { path: '/basic/gscolores', title: 'Gestión Colores de Productos', type: 'link' },
+        { path: '/basic/gscatalogos', title: 'Gestión Catálogos', type: 'link' },
+        { path: '/basic/gsestadopedido', title: 'Gestión Estados de Pedido', type: 'link' },
+        { path: '/basic/gstipopago', title: 'Gestión Tipos de Pago', type: 'link' },
+        { path: '/basic/gsdetalletipopago', title: 'Gestión Detalle Tipos de Pago', type: 'link' }
+      ]
+    },{
+      title: 'Producto', icon: 'icon-desktop', type: 'sub', active: false, children: [
+        {
+          path:'/producto',title:'Registrar',type:'link'}
       ]
     },
     {

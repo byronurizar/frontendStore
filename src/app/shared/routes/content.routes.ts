@@ -104,5 +104,8 @@ export const content: Routes = [
   {
     path: 'basic',
     loadChildren: () => import('../../components/misCompras/basic/basic.module').then(m => m.BasicModule),
-  },
+  },{
+    path:'producto',
+    loadChildren:() => import('../../components/misCompras/producto/producto.module').then(m=>m.ProductoModule),
+  }
 ];

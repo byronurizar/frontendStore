@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-lg-6">
+          <h3>Producto
+            <small>Registro y asignaciones</small>
+          </h3>
+        </div>
+        <div class="col-lg-6">
+          <ol class="breadcrumb pull-right">
+            <li class="breadcrumb-item"><a [routerLink]="'/dashboard/default'"><i class="fa fa-home"></i></a>
+            </li>
+            <li class="breadcrumb-item">Producto </li>
+            <li class="breadcrumb-item active">Registro</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>Registrar Producto</h5>
+          </div>
+          <div class="card-body step-indicator">
+            <aw-wizard navBarLayout="large-filled-symbols">
+              <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome ' }"
+                stepTitle="Registration">
+                <app-registrar-producto></app-registrar-producto>
+              </aw-wizard-step>
+              <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf084;', fontFamily: 'FontAwesome' }" stepTitle="Email">
+                <app-registrar-producto></app-registrar-producto>
+              </aw-wizard-step>
+              <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf099;', fontFamily: 'FontAwesome' }"
+                stepTitle="Birth Date">
+                <app-registrar-producto></app-registrar-producto>
+              </aw-wizard-step>
+            </aw-wizard>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
