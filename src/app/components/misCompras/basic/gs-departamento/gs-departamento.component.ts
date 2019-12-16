@@ -65,8 +65,8 @@ export class GsDepartamentoComponent implements OnInit {
           config: {
             selectText: 'Select',
             list: [
-              { value: '1', title: 'Activo' },
-              { value: '2', title: 'Inactivo' }
+              { value: 'Activo', title: 'Activo' },
+              { value: 'Inactivo', title: 'Inactivo' }
             ]
           }
         },
@@ -96,7 +96,12 @@ export class GsDepartamentoComponent implements OnInit {
   onRegistrar(event):void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
+        if (event.newData["descripcion"].trim().length > 0) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
           this.conectorApi.Post('departamentos/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -116,7 +121,7 @@ export class GsDepartamentoComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("La descripción debe de contener por lo menos 3 caracteres", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
@@ -131,7 +136,12 @@ export class GsDepartamentoComponent implements OnInit {
   onActualizar(event): void {
     try {
       if (event.newData) {
-        if (event.newData["descripcion"].trim().length > 5) {
+        if (event.newData["descripcion"].trim().length > 2) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
           this.conectorApi.Patch(`departamentos/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -150,7 +160,7 @@ export class GsDepartamentoComponent implements OnInit {
             }
           );
         } else {
-          this.toastrService.error("La descripción debe de contener por lo menos 5 caracteres", 'Alerta!');
+          this.toastrService.error("La descripción debe de contener por lo menos 3 caracteres", 'Alerta!');
         }
       } else {
         this.toastrService.error("No existe información", 'Alerta!');
