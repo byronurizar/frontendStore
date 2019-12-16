@@ -14,7 +14,7 @@ export class GsMunicipioComponent implements OnInit {
   info: any[];
   public configuracion: Object;
   departamentos: ElementoLista[] = [];
-  departamentosFiltro: ElementoLista[] = [];
+  departamentosDesc: ElementoLista[] = [];
   constructor(private conectorApi: ConectorApi, private toastrService: ToastrService) {
     this.listarDepartamentos();
   }
@@ -31,7 +31,7 @@ export class GsMunicipioComponent implements OnInit {
         await  dat.data.forEach(departamento => {
             //this.departamentos.push(new ElementoLista(departamento.id, departamento.descripcion));
             this.departamentos.push(new ElementoLista(departamento.id, departamento.descripcion))
-            this.departamentosFiltro.push(new ElementoLista(departamento.descripcion, departamento.descripcion))
+            this.departamentosDesc.push(new ElementoLista(departamento.descripcion, departamento.descripcion))
 
           });
           this.configuracion = {
@@ -67,14 +67,14 @@ export class GsMunicipioComponent implements OnInit {
                   type: 'list',
                   config: {
                     selectText: 'Todos',
-                    list: this.departamentosFiltro
+                    list: this.departamentosDesc
                   }
                 },
                 editor: {
                   type: 'list',
                   config: {
                     selectText: 'Select',
-                    list: this.departamentos
+                    list: this.departamentosDesc
                   }
                 },
                 type: 'number',
@@ -99,8 +99,8 @@ export class GsMunicipioComponent implements OnInit {
                   config: {
                     selectText: 'Select',
                     list: [
-                      { value: '1', title: 'Activo' },
-                      { value: '2', title: 'Inactivo' }
+                      { value: 'Activo', title: 'Activo' },
+                      { value: 'Inactivo', title: 'Inactivo' }
                     ]
                   }
                 },
@@ -140,6 +140,14 @@ export class GsMunicipioComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 0) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
+          let itemDepto=this.departamentos.find(depto=>depto.title==event.newData["idDepartamento"]);
+          event.newData["idDepartamento"]=itemDepto.value;
+          
           this.conectorApi.Post('municipios/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -175,6 +183,14 @@ export class GsMunicipioComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 0) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
+
+          let itemDepto=this.departamentos.find(depto=>depto.title==event.newData["idDepartamento"]);
+          event.newData["idDepartamento"]=itemDepto.value;
           this.conectorApi.Patch(`municipios/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;

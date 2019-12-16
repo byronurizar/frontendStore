@@ -63,8 +63,8 @@ export class GsEstadoPedidoComponent implements OnInit {
           config: {
             selectText: 'Select',
             list: [
-              { value: '1', title: 'Activo' },
-              { value: '2', title: 'Inactivo' }
+              { value: 'Activo', title: 'Activo' },
+              { value: 'Inactivo', title: 'Inactivo' }
             ]
           }
         },
@@ -95,6 +95,11 @@ export class GsEstadoPedidoComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 5) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
           this.conectorApi.Post('estadopedido/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -130,6 +135,11 @@ export class GsEstadoPedidoComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 5) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
           this.conectorApi.Patch(`estadopedido/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;

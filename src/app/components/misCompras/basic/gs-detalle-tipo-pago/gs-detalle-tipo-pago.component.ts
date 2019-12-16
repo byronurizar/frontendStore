@@ -75,7 +75,7 @@ export class GsDetalleTipoPagoComponent implements OnInit {
                   type: 'list',
                   config: {
                     selectText: 'Select',
-                    list: this.listaTipoPago
+                    list: this.listaTipoPagoFiltro
                   }
                 },
                 type: 'number',
@@ -129,8 +129,8 @@ export class GsDetalleTipoPagoComponent implements OnInit {
                   config: {
                     selectText: 'Select',
                     list: [
-                      { value: '1', title: 'Activo' },
-                      { value: '2', title: 'Inactivo' }
+                      { value: 'Activo', title: 'Activo' },
+                      { value: 'Inactivo', title: 'Inactivo' }
                     ]
                   }
                 },
@@ -170,6 +170,13 @@ export class GsDetalleTipoPagoComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["nombreBanco"].trim().length > 0) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
+          let itemTipoPago=this.listaTipoPago.find(item=>item.title==event.newData["idTipoPago"])
+          event.newData["idTipoPago"]=itemTipoPago.value;
           this.conectorApi.Post('tipopago/detalle/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -205,6 +212,14 @@ export class GsDetalleTipoPagoComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["nombreBanco"].trim().length > 0) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
+          let itemTipoPago=this.listaTipoPago.find(item=>item.title==event.newData["idTipoPago"])
+          event.newData["idTipoPago"]=itemTipoPago.value;
+
           this.conectorApi.Patch(`tipopago/detalle/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;

@@ -75,7 +75,7 @@ export class GsCatalogoComponent implements OnInit {
                   type: 'list',
                   config: {
                     selectText: 'Select',
-                    list: this.proveedores
+                    list: this.proveedoresFiltro
                   }
                 },
                 type: 'number',
@@ -100,8 +100,8 @@ export class GsCatalogoComponent implements OnInit {
                   config: {
                     selectText: 'Select',
                     list: [
-                      { value: '1', title: 'Activo' },
-                      { value: '2', title: 'Inactivo' }
+                      { value: 'Activo', title: 'Activo' },
+                      { value: 'Inactivo', title: 'Inactivo' }
                     ]
                   }
                 },
@@ -141,6 +141,14 @@ export class GsCatalogoComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 0) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
+          let itemProveedor=this.proveedores.find(item=>item.title==event.newData["idProveedor"]);
+          event.newData["idProveedor"]=itemProveedor.value;
+
           this.conectorApi.Post('catalogos/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -176,6 +184,14 @@ export class GsCatalogoComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 0) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
+          let itemProveedor=this.proveedores.find(item=>item.title==event.newData["idProveedor"]);
+          event.newData["idProveedor"]=itemProveedor.value;
+
           this.conectorApi.Patch(`catalogos/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -223,8 +239,8 @@ export class GsCatalogoComponent implements OnInit {
   
         try {
           if (event.data) {
-            event.data["idEstado"] = '3';
-            this.conectorApi.Patch(`catalogos/actualizar/${event.data["id"]}`, event.data).subscribe(
+            let json=JSON.stringify({idEstado:3});
+            this.conectorApi.Patch(`catalogos/actualizar/${event.data["id"]}`,json).subscribe(
               (data) => {
                 let apiResult = data as ApiRest;
                 if (apiResult.codigo == 0) {

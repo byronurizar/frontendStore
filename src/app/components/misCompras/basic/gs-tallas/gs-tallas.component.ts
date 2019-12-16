@@ -65,8 +65,8 @@ export class GsTallasComponent implements OnInit {
           config: {
             selectText: 'Select',
             list: [
-              { value: '1', title: 'Activo' },
-              { value: '2', title: 'Inactivo' }
+              { value: 'Activo', title: 'Activo' },
+              { value: 'Inactivo', title: 'Inactivo' }
             ]
           }
         },
@@ -97,6 +97,11 @@ export class GsTallasComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 0) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
           this.conectorApi.Post('tallas/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -132,6 +137,11 @@ export class GsTallasComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["descripcion"].trim().length > 0) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
           this.conectorApi.Patch(`tallas/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;

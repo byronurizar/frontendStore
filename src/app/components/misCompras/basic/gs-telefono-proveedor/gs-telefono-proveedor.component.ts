@@ -74,7 +74,7 @@ export class GsTelefonoProveedorComponent implements OnInit {
                   type: 'list',
                   config: {
                     selectText: 'Select',
-                    list: this.proveedores
+                    list: this.proveedoresFiltro
                   }
                 },
                 type: 'number',
@@ -99,8 +99,8 @@ export class GsTelefonoProveedorComponent implements OnInit {
                   config: {
                     selectText: 'Select',
                     list: [
-                      { value: '1', title: 'Activo' },
-                      { value: '2', title: 'Inactivo' }
+                      { value: 'Activo', title: 'Activo' },
+                      { value: 'Inactivo', title: 'Inactivo' }
                     ]
                   }
                 },
@@ -140,6 +140,15 @@ export class GsTelefonoProveedorComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["telefono"].trim().length > 7) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
+
+          let itemProveedor=this.proveedores.find(item=>item.title==event.newData["idProveedor"]);
+          event.newData["idProveedor"]=itemProveedor.value;
+
           this.conectorApi.Post('proveedores/telefonos/registro', event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
@@ -175,6 +184,15 @@ export class GsTelefonoProveedorComponent implements OnInit {
     try {
       if (event.newData) {
         if (event.newData["telefono"].trim().length > 7) {
+          if(event.newData["idEstado"].trim().toUpperCase()=="INACTIVO"){
+            event.newData["idEstado"]=2;
+          }else{
+            event.newData["idEstado"]=1;
+          }
+
+          let itemProveedor=this.proveedores.find(item=>item.title==event.newData["idProveedor"]);
+          event.newData["idProveedor"]=itemProveedor.value;
+          
           this.conectorApi.Patch(`proveedores/telefonos/actualizar/${event.data["id"]}`, event.newData).subscribe(
             (data) => {
               let apiResult = data as ApiRest;
