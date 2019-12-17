@@ -27,7 +27,7 @@
           <div class="card-body step-indicator">
             <aw-wizard navBarLayout="large-filled-symbols">
               <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf007;', fontFamily: 'FontAwesome ' }"
-                stepTitle="Registration">
+                stepTitle="Registrar">
                 <app-registrar-producto></app-registrar-producto>
               </aw-wizard-step>
               <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf084;', fontFamily: 'FontAwesome' }" stepTitle="Email">
@@ -37,6 +37,10 @@
                 stepTitle="Birth Date">
                 <app-registrar-producto></app-registrar-producto>
               </aw-wizard-step>
+              <aw-wizard-step [navigationSymbol]="{ symbol: '&#xf099;', fontFamily: 'FontAwesome' }"
+              stepTitle="Birth Date">
+              <app-registrar-producto></app-registrar-producto>
+            </aw-wizard-step>
             </aw-wizard>
           </div>
         </div>

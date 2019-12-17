@@ -1,1 +1,100 @@
-<p>registrar-producto works!</p>
+<br>
+<form [formGroup]="validationForm" (ngSubmit)="save(validationForm)" novalidate class="ngx-form">
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="Nombre"
+                [formControl]="validationForm.controls['nombre']" required>
+            <div *ngIf="validationForm.controls.nombre.touched && validationForm.controls.nombre.errors?.required"
+                class="text text-danger">
+                Debe de ingresar un nombre
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="codigo">Código</label>
+            <input type="text" class="form-control" id="codigo" placeholder="Código de producto"
+                [formControl]="validationForm.controls['codigo']" required>
+            <div *ngIf="validationForm.controls.codigo.touched && validationForm.controls.codigo.errors?.required"
+                class="text text-danger">
+                Debe de ingresar un código
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="descripcion">Descripción</label>
+            <textarea type="text" class="form-control" id="descripcion" placeholder="Descripción" rows="2"
+                [formControl]="validationForm.controls['descripcion']" required></textarea>
+            <div *ngIf="validationForm.controls.descripcion.touched && validationForm.controls.descripcion.errors?.required"
+                class="text text-danger">
+                Debe de ingresar una descripción
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="descripcionCorta">Descripción Corta</label>
+            <input type="text" class="form-control" id="descripcionCorta" placeholder="Descripción Corta"
+                [formControl]="validationForm.controls['descripcionCorta']" required>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="Precio">Precio</label>
+            <input type="number" class="form-control" id="precio" placeholder="Precio de venta"
+                [formControl]="validationForm.controls['precio']" required>
+            <div *ngIf="validationForm.controls.precio.touched && validationForm.controls.precio.errors?.required"
+                class="text text-danger">
+                Debe de ingresar un precio de venta
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="Precio">Proveedor</label>
+            <select id="proveedor" class="form-control" [formControl]="validationForm.controls['proveedor']" required>
+                <option [value]="item.value" *ngFor="let item of proveedores" (click)="listarCatalogos($event)">
+                    {{item.title}}</option>
+            </select>
+            <div *ngIf="validationForm.controls.proveedor.touched && validationForm.controls.proveedor.errors?.required"
+                class="text text-danger">
+                Debe de seleccionar un proveedor
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="idCatalogo">Catalogo</label>
+            <select id="idCatalogo" class="form-control" [formControl]="validationForm.controls['idCatalogo']" required>
+                <option [value]="item.value" *ngFor="let item of catalogos">
+                    {{item.title}}</option>
+            </select>
+            <div *ngIf="validationForm.controls.idCatalogo.touched && validationForm.controls.idCatalogo.errors?.required"
+                class="text text-danger">
+                Debe de seleccionar un Catálogo
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label for="nopagina">Número de Página</label>
+            <input type="number" class="form-control" id="nopagina" placeholder="Número de página"
+                [formControl]="validationForm.controls['nopagina']" required>
+            <div *ngIf="validationForm.controls.nopagina.touched && validationForm.controls.nopagina.errors?.required"
+                class="text text-danger">
+                Debe de ingresar un número de página
+            </div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="idCategoria">Categoria</label>
+            <select id="idCategoria" class="form-control" [formControl]="validationForm.controls['idCategoria']"
+                required>
+                <option [value]="item.value" *ngFor="let item of categorias">
+                    {{item.title}}</option>
+            </select>
+            <div *ngIf="validationForm.controls.idCategoria.touched && validationForm.controls.idCategoria.errors?.required"
+                class="text text-danger">
+                Debe de seleccionar una Categoria
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-primary" [disabled]="!validationForm.valid" type="submit">Continuar</button>
+</form>

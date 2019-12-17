@@ -16,6 +16,7 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private route: Router, private fb: FormBuilder) {
     this.createForm();
+    console.log("Ingresando registro");
   }
   createForm() {
     this.regForm = this.fb.group({

@@ -29,10 +29,10 @@ export class GsCatalogoComponent implements OnInit {
         async (data) => {
           let dat = data as ApiRest;
           console.log("Todos los departamentos",dat.data);
-        await  dat.data.forEach(departamento => {
+        await  dat.data.forEach(item => {
             //this.departamentos.push(new ElementoLista(departamento.id, departamento.descripcion));
-            this.proveedores.push(new ElementoLista(departamento.id, departamento.nombre))
-            this.proveedoresFiltro.push(new ElementoLista(departamento.nombre, departamento.nombre))
+            this.proveedores.push(new ElementoLista(item.id, item.nombre))
+            this.proveedoresFiltro.push(new ElementoLista(item.nombre, item.nombre))
 
           });
           this.configuracion = {
