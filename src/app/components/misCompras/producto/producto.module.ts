@@ -9,6 +9,7 @@ import { ProductoComponent } from './producto.component';
 import { AsignacionesComponent } from './asignaciones/asignaciones.component';
 import { ImagenesComponent } from './imagenes/imagenes.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ProductoRoutingModule,
     ReactiveFormsModule,
     ArchwizardModule,
-    NgxDropzoneModule 
+    NgxDropzoneModule,
+    Ng2SmartTableModule 
   ]
 })
 export class ProductoModule { }

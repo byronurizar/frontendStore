@@ -8,35 +8,43 @@ const urlBase = environment.urlBase;
 
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjIsImlhdCI6MTU3NjUyMjQ5M30.jEZabxtv9bHT5pe13CwCtknPweAtDyPRi7wkyf-cJHA'
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NjY4NzA3Mn0.wqYnvCYPEvh6PqwLzzyYGqH-rp2e8mpBC5O5T1WuDDM'
+  })
+};
+
+const httpOptionsImagenes = {
+  headers: new HttpHeaders({
+    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NjY4NzA3Mn0.wqYnvCYPEvh6PqwLzzyYGqH-rp2e8mpBC5O5T1WuDDM'
   })
 };
 
 @Injectable()
-export class ConectorApi{
-resultado:Observable<any>;
+export class ConectorApi {
+  resultado: Observable<any>;
 
-constructor(private http:HttpClient){}
+  constructor(private http: HttpClient) { }
 
 
-obtenerToken(){
-  var json='{"email":"prueba3@gmail.com","password":"123456"}';
-  var a=this.http.post(urlBase+"usuario/login",json,httpOptions);
-  return a;
-}
+  obtenerToken() {
+    var json = '{"email":"prueba3@gmail.com","password":"123456"}';
+    var a = this.http.post(urlBase + "usuario/login", json, httpOptions);
+    return a;
+  }
 
-Post(ruta,jsonSolicitud){
-    return this.http.post(urlBase+ruta,jsonSolicitud,httpOptions);
-}
+  Post(ruta, jsonSolicitud) {
+    return this.http.post(urlBase + ruta, jsonSolicitud, httpOptions);
+  }
 
-Get(ruta):Observable<any> {
-    return this.resultado=this.http.get(urlBase+ruta,httpOptions);
-}
+  Get(ruta): Observable<any> {
+    return this.resultado = this.http.get(urlBase + ruta, httpOptions);
+  }
 
-Patch(ruta,jsonSolicitud){
-  console.log("Ruta patch",ruta);
-    return this.http.patch(urlBase+ruta,jsonSolicitud,httpOptions);
-}
+  Patch(ruta, jsonSolicitud) {
+    return this.http.patch(urlBase + ruta, jsonSolicitud, httpOptions);
+  }
+  PostImagenes(ruta, jsonSolicitud) {
+    return this.http.post(urlBase + ruta, jsonSolicitud, httpOptionsImagenes);
+  }
 
 }

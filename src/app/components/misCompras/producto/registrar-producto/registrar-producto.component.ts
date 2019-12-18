@@ -5,6 +5,7 @@ import { ElementoLista } from 'src/app/modelos/elementoLista.model';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
 import { MovingDirection } from 'angular-archwizard';
+import { async } from '@angular/core/testing';
 declare var require
 const Swal = require('sweetalert2')
 @Component({
@@ -54,18 +55,17 @@ export class RegistrarProductoComponent implements OnInit {
     })
   }
 
-  listarProveedores(): void {
+ async listarProveedores() {
     try {
       this.conectorApi.Get('proveedores/listar').subscribe(
-        (data) => {
+      async  (data) => {
           let dat = data as ApiRest;
-          dat.data.forEach(item => {
+         await dat.data.forEach(item => {
             this.proveedores.push(new ElementoLista(item.id, item.nombre))
           });
         },
         (dataError) => {
-          let dat = dataError as ApiRest;
-          this.toastrService.error(dat.error, 'Alerta!');
+          this.toastrService.error(dataError.message, 'Alerta!');
         }
       );
     } catch (exce) {
@@ -102,8 +102,7 @@ export class RegistrarProductoComponent implements OnInit {
           });
         },
         (dataError) => {
-          let dat = dataError as ApiRest;
-          this.toastrService.error(dat.error, 'Alerta!');
+          this.toastrService.error(dataError.message, 'Alerta!');
         }
       );
     } catch (exce) {
@@ -116,23 +115,22 @@ export class RegistrarProductoComponent implements OnInit {
       return false;
     }
 
-    // try {
-    //   this.conectorApi.Post("productos/registro", form.value).subscribe(
-    //     (data) => {
-    //       let info = data as ApiRest;
-    //       if (info.codigo == 0) {
-    //         this.toastrService.success(info.respuesta, 'Información!');
-    //       } else {
-    //         this.toastrService.error(info.error, 'Alerta!');
-    //       }
-    //     }, (dataError) => {
-    //       let dat = dataError as ApiRest;
-    //       this.toastrService.error(dat.error, 'Alerta!');
-    //     }
-    //   );
-    // } catch (ex) {
-    //   this.toastrService.error(ex.error, 'Alerta!');
-    // }
+    try {
+      this.conectorApi.Post("productos/registro", form.value).subscribe(
+        (data) => {
+          let info = data as ApiRest;
+          if (info.codigo == 0) {
+            this.toastrService.success(info.respuesta, 'Información!');
+          } else {
+            this.toastrService.error(info.error, 'Alerta!');
+          }
+        }, (dataError) => {
+          this.toastrService.error(dataError.message, 'Alerta!');
+        }
+      );
+    } catch (ex) {
+      this.toastrService.error(ex.error, 'Alerta!');
+    }
     
   }
 
