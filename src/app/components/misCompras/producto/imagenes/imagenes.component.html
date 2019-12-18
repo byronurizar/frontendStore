@@ -1,0 +1,24 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <div class="card">
+                <div class="card-body">
+                    <div class="custom-dropzone" ngx-dropzone   [accept]="'image/png,image/jpeg,image/jpg'" (change)="onFilesAdded($event)">
+                        <ngx-dropzone-label>
+                            <div>
+                                <h2>Cargar todas las imagenes del producto</h2>
+                            </div>
+                        </ngx-dropzone-label>
+                        <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true"
+                            (removed)="onRemove(f)">
+                            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                        </ngx-dropzone-image-preview>
+                    </div>
+                    <br>
+                    <button class="btn btn-primary btn-next" type="submit" (click)="registrarImagenes()" awNextStep>Continuar</button>
+                </div>
+            </div>
+    </div>
+</div>
+<!-- Container-fluid Ends -->

@@ -34,7 +34,7 @@ import { ConectorApi } from './servicios/conectorApi.service';
 import { IngresoSistemaComponent } from './misCompras/ingreso-sistema/ingreso-sistema.component';
 import { RegistroComponent } from './misCompras/registro/registro.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgxDropzoneModule } from 'ngx-dropzone';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -71,9 +71,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    NgbModule
+    NgbModule,
+    NgxDropzoneModule
   ],
-  providers: [AuthService, AdminGuard, SecureInnerPagesGuard, CookieService,CategoriaService,ConectorApi],
+  providers: [AuthService, AdminGuard, SecureInnerPagesGuard, CookieService, CategoriaService, ConectorApi],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

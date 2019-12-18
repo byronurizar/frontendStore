@@ -17,31 +17,30 @@ export class RegistrarProductoComponent implements OnInit {
   public title: string = "registration page"
   public validationForm: FormGroup;
   proveedores: ElementoLista[] = [];
-  catalogos:ElementoLista[]=[];
+  catalogos: ElementoLista[] = [];
   categorias: ElementoLista[] = [];
-  ingresos=0;
+  ingresos = 0;
   public canExitStep1: (MovingDirection) => boolean;
-  constructor(private fb: FormBuilder, private conectorApi: ConectorApi, private toastrService: ToastrService) { 
+  constructor(private fb: FormBuilder, private conectorApi: ConectorApi, private toastrService: ToastrService) {
 
   }
 
   ngOnInit() {
 
-    this.canExitStep1 = (direction) => {
-      switch (direction) {
-        case MovingDirection.Forwards:
-          return true;
-        case MovingDirection.Backwards:
-          return false;
-        case MovingDirection.Stay:
-          return true;
-      }
-    };
-    
-    this.ingresos+=1;
+    // this.canExitStep1 = (direction) => {
+    //   switch (direction) {
+    //     case MovingDirection.Forwards:
+    //       return true;
+    //     case MovingDirection.Backwards:
+    //       return false;
+    //     case MovingDirection.Stay:
+    //       return true;
+    //   }
+    // };
+
+    this.ingresos += 1;
     this.listarProveedores();
     this.listarCategorias();
-    console.log("Ingresando",this.ingresos);
     this.validationForm = this.fb.group({
       nombre: ['', Validators.required],
       codigo: ['', Validators.required],
@@ -55,9 +54,9 @@ export class RegistrarProductoComponent implements OnInit {
     })
   }
 
-  listarProveedores():void {
+  listarProveedores(): void {
     try {
-        this.conectorApi.Get('proveedores/listar').subscribe(
+      this.conectorApi.Get('proveedores/listar').subscribe(
         (data) => {
           let dat = data as ApiRest;
           dat.data.forEach(item => {
@@ -73,13 +72,11 @@ export class RegistrarProductoComponent implements OnInit {
       this.toastrService.error(exce.error, 'Alerta!');
     }
   }
-
-  
   async listarCatalogos(event) {
     try {
-      this.catalogos=[];
+      this.catalogos = [];
       let idProveedor = event.target.value;
-      this.conectorApi.Get('catalogos/listar/'+idProveedor).subscribe(
+      this.conectorApi.Get('catalogos/listar/' + idProveedor).subscribe(
         async (data) => {
           let dat = data as ApiRest;
           await dat.data.forEach(item => {
@@ -95,8 +92,6 @@ export class RegistrarProductoComponent implements OnInit {
       this.toastrService.error(exce, 'Alerta!');
     }
   }
-
-
   async listarCategorias() {
     try {
       this.conectorApi.Get('categorias/listar').subscribe(
@@ -116,16 +111,29 @@ export class RegistrarProductoComponent implements OnInit {
     }
   }
 
-  save(form: any) {
+  async registrarProducto(form: any) {
     if (!form.valid) {
       return false;
     }
-    console.log("Formulario", form);
-    return true;
+
+    // try {
+    //   this.conectorApi.Post("productos/registro", form.value).subscribe(
+    //     (data) => {
+    //       let info = data as ApiRest;
+    //       if (info.codigo == 0) {
+    //         this.toastrService.success(info.respuesta, 'Información!');
+    //       } else {
+    //         this.toastrService.error(info.error, 'Alerta!');
+    //       }
+    //     }, (dataError) => {
+    //       let dat = dataError as ApiRest;
+    //       this.toastrService.error(dat.error, 'Alerta!');
+    //     }
+    //   );
+    // } catch (ex) {
+    //   this.toastrService.error(ex.error, 'Alerta!');
+    // }
+    
   }
-
-  // listarCatalogos(event){
-
-  //}
 
 }
