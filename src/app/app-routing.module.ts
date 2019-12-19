@@ -55,7 +55,7 @@ const appRoutes: Routes = [
     children: full
   },
   {
-    path:'ingresosSistema',
+    path:'login',
     component:IngresoSistemaComponent
   },
   {

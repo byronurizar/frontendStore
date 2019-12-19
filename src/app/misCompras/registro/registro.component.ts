@@ -5,8 +5,7 @@ import { ElementoLista } from 'src/app/modelos/elementoLista.model';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
-import { NgbDateStruct, NgbCalendar, NgbDate, NgbDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { async } from 'q';
+import { Router } from '@angular/router';
 
 declare var require
 const Swal = require('sweetalert2')
@@ -35,7 +34,7 @@ export class RegistroComponent implements OnInit {
   @ViewChild("nuevoUsuario", { static: false }) nuevoUsuario: NgForm;
   public emailForm: FormGroup;
   public form: any;
-  constructor(private conectorApi: ConectorApi, private toastrService: ToastrService, private calendar: NgbCalendar) {
+  constructor(private conectorApi: ConectorApi, private toastrService: ToastrService,private router: Router) {
     this.listarDepartamentos();
   }
 
@@ -106,6 +105,7 @@ export class RegistroComponent implements OnInit {
           if (dat.codigo == 0) {
             this.toastrService.success(dat.respuesta, 'Información!');
             localStorage.setItem("token", dat.data.token);
+            this.router.navigate(['/dashboard/principal'])
           } else {
             this.toastrService.error(dat.error, 'Alerta!');
           }

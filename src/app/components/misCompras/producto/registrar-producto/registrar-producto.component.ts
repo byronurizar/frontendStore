@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ElementoLista } from 'src/app/modelos/elementoLista.model';
@@ -15,6 +15,7 @@ const Swal = require('sweetalert2')
   encapsulation: ViewEncapsulation.None
 })
 export class RegistrarProductoComponent implements OnInit {
+  @Output() codigoProducto = new EventEmitter<number>()
   public title: string = "registration page"
   public validationForm: FormGroup;
   proveedores: ElementoLista[] = [];
@@ -121,6 +122,9 @@ export class RegistrarProductoComponent implements OnInit {
           let info = data as ApiRest;
           if (info.codigo == 0) {
             this.toastrService.success(info.respuesta, 'Información!');
+            let idProducto=0;
+            idProducto=info.data.id;
+            this.codigoProducto.emit(idProducto);
           } else {
             this.toastrService.error(info.error, 'Alerta!');
           }

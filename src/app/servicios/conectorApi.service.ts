@@ -5,17 +5,24 @@ import { ApiRest } from '../modelos/apiResponse.model';
 import { Observable } from 'rxjs/Observable';
 
 const urlBase = environment.urlBase;
+let token;
+
+if(sessionStorage.getItem("token")){
+  token=sessionStorage.getItem("token");
+}else{
+  token=localStorage.getItem("token");
+}
 
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NjY4NzA3Mn0.wqYnvCYPEvh6PqwLzzyYGqH-rp2e8mpBC5O5T1WuDDM'
+    'Authorization': `Bearer ${token}`
   })
 };
 
 const httpOptionsImagenes = {
   headers: new HttpHeaders({
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NjY4NzA3Mn0.wqYnvCYPEvh6PqwLzzyYGqH-rp2e8mpBC5O5T1WuDDM'
+    'Authorization': `Bearer ${token}`
   })
 };
 

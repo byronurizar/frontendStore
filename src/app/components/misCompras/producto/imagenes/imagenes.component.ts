@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
 import { ToastrService } from 'ngx-toastr';
@@ -10,10 +10,11 @@ import { ToastrService } from 'ngx-toastr';
   encapsulation: ViewEncapsulation.None
 })
 export class ImagenesComponent implements OnInit {
-
+  @Input() resultadoInput:number;
   constructor(private conectorApi: ConectorApi, private toastrService: ToastrService) { }
 
   ngOnInit() {
+    console.log("Codigo en imagenes",this.resultadoInput);
   }
   files: File[] = [];
 
@@ -32,8 +33,6 @@ export class ImagenesComponent implements OnInit {
   }
 
   registrarImagenes() {
-
-
     try {
       this.files.forEach(archivo => {
         const formData = new FormData();

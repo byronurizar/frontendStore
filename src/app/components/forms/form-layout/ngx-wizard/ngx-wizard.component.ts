@@ -12,6 +12,7 @@ export class NgxWizardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log("Data ",this.formData);
   }
 
 }
