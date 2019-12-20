@@ -23,11 +23,11 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-3 col-sm-6" *ngFor="let product of products">
+        <div class="col-xl-3 col-sm-6" *ngFor="let product of productos">
             <div class="card">
                 <div class="product-box">
                     <div class="product-img">
-                        <div class="ribbon ribbon-danger" *ngIf="product.status == 'sale'">{{product.status}}</div>
+                        <!-- <div class="ribbon ribbon-danger" *ngIf="product.status == 'sale'">{{product.status}}</div>
                         <div class="ribbon ribbon-success ribbon-right" *ngIf="product.status == '50%'  ">
                             {{product.status}}
                         </div>
@@ -37,14 +37,14 @@
                             *ngIf="product.status == 'love'  "><i class="icofont icofont-love"></i>
                         </div>
                         <div class="ribbon ribbon ribbon-clip ribbon-warning" *ngIf="product.status == 'Hot' ">
-                            {{product.status}}</div>
-                        <a [href]="[product.img]"> <img class="img-fluid" [src]="[product.img]" alt=""></a>
+                            {{product.status}}</div> -->
+                        <a [href]="[product.pathImagen]"> <img class="img-fluid" [src]="[product.pathImagen]" alt=""></a>
                         <div class="product-hover">
                             <ul>
                                 <li><i class="icon-shopping-cart" [routerLink]="['/ecommerce/add-cart']"
                                         (click)=addToCart(product)></i>
                                 </li>
-                                <li><i class="icon-eye" (click)="openProductDetail(content,product.id)"></i></li>
+                                <li><i class="icon-eye" (click)="abrirDetalle(content,product.id)"></i></li>
                                 <ng-template #content let-modal>
                                     <div class="modal-header" style="border-bottom: 0px;">
                                         <button type="button" class="close" aria-label="Close"
@@ -53,7 +53,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body" style="padding: 0%;">
-                                        <app-vista-rapida [productDetail]="productDetail"></app-vista-rapida>
+                                        <app-vista-rapida [productoDetalleVistaRapida]="productoDetalleVistaRapida"></app-vista-rapida>
                                     </div>
                                 </ng-template>
                                 <li><i class="icofont icofont-heart" [routerLink]="['/ecommerce/wishlist']"
@@ -63,11 +63,11 @@
                         </div>
                     </div>
                     <div class="product-details">
-                        <a [routerLink]="['/ecommerce/product-details', product.id]">
-                            <h5>{{product.name}}</h5>
+                        <a [routerLink]="['/comercio/detalle', product.id]">
+                            <h5>{{product.nombre}}</h5>
                         </a>
                         <div class="product-price">
-                            <del>{{product.discountPrice | currency:productsService?.currency:'symbol'}}</del>{{product.price | currency:productsService?.currency:'symbol'}}
+                            <del>{{product.precio | currency:'Q':'symbol'}}</del>{{product.precio | currency:'Q':'symbol'}}
                         </div>
                     </div>
                 </div>

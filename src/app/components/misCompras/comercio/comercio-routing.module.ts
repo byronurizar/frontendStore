@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductosComponent } from './productos/productos.component';
+import { DetalleProductoComponent } from './detalle-producto/detalle-producto.component';
 
 
 const routes: Routes = [{
@@ -8,7 +9,11 @@ const routes: Routes = [{
   children:[{
     path:'productos',
     component:ProductosComponent
-  }]
+  },
+{
+  path:'detalle',
+  component:DetalleProductoComponent
+}]
 }];
 
 @NgModule({

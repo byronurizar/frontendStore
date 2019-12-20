@@ -6,6 +6,9 @@ import { CartService } from 'src/app/shared/service/e-commerce/cart.service';
 import { Products } from 'src/app/shared/model/e-commerce/product.model';
 import { Observable, of } from 'rxjs';
 import { CartItem } from 'src/app/shared/model/e-commerce/cart.model';
+import { ConectorApi } from 'src/app/servicios/conectorApi.service';
+import { ToastrService } from 'ngx-toastr';
+import { ApiRest } from 'src/app/modelos/apiResponse.model';
 
 @Component({
   selector: 'app-vista-rapida',
@@ -14,27 +17,37 @@ import { CartItem } from 'src/app/shared/model/e-commerce/cart.model';
 })
 export class VistaRapidaComponent implements OnInit {
 
+  @Input() productoDetalleVistaRapida: any;
+  public cantidad: number = 1;
+  tallasDisponibles:any;
+  idTalla:number;
   @Input() productDetail: any;
+
+
 
   public cartItems: Observable<CartItem[]> = of([]);
   public selectCartItems: CartItem[] = [];
-  public counter: number = 1;
+
   public product: Products = {};
   public detailCnt = [];
   public slidesPerPage = 4;
   public products: Products[];
 
-  public increment() {
-    this.counter += 1;
+  public incrementar() {
+      this.cantidad += 1;
   }
 
-  public decrement() {
-    if (this.counter > 1) {
-      this.counter -= 1;
+  public disminuir() {
+    if (this.cantidad > 1) {
+      this.cantidad -= 1;
     }
   }
 
-  constructor(private router: Router, private route: ActivatedRoute, config: NgbRatingConfig, public productService: ProductsService, private cartService: CartService, private ngb: NgbModal) {
+  public tallaSelecionada(id){
+    this.idTalla=id;
+  }
+
+  constructor(private router: Router,private conectorApi: ConectorApi,private toastrService: ToastrService, private route: ActivatedRoute, config: NgbRatingConfig, public productService: ProductsService, private cartService: CartService, private ngb: NgbModal) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.ngb.dismissAll();
@@ -64,6 +77,27 @@ export class VistaRapidaComponent implements OnInit {
   ngOnInit() {
     this.cartItems = this.cartService.getAll();
     this.cartItems.subscribe(selectCartItems => this.selectCartItems = selectCartItems)
+    this.litarTallasDisponibles();
+  }
+  async litarTallasDisponibles() {
+    try {
+      this.conectorApi.Get(`productos/asigtalla/listar/${this.productoDetalleVistaRapida.id}`).subscribe(
+        async (data) => {
+          let apiResult = data as ApiRest;
+          if (apiResult.codigo == 0) {
+            this.tallasDisponibles=await apiResult.data;
+          } else {
+            this.toastrService.success(apiResult.respuesta, 'Alerta!');
+          }
+        },
+        (dataError) => {
+          this.toastrService.error(dataError.message, 'Alerta!');
+        }
+      )
+
+    } catch (error) {
+      this.toastrService.error(error.message, 'Alerta!');
+    }
   }
 
 }

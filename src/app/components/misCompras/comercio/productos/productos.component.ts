@@ -7,6 +7,8 @@ import { CartService } from 'src/app/shared/service/e-commerce/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WishListService } from 'src/app/shared/service/e-commerce/wish-list.service';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
+import { Producto } from 'src/app/modelos/producto.model';
+import { ApiRest } from 'src/app/modelos/apiResponse.model';
 
 @Component({
   selector: 'app-productos',
@@ -15,6 +17,10 @@ import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 })
 export class ProductosComponent implements OnInit {
   @Output() productDetail: any;
+
+  @Output() productoDetalleVistaRapida: any;
+  public productos: Producto[] = [];
+
 
   public items: Products[] = [];
   public products: Products[] = [];
@@ -30,21 +36,31 @@ export class ProductosComponent implements OnInit {
   public check: boolean = false;
   public term: string
 
-  constructor(private conectorApi: ConectorApi,private toastr: ToastrService, private productService: ProductsService, private route: ActivatedRoute, private cartService: CartService, private modalService: NgbModal, private wishService: WishListService) { }
+  constructor(private conectorApi: ConectorApi, private toastr: ToastrService, private productService: ProductsService, private route: ActivatedRoute, private cartService: CartService, private modalService: NgbModal, private wishService: WishListService) { }
 
   public onChangeSorting(val) {
     this.sortByOrder = val;
   }
 
-  listarProductos(){
+  async listarProductos() {
     this.conectorApi.Get("productos/comercio/listar").subscribe(
-      (data)=>{
-console.log("Data Productos",data);
+      async (data) => {
+        let dat = data as ApiRest;
+        if(dat.codigo==0){
+          this.productos =await dat.data;
+          console.log("Productos",this.productos);
+        }
+        
       },
-      (dataError)=>{
-console.log("Data Error",dataError);
+      (dataError) => {
+        console.log("Data Error", dataError);
       }
     )
+  }
+
+  abrirDetalle(content, id: number) {
+    this.modalService.open(content, { centered: true, size: 'lg' });
+    this.productoDetalleVistaRapida=this.productos.find(item=>item.id==id);
   }
 
   showAdd() {
