@@ -105,7 +105,8 @@ export class BarraNavegacionComponent implements OnInit {
   async listarCatalogos(event) {
     try {
       this.catalogos = [];
-      let idProveedor = event.target.value;
+      let idProveedor =event;
+      if(idProveedor){
       this.conectorApi.Get('catalogos/listar/' + idProveedor).subscribe(
         async (data) => {
           let dat = data as ApiRest;
@@ -118,6 +119,7 @@ export class BarraNavegacionComponent implements OnInit {
           this.toastrService.error(dat.error, 'Alerta!');
         }
       );
+      }
     } catch (exce) {
       this.toastrService.error(exce, 'Alerta!');
     }

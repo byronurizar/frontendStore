@@ -9,18 +9,19 @@ let token;
 
 if(sessionStorage.getItem("token")){
   token=sessionStorage.getItem("token");
+  console.log("Mi token",token);
 }else{
   token=localStorage.getItem("token");
 }
-
-const httpOptions = {
+console.log("Mi token",token);
+let httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
   })
 };
 
-const httpOptionsImagenes = {
+let httpOptionsImagenes = {
   headers: new HttpHeaders({
     'Authorization': `Bearer ${token}`
   })

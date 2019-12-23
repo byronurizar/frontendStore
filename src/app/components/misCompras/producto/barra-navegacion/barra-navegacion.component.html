@@ -91,11 +91,9 @@
                           <div class="form-row">
                             <div class="col-md-4 mb-3">
                               <label for="Precio">Proveedor</label>
-                              <select id="proveedor" class="form-control"
+                              <select id="proveedor" class="form-control" ngModel (ngModelChange)="listarCatalogos($event)"
                                 [formControl]="validationForm.controls['proveedor']" required>
-                                <option [value]="item.value" *ngFor="let item of proveedores"
-                                  (click)="listarCatalogos($event)">
-                                  {{item.title}}</option>
+                                <option [value]="item.value" *ngFor="let item of proveedores">{{item.title}}</option>
                               </select>
                               <div
                                 *ngIf="validationForm.controls.proveedor.touched && validationForm.controls.proveedor.errors?.required"
