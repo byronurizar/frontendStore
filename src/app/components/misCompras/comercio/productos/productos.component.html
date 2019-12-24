@@ -28,21 +28,10 @@
                 <div class="product-box">
                     <div class="product-img">
                         <div class="ribbon ribbon-danger" *ngIf="product.oferta>0">Oferta</div>
-                        <!-- <div class="ribbon ribbon-success ribbon-right" *ngIf="product.status == '50%'  ">
-                            {{product.status}}
-                        </div>
-                        <div class="ribbon ribbon-secondary ribbon-vertical-left" *ngIf="product.status == 'gift'"><i
-                                class="icon-gift"></i></div>
-                        <div class="ribbon ribbon-bookmark ribbon-vertical-right ribbon-info"
-                            *ngIf="product.status == 'love'  "><i class="icofont icofont-love"></i>
-                        </div>
-                        <div class="ribbon ribbon ribbon-clip ribbon-warning" *ngIf="product.status == 'Hot' ">
-                            {{product.status}}</div> -->
-                        <!-- <a [href]="[product.pathImagen]"> <img class="img-fluid" [src]="[product.pathImagen]" alt=""></a> -->
                         <img class="img-fluid" [src]="[product.pathImagen]" alt="">
                         <div class="product-hover">
                             <ul>
-                                <li><i class="icon-shopping-cart" [routerLink]="['/ecommerce/add-cart']"
+                                <li><i class="icon-shopping-cart" [routerLink]="['/comercio/carrito']"
                                         (click)=addToCart(product)></i>
                                 </li>
                                 <li><i class="icon-eye" (click)="abrirDetalle(content,product.id)"></i></li>
@@ -54,7 +43,8 @@
                                         </button>
                                     </div>
                                     <div class="modal-body" style="padding: 0%;">
-                                        <app-vista-rapida [productoDetalleVistaRapida]="productoDetalleVistaRapida"></app-vista-rapida>
+                                        <app-vista-rapida [productoDetalleVistaRapida]="productoDetalleVistaRapida">
+                                        </app-vista-rapida>
                                     </div>
                                 </ng-template>
                                 <li><i class="icofont icofont-heart" [routerLink]="['/ecommerce/wishlist']"
@@ -68,7 +58,12 @@
                             <h5>{{product.nombre}}</h5>
                         </a>
                         <div class="product-price">
-                            <del *ngIf="product.oferta>0">{{product.precio | currency:'Q':'symbol'}}</del>{{product.precio | currency:'Q':'symbol'}}
+                            <div *ngIf="product.oferta>0">
+                                <del>{{product.precio | currency:'Q':'symbol'}}</del>{{product.oferta | currency:'Q':'symbol'}}
+                            </div>
+                            <div *ngIf="product.oferta==0">
+                                {{product.precio | currency:'Q':'symbol'}}
+                            </div>
                         </div>
                     </div>
                 </div>

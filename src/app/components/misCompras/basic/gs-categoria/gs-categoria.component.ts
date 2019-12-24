@@ -85,11 +85,11 @@ export class GsCategoriaComponent implements OnInit {
         this.info = dat.data;
       },
       (dataError) => {
-        this.toastrService.error(dataError.error, 'Alerta!');
+        this.toastrService.error(dataError.error.error, 'Alerta!');
       }
     )
     }catch(ex){
-      this.toastrService.error(ex, 'Alerta!');
+      this.toastrService.error(ex.message, 'Alerta!');
     }
     
   }

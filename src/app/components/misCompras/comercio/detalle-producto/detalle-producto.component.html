@@ -54,7 +54,13 @@
                 <hr>
                 <p>{{producto.descripcion}}</p>
                 <div class="product-price digits">
-                    <del>{{producto.precio | currency:'Q':'symbol'}}</del>{{producto.precio | currency:'Q':'symbol'}}
+                    <div *ngIf="producto.oferta>0">
+                        <del>{{producto.precio | currency:'Q':'symbol'}}</del>{{producto.oferta | currency:'Q':'symbol'}}
+                    </div>
+
+                    <div *ngIf="producto.oferta==0">
+                        {{producto.precio | currency:'Q':'symbol'}}
+                    </div>
                 </div>
                 <hr>
                 <div>
@@ -104,7 +110,7 @@
                 <hr>
                 <div class="m-t-15">
                     <button class="btn btn-primary-gradien m-r-10" type="button"
-                        data-original-title="btn btn-info-gradien" [routerLink]="['/ecommerce/add-cart']"
+                        data-original-title="btn btn-info-gradien" [routerLink]="['/comercio/carrito']"
                         (click)=addToCart(product) title="">
                         Añadir al carrito</button>
                     <button class="btn btn-success-gradien" type="button" data-original-title="btn btn-info-gradien"
@@ -143,7 +149,12 @@
                                                     <h6>{{product.nombre}}</h6>
                                                 </a>
                                                 <div class="product-price">
-                                                    <del *ngIf="product.oferta>0">{{product.precio | currency:'Q':'symbol'}}</del>{{product.precio | currency:'Q':'symbol'}}
+                                                    <div *ngIf="product.oferta>0">
+                                                        <del>{{product.precio | currency:'Q':'symbol'}}</del>{{product.oferta | currency:'Q':'symbol'}}
+                                                    </div>
+                                                    <div *ngIf="product.oferta==0">
+                                                        {{product.precio | currency:'Q':'symbol'}}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

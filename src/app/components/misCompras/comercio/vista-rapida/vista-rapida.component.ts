@@ -23,19 +23,10 @@ export class VistaRapidaComponent implements OnInit {
   coloresDisponibles:any;
   tallaSeleccionada=0;
 colorSeleccionado=0;
-
   idTalla:number;
-  @Input() productDetail: any;
 
-
-
-  public cartItems: Observable<CartItem[]> = of([]);
-  public selectCartItems: CartItem[] = [];
-
-  public product: Products = {};
   public detailCnt = [];
   public slidesPerPage = 4;
-  public products: Products[];
 
   public incrementar() {
       this.cantidad += 1;
@@ -54,13 +45,6 @@ colorSeleccionado=0;
       }
     });
 
-    this.route.params.subscribe(params => {
-      const id = +params['id'];
-      this.productService.getProduct(id).subscribe((product) => {
-        this.product = product;
-      });
-    });
-
   }
 
   public addToCart(product: Products, quantity) {
@@ -75,8 +59,6 @@ colorSeleccionado=0;
   }
 
   ngOnInit() {
-    this.cartItems = this.cartService.getAll();
-    this.cartItems.subscribe(selectCartItems => this.selectCartItems = selectCartItems)
     this.litarTallasDisponibles();
   }
   async litarTallasDisponibles() {

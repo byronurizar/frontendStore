@@ -65,6 +65,12 @@ export class NavService {
       ]
     },
     {
+      title: 'Comercio', icon: 'icon-desktop', type: 'sub', active: false, children: [
+        {
+          path:'/comercio/productos',title:'Registrar',type:'link'}
+      ]
+    },
+    {
       headTitle: 'GENERAL'
     },
     {

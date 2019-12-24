@@ -13,9 +13,10 @@ import 'mousetrap';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/shared/service/e-commerce/products.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CarritoComponent } from './carrito/carrito.component';
 
 @NgModule({
-  declarations: [ProductosComponent, VistaRapidaComponent, DetalleProductoComponent],
+  declarations: [ProductosComponent, VistaRapidaComponent, DetalleProductoComponent, CarritoComponent],
   imports: [
     CommonModule,
     ComercioRoutingModule,
