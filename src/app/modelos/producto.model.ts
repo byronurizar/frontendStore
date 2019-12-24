@@ -5,5 +5,6 @@ export interface Producto {
     descripcionCorta?: String;
     esImagenPrincipal: boolean,
     pathImagen: String,
-    precio: number
+    precio: number,
+    oferta: number
 }

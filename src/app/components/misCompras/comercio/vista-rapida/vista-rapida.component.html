@@ -4,19 +4,44 @@
       <div class="product-details col-md-6 text-left">
         <h1>{{productoDetalleVistaRapida?.nombre}}</h1>
         <div class="product-price">
-          <del>{{productoDetalleVistaRapida?.precio | currency:'Q':'symbol'}}</del>{{productoDetalleVistaRapida?.precio | currency:'Q':'symbol'}}
+          <del *ngIf="productoDetalleVistaRapida?.oferta>0">{{productoDetalleVistaRapida?.precio | currency:'Q':'symbol'}}</del>{{productoDetalleVistaRapida?.precio | currency:'Q':'symbol'}}
         </div>
         <div class="product-view">
           <h6 class="f-w-600">Detalle de Producto</h6>
         <p class="mb-0">{{productoDetalleVistaRapida.descripcion}}</p>
         </div>
-        <div class="product-size">
-          <ul *ngFor="let talla of tallasDisponibles">
-            <li>
-              <button class="btn btn-outline-light" type="button" (click)="tallaSelecionada(talla.id)">{{talla.idTalla}}</button>
-            </li>
-          </ul>
+        <hr *ngIf="tallasDisponibles?.length >0">
+        <div class="m-t-15" *ngIf="tallasDisponibles?.length >0">
+            <h6>Tallas</h6>
+            <div class="product-size">
+                <ul>
+                    <div ngbRadioGroup name="radioTallas" [(ngModel)]="tallaSeleccionada">
+                  <li *ngFor="let talla of tallasDisponibles">
+                    <label ngbButtonLabel  class="btn btn-outline-light">
+                        <input ngbButton type="radio" [value]="talla.id"> {{talla.idTalla}}
+                    </label>
+                  </li>
+                </div>
+                </ul>
+              </div>
         </div>
+        <hr *ngIf="coloresDisponibles?.length >0">
+        <div class="m-t-15" *ngIf="coloresDisponibles?.length >0">
+            <h6>Colores</h6>
+            <div class="product-size">
+                <ul>
+                  <div ngbRadioGroup name="radioColores" [(ngModel)]="colorSeleccionado">
+                    <li *ngFor="let color of coloresDisponibles">
+                      <label ngbButtonLabel  class="btn btn-outline-light">
+                          <input ngbButton type="radio" [value]="color.id"> {{color.idColor}}
+                      </label>
+                    </li>
+                  </div>
+
+                </ul>
+              </div>
+        </div>
+        <hr>
         <div class="product-qnty">
           <h6 class="f-w-600">Cantidad</h6>
           <div class="qty-box1">

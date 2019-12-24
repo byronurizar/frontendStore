@@ -20,6 +20,10 @@ export class VistaRapidaComponent implements OnInit {
   @Input() productoDetalleVistaRapida: any;
   public cantidad: number = 1;
   tallasDisponibles:any;
+  coloresDisponibles:any;
+  tallaSeleccionada=0;
+colorSeleccionado=0;
+
   idTalla:number;
   @Input() productDetail: any;
 
@@ -41,10 +45,6 @@ export class VistaRapidaComponent implements OnInit {
     if (this.cantidad > 1) {
       this.cantidad -= 1;
     }
-  }
-
-  public tallaSelecionada(id){
-    this.idTalla=id;
   }
 
   constructor(private router: Router,private conectorApi: ConectorApi,private toastrService: ToastrService, private route: ActivatedRoute, config: NgbRatingConfig, public productService: ProductsService, private cartService: CartService, private ngb: NgbModal) {
@@ -86,6 +86,27 @@ export class VistaRapidaComponent implements OnInit {
           let apiResult = data as ApiRest;
           if (apiResult.codigo == 0) {
             this.tallasDisponibles=await apiResult.data;
+            this.listarColoresDisponibles(this.productoDetalleVistaRapida.id);
+          } else {
+            this.toastrService.success(apiResult.respuesta, 'Alerta!');
+          }
+        },
+        (dataError) => {
+          this.toastrService.error(dataError.message, 'Alerta!');
+        }
+      )
+
+    } catch (error) {
+      this.toastrService.error(error.message, 'Alerta!');
+    }
+  }
+  async listarColoresDisponibles(idProducto) {
+    try {
+      this.conectorApi.Get(`productos/asigcolor/listar/${idProducto}`).subscribe(
+        async (data) => {
+          let apiResult = data as ApiRest;
+          if (apiResult.codigo == 0) {
+            this.coloresDisponibles=await apiResult.data;
           } else {
             this.toastrService.success(apiResult.respuesta, 'Alerta!');
           }

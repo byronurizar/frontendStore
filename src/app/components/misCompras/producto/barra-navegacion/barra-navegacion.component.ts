@@ -57,6 +57,7 @@ export class BarraNavegacionComponent implements OnInit {
       descripcion: ['', Validators.required],
       descripcionCorta: [''],
       precio: ['', Validators.required],
+      oferta: ['', Validators.required],
       proveedor: ['', Validators.required],
       idCatalogo: ['', Validators.required],
       nopagina: ['', Validators.required],

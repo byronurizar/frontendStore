@@ -5,14 +5,15 @@ import { ApiRest } from '../modelos/apiResponse.model';
 import { Observable } from 'rxjs/Observable';
 
 const urlBase = environment.urlBase;
-let token;
+let token='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsImlhdCI6MTU3NzE0Mjc0OH0.N2RvlGbXCMZ4z0GkkrUezLkLp8Jc-NFMt14MEwAMGzk';
 
-if(sessionStorage.getItem("token")){
-  token=sessionStorage.getItem("token");
-  console.log("Mi token",token);
-}else{
-  token=localStorage.getItem("token");
-}
+
+// if(sessionStorage.getItem("token")){
+//   token=sessionStorage.getItem("token");
+//   console.log("Mi token",token);
+// }else{
+//   token=localStorage.getItem("token");
+//}
 console.log("Mi token",token);
 let httpOptions = {
   headers: new HttpHeaders({

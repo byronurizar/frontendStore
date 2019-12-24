@@ -12,6 +12,7 @@ import 'hammerjs';
 import 'mousetrap';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/shared/service/e-commerce/products.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ProductosComponent, VistaRapidaComponent, DetalleProductoComponent],
@@ -21,6 +22,8 @@ import { ProductsService } from 'src/app/shared/service/e-commerce/products.serv
     CarouselModule,
     NgbModule,
     NgxPrintModule,
+    FormsModule,
+    ReactiveFormsModule,
     GalleryModule.forRoot()
   ],
   providers: [NgbActiveModal,ProductsService]

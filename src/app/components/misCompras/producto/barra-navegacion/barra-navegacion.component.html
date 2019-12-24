@@ -77,14 +77,24 @@
                                 placeholder="Descripción Corta"
                                 [formControl]="validationForm.controls['descripcionCorta']" required>
                             </div>
-                            <div class="col-md-6 mb-3">
-                              <label for="Precio">Precio</label>
-                              <input type="number" class="form-control" id="precio" placeholder="Precio de venta"
+                            <div class="col-md-3 mb-3">
+                              <label for="Precio">Precio Normal</label>
+                              <input type="number" class="form-control" id="precio" placeholder="Precio normal"
                                 [formControl]="validationForm.controls['precio']" required>
                               <div
                                 *ngIf="validationForm.controls.precio.touched && validationForm.controls.precio.errors?.required"
                                 class="text text-danger">
                                 Debe de ingresar un precio de venta
+                              </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                              <label for="Precio">Precio Oferta</label>
+                              <input type="number" class="form-control" id="oferta" placeholder="Precio oferta" value="0"
+                                [formControl]="validationForm.controls['oferta']" required>
+                              <div
+                                *ngIf="validationForm.controls.oferta.touched && validationForm.controls.oferta.errors?.required"
+                                class="text text-danger">
+                                Debe de ingresar un precio de Oferta
                               </div>
                             </div>
                           </div>

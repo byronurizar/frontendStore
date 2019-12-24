@@ -27,8 +27,8 @@
             <div class="card">
                 <div class="product-box">
                     <div class="product-img">
-                        <!-- <div class="ribbon ribbon-danger" *ngIf="product.status == 'sale'">{{product.status}}</div>
-                        <div class="ribbon ribbon-success ribbon-right" *ngIf="product.status == '50%'  ">
+                        <div class="ribbon ribbon-danger" *ngIf="product.oferta>0">Oferta</div>
+                        <!-- <div class="ribbon ribbon-success ribbon-right" *ngIf="product.status == '50%'  ">
                             {{product.status}}
                         </div>
                         <div class="ribbon ribbon-secondary ribbon-vertical-left" *ngIf="product.status == 'gift'"><i
@@ -38,7 +38,8 @@
                         </div>
                         <div class="ribbon ribbon ribbon-clip ribbon-warning" *ngIf="product.status == 'Hot' ">
                             {{product.status}}</div> -->
-                        <a [href]="[product.pathImagen]"> <img class="img-fluid" [src]="[product.pathImagen]" alt=""></a>
+                        <!-- <a [href]="[product.pathImagen]"> <img class="img-fluid" [src]="[product.pathImagen]" alt=""></a> -->
+                        <img class="img-fluid" [src]="[product.pathImagen]" alt="">
                         <div class="product-hover">
                             <ul>
                                 <li><i class="icon-shopping-cart" [routerLink]="['/ecommerce/add-cart']"
@@ -67,7 +68,7 @@
                             <h5>{{product.nombre}}</h5>
                         </a>
                         <div class="product-price">
-                            <del>{{product.precio | currency:'Q':'symbol'}}</del>{{product.precio | currency:'Q':'symbol'}}
+                            <del *ngIf="product.oferta>0">{{product.precio | currency:'Q':'symbol'}}</del>{{product.precio | currency:'Q':'symbol'}}
                         </div>
                     </div>
                 </div>
