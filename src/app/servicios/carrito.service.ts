@@ -6,7 +6,7 @@ import { ActivatedRoute } from "@angular/router";
 import { ProductsService } from "../shared/service/e-commerce/products.service";
 import { ToastrService } from "ngx-toastr";
 
-let products = JSON.parse(localStorage.getItem("cartItem")) || [];
+let products = JSON.parse(localStorage.getItem("carritoItems")) || [];
 @Injectable({
   providedIn: 'root'
 })
@@ -39,7 +39,7 @@ export class Carrito {
         if (qty != 0 && stock) {
           products[index]['quantity'] = qty;
           this.toastrService.success('This product has been already added to cart.');
-          localStorage.setItem('cartItem', JSON.stringify(products));
+          localStorage.setItem('carritoItems', JSON.stringify(products));
 
         }
         return true;
@@ -51,7 +51,7 @@ export class Carrito {
       products.push(item);
       this.toastrService.success('This product has been added to cart.');
     }
-    localStorage.setItem('cartItem', JSON.stringify(products));
+    localStorage.setItem('carritoItems', JSON.stringify(products));
     return item;
 
   }
@@ -70,7 +70,7 @@ export class Carrito {
     if (item === undefined) return false;
     const index = products.indexOf(item);
     products.splice(index, 1);
-    localStorage.setItem('cartItem', JSON.stringify(products));
+    localStorage.setItem('carritoItems', JSON.stringify(products));
 
   }
 
@@ -81,7 +81,7 @@ export class Carrito {
         let stock = this.calculateStockCounts(products[index], quantity);
         if (qty != 0 && stock)
           products[index]['quantity'] = qty;
-        localStorage.setItem("cartItem", JSON.stringify(products));
+        localStorage.setItem("carritoItems", JSON.stringify(products));
         return true;
       }
     });
