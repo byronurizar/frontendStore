@@ -1,14 +1,13 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Products } from 'src/app/shared/model/e-commerce/product.model';
 import { ToastrService } from 'ngx-toastr';
-import { ProductsService } from 'src/app/shared/service/e-commerce/products.service';
 import { ActivatedRoute } from '@angular/router';
-import { CartService } from 'src/app/shared/service/e-commerce/cart.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { WishListService } from 'src/app/shared/service/e-commerce/wish-list.service';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { Producto } from 'src/app/modelos/producto.model';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
+import { Carrito } from 'src/app/servicios/carrito.service';
 
 @Component({
   selector: 'app-productos',
@@ -24,7 +23,7 @@ export class ProductosComponent implements OnInit {
 
 
 
-  constructor(private conectorApi: ConectorApi, private toastr: ToastrService, private route: ActivatedRoute, private cartService: CartService, private modalService: NgbModal, private wishService: WishListService) { }
+  constructor(private conectorApi: ConectorApi, private toastr: ToastrService, private route: ActivatedRoute, private cartService: Carrito, private modalService: NgbModal, private wishService: WishListService) { }
 
   async listarProductos() {
     this.conectorApi.Get("productos/comercio/listar").subscribe(
@@ -54,8 +53,8 @@ export class ProductosComponent implements OnInit {
   }
 
   // add to cart service
-  public addToCart(product: Products, quantity: number = 1) {
-    this.cartService.addToCart(product, quantity);
+  public addToCart(producto:any, quantity: number = 1) {
+    this.cartService.agregarProducto(producto,1,0,0);
   }
 
   //add to wish list service

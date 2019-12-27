@@ -1,96 +1,99 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Subscriber, Observable } from "rxjs";
-import { CartItem } from "../shared/model/e-commerce/cart.model";
-import { Products } from "../shared/model/e-commerce/product.model";
 import { ActivatedRoute } from "@angular/router";
 import { ProductsService } from "../shared/service/e-commerce/products.service";
 import { ToastrService } from "ngx-toastr";
 
-let products = JSON.parse(localStorage.getItem("carritoItems")) || [];
+let productos = JSON.parse(localStorage.getItem("carritoItems")) || [];
 @Injectable({
   providedIn: 'root'
 })
 export class Carrito {
-  public cartItems: BehaviorSubject<CartItem[]> = new BehaviorSubject([]);
+  public cartItems: BehaviorSubject<any[]> = new BehaviorSubject([]);
   public observer: Subscriber<{}>;
-  private itemsInCart: CartItem[] = [];
 
-  public itemList: Products[];
   constructor(private route: ActivatedRoute, private productService: ProductsService, private toastrService: ToastrService) {
-    this.cartItems.subscribe(products => products = products);
-    this.itemList = [];
+    this.cartItems.subscribe(productos => productos = productos);
+    console.log("cartItems",this.cartItems);
   }
 
-  getAll(): Observable<CartItem[]> {
+  getTodos(): Observable<any[]> {
     const itemsList = new Observable(observer => {
-      observer.next(products);
+      observer.next(productos);
       observer.complete();
     });
-    return <Observable<CartItem[]>>itemsList;
+    return <Observable<any[]>>itemsList;
   }
 
-  public addToCart(product: Products, quantity: number): CartItem | boolean {
-    var item: CartItem | boolean = false;
 
-    let hashItem = products.find((items, index) => {
-      if (items.product.id == product.id) {
-        let qty = products[index].quantity + quantity;
-        let stock = this.calculateStockCounts(products[index], quantity);
-        if (qty != 0 && stock) {
-          products[index]['quantity'] = qty;
-          this.toastrService.success('This product has been already added to cart.');
-          localStorage.setItem('carritoItems', JSON.stringify(products));
-
+  public agregarProducto(producto:any,cantidad:number,idColor:number,idTalla:number){
+    let nuevoProducto:any;
+    let productoExistente=productos.find((items,index)=>{
+      if(items.producto.id==producto.id){
+        let idTallaActual=productos[index].idTalla;
+        let idColorActual=productos[index].idColor;
+        if(idTallaActual==idTalla){
+          if(idColorActual==idColor){
+            let cantidadTotal=parseInt((productos[index].cantidad))+ parseInt(''+cantidad);
+            productos[index]["cantidad"]=cantidadTotal;
+            this.toastrService.success('Producto agregado exitosamente');
+            localStorage.setItem('carritoItems', JSON.stringify(productos));
+            return true;
+          }else{
+            return false;
+          }
+        }else{
+          return false;
         }
-        return true;
       }
     });
 
-    if (!hashItem) {
-      item = { product: product, quantity: quantity };
-      products.push(item);
-      this.toastrService.success('This product has been added to cart.');
+    if(!productoExistente){
+      nuevoProducto={producto:producto,cantidad:cantidad,idColor:idColor,idTalla:idTalla};
+      productos.push(nuevoProducto);
+      this.toastrService.success('Producto agregado exitosamente');
     }
-    localStorage.setItem('carritoItems', JSON.stringify(products));
-    return item;
+    localStorage.setItem('carritoItems', JSON.stringify(productos));
+    return true;
 
   }
 
-  public calculateStockCounts(product: CartItem, quantity): CartItem | Boolean {
-    let qty = product.quantity + quantity;
-    let stock = product.product.stock;
-    if (stock < qty) {
-      this.toastrService.error('You can not add more items than available. In stock ' + stock + ' items.');
-      return false
-    }
-    return true
-  }
-
-  public removeCartItem(item: CartItem) {
-    if (item === undefined) return false;
-    const index = products.indexOf(item);
-    products.splice(index, 1);
-    localStorage.setItem('carritoItems', JSON.stringify(products));
-
-  }
-
-  public updateCartQuantity(product: Products, quantity: number): CartItem | boolean {
-    return products.find((items, index) => {
-      if (items.product.id == product.id) {
-        let qty = products[index].quantity + quantity;
-        let stock = this.calculateStockCounts(products[index], quantity);
-        if (qty != 0 && stock)
-          products[index]['quantity'] = qty;
-        localStorage.setItem("carritoItems", JSON.stringify(products));
-        return true;
-      }
-    });
-  }
-  public getTotalAmount(): Observable<number> {
-    return this.cartItems.map((product: CartItem[]) => {
-      return products.reduce((prev, curr: CartItem) => {
-        return prev + curr.product.price * curr.quantity;
+  public getCantidadTotal(){
+    return this.cartItems.map((producto: any[]) => {
+      return productos.reduce((prev, curr: any) => {
+        return prev + curr.producto.precio * curr.cantidad;
       }, 0);
     });
   }
+
+  public eliminarItem(item:any){
+    if (item === undefined){
+      return false;
+    }else{
+    const index = productos.indexOf(item);
+    productos.splice(index, 1);
+    localStorage.setItem('carritoItems', JSON.stringify(productos));
+    }
+  }
+
+  public actualizarCantidad(item:any,cantidad:number){
+    return productos.find((items, index) => {
+      if (items.producto.id == item.producto.id) {
+        let idTallaActual=productos[index].idTalla;
+        let idColorActual=productos[index].idColor;
+        if(idTallaActual==item.idTalla){
+          if(idColorActual==item.idColor){
+            let cantidadTotal=parseInt(productos[index].cantidad)+cantidad;
+            productos[index]["cantidad"]=cantidadTotal;
+            localStorage.setItem('carritoItems', JSON.stringify(productos));
+            if(cantidadTotal<=0){
+              this.eliminarItem(item);
+            }
+            return true;
+          }
+        }
+      }
+    });
+  }
+
 }

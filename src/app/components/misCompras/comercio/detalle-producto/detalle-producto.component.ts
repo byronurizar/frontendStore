@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
 import { Producto } from 'src/app/modelos/producto.model';
+import { Carrito } from 'src/app/servicios/carrito.service';
 
 @Component({
   selector: 'app-detalle-producto',
@@ -54,7 +55,7 @@ export class DetalleProductoComponent implements OnInit {
     focusOnSelect: true
   }
 
-  constructor(private conectorApi: ConectorApi, private router: Router, private route: ActivatedRoute, private toastrService: ToastrService, config: NgbRatingConfig, public productService: ProductsService, private cartService: CartService) {
+  constructor(private conectorApi: ConectorApi, private router: Router, private route: ActivatedRoute, private toastrService: ToastrService, config: NgbRatingConfig, public productService: ProductsService, private cartService: Carrito) {
     this.allContent = ContentDetail.ContentDetails;
 
 
@@ -198,15 +199,20 @@ export class DetalleProductoComponent implements OnInit {
     })
   }
 
-  public buyNow(product: Products, quantity: number = 1) {
-    if (quantity > 0)
-      this.cartService.addToCart(product, quantity);
-    this.router.navigate(['/ecommerce/check-out']);
+  public buyNow(producto:any, cantidad: number = 1) {
+    if (cantidad > 0){
+      this.cartService.agregarProducto(producto, cantidad,this.colorSeleccionado,this.tallaSeleccionada);      
+      this.router.navigate(['/ecommerce/check-out']);
+    }
   }
 
-  public addToCart(product: Products, quantity: number = 1) {
-    if (quantity == 0) return false;
-    this.cartService.addToCart(product, quantity);
+  public addToCart(producto:any, cantidad: number = 1) {
+    if (cantidad == 0){
+      return false;
+    } else{
+      this.cartService.agregarProducto(producto, cantidad,this.colorSeleccionado,this.tallaSeleccionada);
+    }
+    
   }
 
 

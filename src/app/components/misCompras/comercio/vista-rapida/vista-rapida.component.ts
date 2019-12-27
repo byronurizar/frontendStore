@@ -2,13 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { NgbRatingConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/shared/service/e-commerce/products.service';
-import { CartService } from 'src/app/shared/service/e-commerce/cart.service';
 import { Products } from 'src/app/shared/model/e-commerce/product.model';
-import { Observable, of } from 'rxjs';
-import { CartItem } from 'src/app/shared/model/e-commerce/cart.model';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
+import { Carrito } from 'src/app/servicios/carrito.service';
 
 @Component({
   selector: 'app-vista-rapida',
@@ -38,7 +36,7 @@ colorSeleccionado=0;
     }
   }
 
-  constructor(private router: Router,private conectorApi: ConectorApi,private toastrService: ToastrService, private route: ActivatedRoute, config: NgbRatingConfig, public productService: ProductsService, private cartService: CartService, private ngb: NgbModal) {
+  constructor(private router: Router,private conectorApi: ConectorApi,private toastrService: ToastrService, private route: ActivatedRoute, config: NgbRatingConfig, public productService: ProductsService, private cartService: Carrito, private ngb: NgbModal) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.ngb.dismissAll();
@@ -49,14 +47,24 @@ colorSeleccionado=0;
 
   public addToCart(product: Products, quantity) {
     if (quantity == 0) return false;
-    this.cartService.addToCart(product, parseInt(quantity));
+    // this.cartService.addToCart(product, parseInt(quantity));
+  }
+
+  public agregarProducto(producto:any,cantidad:number){
+    if(cantidad==0){
+      return false;
+    }else{
+      console.log("Cantidad Vista rapida",cantidad);
+      this.cartService.agregarProducto(producto,cantidad,this.colorSeleccionado,this.tallaSeleccionada);
+    }
   }
 
   public buyNow(product: Products, quantity) {
     if (quantity > 0)
-      this.cartService.addToCart(product, parseInt(quantity));
+      //this.cartService.addToCart(product, parseInt(quantity));
     this.router.navigate(['/ecommerce/check-out']);
   }
+
 
   ngOnInit() {
     this.litarTallasDisponibles();

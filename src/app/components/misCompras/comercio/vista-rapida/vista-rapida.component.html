@@ -43,7 +43,6 @@
                 </label>
               </li>
             </div>
-
           </ul>
         </div>
       </div>
@@ -59,7 +58,7 @@
         </div>
         <div class="addcart-btn">
           <button class="btn btn-primary-gradien m-r-10" type="button" data-original-title="btn btn-info-gradien"
-            [routerLink]="['/comercio/carrito']" (click)=addToCart(productoDetalleVistaRapida,qty.value) title="">
+            [routerLink]="['/comercio/carrito']" (click)=agregarProducto(productoDetalleVistaRapida,qty.value) title="">
             Añadir al carrito</button>
           <button class="btn btn-success-gradien" type="button" data-original-title="btn btn-info-gradien"
             (click)=buyNow(productoDetalleVistaRapida,qty.value) title="">Compra ahora</button>
