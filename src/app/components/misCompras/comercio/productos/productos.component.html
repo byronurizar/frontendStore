@@ -31,10 +31,10 @@
                         <img class="img-fluid" [src]="[product.pathImagen]" alt="">
                         <div class="product-hover">
                             <ul>
-                                <li><i class="icon-shopping-cart" [routerLink]="['/comercio/carrito']"
+                                <!-- <li><i class="icon-shopping-cart" [routerLink]="['/comercio/carrito']"
                                         (click)=addToCart(product)></i>
-                                </li>
-                                <li><i class="icon-eye" (click)="abrirDetalle(content,product.id)"></i></li>
+                                </li> -->
+                                <li (click)="abrirDetalle(content,product.id)"><i class="icon-eye"></i></li>
                                 <ng-template #content let-modal>
                                     <div class="modal-header" style="border-bottom: 0px;">
                                         <button type="button" class="close" aria-label="Close"
@@ -47,9 +47,7 @@
                                         </app-vista-rapida>
                                     </div>
                                 </ng-template>
-                                <li><i class="icofont icofont-heart" [routerLink]="['/ecommerce/wishlist']"
-                                        (click)=addToWishlist(product)></i>
-                                </li>
+                                <li (click)=agregarListaDeseos(product)><i class="icofont icofont-heart"></i></li>
                             </ul>
                         </div>
                     </div>

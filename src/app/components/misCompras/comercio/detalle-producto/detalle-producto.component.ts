@@ -201,7 +201,7 @@ export class DetalleProductoComponent implements OnInit {
 
   public buyNow(producto:any, cantidad: number = 1) {
     if (cantidad > 0){
-      this.cartService.agregarProducto(producto, cantidad,this.colorSeleccionado,this.tallaSeleccionada);      
+     // this.cartService.agregarProducto(producto, cantidad,this.colorSeleccionado,this.tallaSeleccionada);      
       this.router.navigate(['/ecommerce/check-out']);
     }
   }
@@ -210,7 +210,7 @@ export class DetalleProductoComponent implements OnInit {
     if (cantidad == 0){
       return false;
     } else{
-      this.cartService.agregarProducto(producto, cantidad,this.colorSeleccionado,this.tallaSeleccionada);
+     // this.cartService.agregarProducto(producto, cantidad,this.colorSeleccionado,this.tallaSeleccionada);
     }
     
   }

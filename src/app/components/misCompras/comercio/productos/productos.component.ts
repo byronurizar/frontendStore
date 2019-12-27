@@ -8,6 +8,7 @@ import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { Producto } from 'src/app/modelos/producto.model';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
 import { Carrito } from 'src/app/servicios/carrito.service';
+import { ListaDeseos } from 'src/app/servicios/listadeseos.service';
 
 @Component({
   selector: 'app-productos',
@@ -23,7 +24,7 @@ export class ProductosComponent implements OnInit {
 
 
 
-  constructor(private conectorApi: ConectorApi, private toastr: ToastrService, private route: ActivatedRoute, private cartService: Carrito, private modalService: NgbModal, private wishService: WishListService) { }
+  constructor(private conectorApi: ConectorApi, private toastr: ToastrService, private route: ActivatedRoute, private modalService: NgbModal, private listaDeseos: ListaDeseos) { }
 
   async listarProductos() {
     this.conectorApi.Get("productos/comercio/listar").subscribe(
@@ -48,19 +49,20 @@ export class ProductosComponent implements OnInit {
     this.productoDetalleVistaRapida = this.productos.find(item => item.id == id);
   }
 
-  showAdd() {
-    this.toastr.success('User Added !');
-  }
 
   // add to cart service
-  public addToCart(producto:any, quantity: number = 1) {
-    this.cartService.agregarProducto(producto,1,0,0);
+  public addToCart(producto: any, quantity: number = 1) {
+    //this.cartService.agregarProducto(producto,1,0,0);
   }
 
   //add to wish list service
   public addToWishlist(product: Products, quantity: number = 1) {
-    this.wishService.addToWishList(product, quantity);
-    this.showAdd();
+    // this.wishService.addToWishList(product, quantity);
+    // this.showAdd();
+  }
+
+  public agregarListaDeseos(producto: any) {
+    this.listaDeseos.agregarProducto(producto);
   }
 
 }

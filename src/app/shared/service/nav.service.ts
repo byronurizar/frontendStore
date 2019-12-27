@@ -58,16 +58,24 @@ export class NavService {
         { path: '/basic/gstipopago', title: 'Gestión Tipos de Pago', type: 'link' },
         { path: '/basic/gsdetalletipopago', title: 'Gestión Detalle Tipos de Pago', type: 'link' }
       ]
-    },{
+    }, {
       title: 'Producto', icon: 'icon-desktop', type: 'sub', active: false, children: [
         {
-          path:'/producto',title:'Registrar',type:'link'}
+          path: '/producto', title: 'Registrar', type: 'link'
+        }
       ]
     },
     {
       title: 'Comercio', icon: 'icon-desktop', type: 'sub', active: false, children: [
         {
-          path:'/comercio/productos',title:'Registrar',type:'link'}
+          path: '/comercio/productos', title: 'Productos', type: 'link'
+        },
+        {
+          path: '/comercio/carrito', title: 'Mi Carrito', type: 'link'
+        },
+        {
+          path: '/comercio/listadeseos', title: 'Lista de deseos', type: 'link'
+        }
       ]
     },
     {

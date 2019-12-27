@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { NgbRatingConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/shared/service/e-commerce/products.service';
@@ -14,20 +14,20 @@ import { Carrito } from 'src/app/servicios/carrito.service';
   styleUrls: ['./vista-rapida.component.scss']
 })
 export class VistaRapidaComponent implements OnInit {
-
   @Input() productoDetalleVistaRapida: any;
   public cantidad: number = 1;
-  tallasDisponibles:any;
-  coloresDisponibles:any;
-  tallaSeleccionada=0;
-colorSeleccionado=0;
-  idTalla:number;
-
+  tallasDisponibles: any[] = [];
+  coloresDisponibles: any[] = [];
+  tallaSeleccionada = 0;
+  colorSeleccionado = 0;
+  idTalla: number;
+  colorValido = true;
+  tallaValido = true;
   public detailCnt = [];
   public slidesPerPage = 4;
 
   public incrementar() {
-      this.cantidad += 1;
+    this.cantidad += 1;
   }
 
   public disminuir() {
@@ -36,7 +36,7 @@ colorSeleccionado=0;
     }
   }
 
-  constructor(private router: Router,private conectorApi: ConectorApi,private toastrService: ToastrService, private route: ActivatedRoute, config: NgbRatingConfig, public productService: ProductsService, private cartService: Carrito, private ngb: NgbModal) {
+  constructor(private router: Router, private conectorApi: ConectorApi, private toastrService: ToastrService, private route: ActivatedRoute, config: NgbRatingConfig, public productService: ProductsService, private cartService: Carrito, private ngb: NgbModal) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.ngb.dismissAll();
@@ -50,22 +50,46 @@ colorSeleccionado=0;
     // this.cartService.addToCart(product, parseInt(quantity));
   }
 
-  public agregarProducto(producto:any,cantidad:number){
-    if(cantidad==0){
+  public agregarProducto(producto: any, cantidad: number) {
+    if (cantidad == 0) {
       return false;
-    }else{
-      console.log("Cantidad Vista rapida",cantidad);
-      this.cartService.agregarProducto(producto,cantidad,this.colorSeleccionado,this.tallaSeleccionada);
+    } else {
+      let talla = { idTalla: 0, descripcion: 'N/A' }
+      if (this.coloresDisponibles.length > 0) {
+        if (this.tallaSeleccionada > 0) {
+          let itemTalla = this.tallasDisponibles.find(item => item.id == this.tallaSeleccionada);
+          let descTalla = itemTalla.idTalla;
+          talla = { idTalla: this.tallaSeleccionada, descripcion: descTalla }
+        } else {
+          this.tallaValido = true;
+          this.toastrService.error("Debe de seleccionar una talla", 'Alerta!');
+        }
+      }
+      let color = { idColor: 0, descripcion: 'N/A' }
+      if (this.coloresDisponibles.length > 0) {
+        if (this.colorSeleccionado > 0) {
+          let itemColor = this.coloresDisponibles.find(item => item.id == this.colorSeleccionado);
+          let descColor = itemColor.idColor;
+          color = { idColor: this.colorSeleccionado, descripcion: descColor }
+        } else {
+          this.colorValido = false;
+          this.toastrService.error("Debe de selecciónar un color", 'Alerta!');
+        }
+      }
+      if (this.tallaValido && this.colorValido) {
+        if(producto.oferta>0){
+          producto.precio=producto.oferta;
+        }
+        this.cartService.agregarProducto(producto, cantidad, this.coloresDisponibles, color, this.tallasDisponibles, talla);
+      }
+
     }
   }
 
   public buyNow(product: Products, quantity) {
     if (quantity > 0)
-      //this.cartService.addToCart(product, parseInt(quantity));
-    this.router.navigate(['/ecommerce/check-out']);
+      this.router.navigate(['/comercio/finalizarpedido']);
   }
-
-
   ngOnInit() {
     this.litarTallasDisponibles();
   }
@@ -75,7 +99,7 @@ colorSeleccionado=0;
         async (data) => {
           let apiResult = data as ApiRest;
           if (apiResult.codigo == 0) {
-            this.tallasDisponibles=await apiResult.data;
+            this.tallasDisponibles = await apiResult.data;
             this.listarColoresDisponibles(this.productoDetalleVistaRapida.id);
           } else {
             this.toastrService.success(apiResult.respuesta, 'Alerta!');
@@ -96,7 +120,7 @@ colorSeleccionado=0;
         async (data) => {
           let apiResult = data as ApiRest;
           if (apiResult.codigo == 0) {
-            this.coloresDisponibles=await apiResult.data;
+            this.coloresDisponibles = await apiResult.data;
           } else {
             this.toastrService.success(apiResult.respuesta, 'Alerta!');
           }

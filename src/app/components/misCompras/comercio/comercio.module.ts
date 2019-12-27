@@ -14,9 +14,14 @@ import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/shared/service/e-commerce/products.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CarritoComponent } from './carrito/carrito.component';
+import { ModalTallasComponent } from './modal-tallas/modal-tallas.component';
+import { ModalColoresComponent } from './modal-colores/modal-colores.component';
+import { ListaDeseosComponent } from './lista-deseos/lista-deseos.component';
+import { FinalizarPedidoComponent } from './finalizar-pedido/finalizar-pedido.component';
+import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 
 @NgModule({
-  declarations: [ProductosComponent, VistaRapidaComponent, DetalleProductoComponent, CarritoComponent],
+  declarations: [ProductosComponent, VistaRapidaComponent, DetalleProductoComponent, CarritoComponent, ModalTallasComponent, ModalColoresComponent, ListaDeseosComponent, FinalizarPedidoComponent, DetallePedidoComponent],
   imports: [
     CommonModule,
     ComercioRoutingModule,

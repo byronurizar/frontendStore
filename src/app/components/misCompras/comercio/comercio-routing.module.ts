@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProductosComponent } from './productos/productos.component';
 import { DetalleProductoComponent } from './detalle-producto/detalle-producto.component';
 import { CarritoComponent } from './carrito/carrito.component';
+import { ListaDeseosComponent } from './lista-deseos/lista-deseos.component';
+import { FinalizarPedidoComponent } from './finalizar-pedido/finalizar-pedido.component';
+import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
 
 
 const routes: Routes = [{
@@ -18,6 +21,18 @@ const routes: Routes = [{
 {
   path:'carrito',
   component:CarritoComponent
+},
+{
+  path:'listadeseos',
+  component:ListaDeseosComponent
+},
+{
+  path:'finalizarpedido',
+  component:FinalizarPedidoComponent
+},
+{
+  path:'detallepedido',
+  component:DetallePedidoComponent
 }
 ]
 }];
