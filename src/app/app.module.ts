@@ -35,6 +35,7 @@ import { IngresoSistemaComponent } from './misCompras/ingreso-sistema/ingreso-si
 import { RegistroComponent } from './misCompras/registro/registro.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { InicioComponent } from './misCompras/inicio/inicio.component';
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -50,7 +51,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     EnterpriseComponent,
     IngresoSistemaComponent,
-    RegistroComponent
+    RegistroComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,

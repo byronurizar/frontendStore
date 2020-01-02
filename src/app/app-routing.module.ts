@@ -17,6 +17,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SecureInnerPagesGuard } from './shared/guard/SecureInnerPagesGuard.guard';
 import { IngresoSistemaComponent } from './misCompras/ingreso-sistema/ingreso-sistema.component';
 import { RegistroComponent } from './misCompras/registro/registro.component';
+import { InicioComponent } from './misCompras/inicio/inicio.component';
 const appRoutes: Routes = [
   {
     path: '',
@@ -61,6 +62,10 @@ const appRoutes: Routes = [
   {
     path:'registrarse',
     component:RegistroComponent
+  },
+  {
+    path:'inicio',
+    component:InicioComponent
   }
 ];
 
@@ -76,3 +81,4 @@ const appRoutes: Routes = [
 
 export class AppRoutingModule {
 }
+

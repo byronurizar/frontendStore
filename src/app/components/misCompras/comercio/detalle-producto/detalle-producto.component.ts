@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Products } from 'src/app/shared/model/e-commerce/product.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ContentDetail } from 'src/app/shared/model/e-commerce/content';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ProductsService } from 'src/app/shared/service/e-commerce/products.service';
-import { CartService } from 'src/app/shared/service/e-commerce/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
@@ -34,6 +32,9 @@ export class DetalleProductoComponent implements OnInit {
   public type: string = "Febric"
   public nav: any;
 
+  colorValido = true;
+  tallaValido = true;
+
   sliderOption = {
     rtl: true,
     items: 1,
@@ -58,7 +59,6 @@ export class DetalleProductoComponent implements OnInit {
   constructor(private conectorApi: ConectorApi, private router: Router, private route: ActivatedRoute, private toastrService: ToastrService, config: NgbRatingConfig, public productService: ProductsService, private cartService: Carrito) {
     this.allContent = ContentDetail.ContentDetails;
 
-
     //for rating 
     this.allContent.filter(opt => {
       if (this.type == opt.type) {
@@ -73,7 +73,12 @@ export class DetalleProductoComponent implements OnInit {
       const id = +params['id'];
       this.infoProducto(id);
       this.listarProductosCruzados();
+
+      this.listarTallasDisponibles(id);
+      this.listarColoresDisponibles(id);
     });
+
+
   }
   ngOnInit() {
     console.log("Detalle de producto");
@@ -114,7 +119,6 @@ export class DetalleProductoComponent implements OnInit {
             let dat = data as ApiRest;
             if (dat.codigo == 0) {
               this.imagenesProducto = dat.data;
-              this.listarTallasDisponibles(idProducto);
             } else {
               this.toastrService.error(dat.error, 'Alerta!');
             }
@@ -135,7 +139,6 @@ export class DetalleProductoComponent implements OnInit {
           let apiResult = data as ApiRest;
           if (apiResult.codigo == 0) {
             this.tallasDisponibles = await apiResult.data;
-            this.listarColoresDisponibles(idProducto);
           } else {
             this.toastrService.success(apiResult.respuesta, 'Alerta!');
           }
@@ -175,11 +178,11 @@ export class DetalleProductoComponent implements OnInit {
     this.conectorApi.Get("productos/comercio/listar").subscribe(
       async (data) => {
         let dat = data as ApiRest;
-        if(dat.codigo==0){
-          this.productosRelacionados =await dat.data;
-          console.log("Productos",this.productosRelacionados);
+        if (dat.codigo == 0) {
+          this.productosRelacionados = await dat.data;
+          console.log("Productos", this.productosRelacionados);
         }
-        
+
       },
       (dataError) => {
         console.log("Data Error", dataError);
@@ -199,22 +202,35 @@ export class DetalleProductoComponent implements OnInit {
     })
   }
 
-  public buyNow(producto:any, cantidad: number = 1) {
-    if (cantidad > 0){
-     // this.cartService.agregarProducto(producto, cantidad,this.colorSeleccionado,this.tallaSeleccionada);      
-      this.router.navigate(['/ecommerce/check-out']);
+  public agregarProducto(producto: any) {
+    let talla = { idTalla: 0, descripcion: 'N/A' }
+    if (this.coloresDisponibles.length > 0) {
+      if (this.tallaSeleccionada > 0) {
+        let itemTalla = this.tallasDisponibles.find(item => item.id == this.tallaSeleccionada);
+        let descTalla = itemTalla.idTalla;
+        talla = { idTalla: this.tallaSeleccionada, descripcion: descTalla }
+      } else {
+        this.tallaValido = true;
+        this.toastrService.error("Debe de seleccionar una talla", 'Alerta!');
+      }
     }
-  }
-
-  public addToCart(producto:any, cantidad: number = 1) {
-    if (cantidad == 0){
-      return false;
-    } else{
-     // this.cartService.agregarProducto(producto, cantidad,this.colorSeleccionado,this.tallaSeleccionada);
+    let color = { idColor: 0, descripcion: 'N/A' }
+    if (this.coloresDisponibles.length > 0) {
+      if (this.colorSeleccionado > 0) {
+        let itemColor = this.coloresDisponibles.find(item => item.id == this.colorSeleccionado);
+        let descColor = itemColor.idColor;
+        color = { idColor: this.colorSeleccionado, descripcion: descColor }
+      } else {
+        this.colorValido = false;
+        this.toastrService.error("Debe de selecciónar un color", 'Alerta!');
+      }
+    }
+    if (this.tallaValido && this.colorValido) {
+      if (producto.oferta > 0) {
+        producto.precio = producto.oferta;
+      }
+      this.cartService.agregarProducto(producto, 1, this.coloresDisponibles, color, this.tallasDisponibles, talla);
     }
     
   }
-
-
-
 }

@@ -167,8 +167,8 @@
                 </div>
               </div>
               <div class="text-right">
-                <!-- [disabled]="!checkoutForm.valid" -->
-                <button class="btn btn-primary" type="submit" 
+                
+                <button [disabled]="!checkoutForm.valid" class="btn btn-primary" type="submit" 
                   (click)="onSubmit()">Realizar pedido
                 </button>
               </div>

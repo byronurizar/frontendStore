@@ -57,14 +57,15 @@
                   </td>
                   <td *ngIf="item.color?.idColor==0">{{item.color.descripcion}}</td>
                   <td *ngIf="item.color?.idColor>0">
-                      <div class="input-group">
-                     <a (click)="abrirModal(content)">{{item.color.descripcion}}&nbsp;<i class="fa fa-edit"></i></a>
-                     <ng-template #content let-modal>
-                         <div class="modal-body" style="padding: 0%;">
-                             <app-modal-colores (accionModal)="cerrarModalTalla($event)" [itemProducto]="item" [indexArreglo]="i">
-                             </app-modal-colores>
-                         </div>
-                     </ng-template>
+                    <div class="input-group">
+                      <a (click)="abrirModal(content)">{{item.color.descripcion}}&nbsp;<i class="fa fa-edit"></i></a>
+                      <ng-template #content let-modal>
+                        <div class="modal-body" style="padding: 0%;">
+                          <app-modal-colores (accionModal)="cerrarModalTalla($event)" [itemProducto]="item"
+                            [indexArreglo]="i">
+                          </app-modal-colores>
+                        </div>
+                      </ng-template>
 
                     </div>
                   </td>
@@ -72,14 +73,15 @@
                   <td *ngIf="item.talla?.idTalla>0">
                     <div class="input-group">
                       <a (click)="abrirModal(content2)">{{item.talla.descripcion}}&nbsp;<i class="fa fa-edit"></i></a>
-                     <ng-template #content2 let-modal>
-                         <div class="modal-body" style="padding: 0%;">
-                             <app-modal-tallas (accionModal)="cerrarModalTalla($event)" [itemProducto]="item" [indexArreglo]="i">
-                             </app-modal-tallas>
-                         </div>
-                     </ng-template>
-                     </div>
-                    </td>
+                      <ng-template #content2 let-modal>
+                        <div class="modal-body" style="padding: 0%;">
+                          <app-modal-tallas (accionModal)="cerrarModalTalla($event)" [itemProducto]="item"
+                            [indexArreglo]="i">
+                          </app-modal-tallas>
+                        </div>
+                      </ng-template>
+                    </div>
+                  </td>
                   <td><i class="fa fa-trash f-18" (click)=remove(item) aria-hidden="true"></i></td>
                   <td>{{ item.producto.precio * item.cantidad | currency:'Q':'symbol'}}</td>
                 </tr>
@@ -89,13 +91,14 @@
                   </td>
                   <td><span><strong>{{ getTotal() | async | currency:'Q':'symbol'}} </strong></span></td>
                 </tr>
-                <tr>
-                  <td colspan="5"><a class="btn btn-primary cart-btn-transform"
-                      [routerLink]="['/comercio/productos']">Continuar Comprando</a></td>
-                  <td><a class="btn btn-primary cart-btn-transform" [routerLink]="['/comercio/finalizarpedido']">Continuar con pedido</a></td>
-                </tr>
               </tbody>
             </table>
+            <div class="card-footer">
+              <a class="btn btn-primary mr-1" [routerLink]="['/comercio/productos']">Continuar Comprando</a>
+              <a class="btn btn-success cart-btn-transform" [routerLink]="['/comercio/finalizarpedido']">Continuar con
+                pedido</a>
+            </div>
+
           </div>
         </div>
       </div>

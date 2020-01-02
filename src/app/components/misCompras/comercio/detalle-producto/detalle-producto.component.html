@@ -66,11 +66,16 @@
                     <table class="product-page-width">
                         <tbody>
                             <tr>
-                                <td><b>Proveedor : </b>{{producto.nombre}}</td>
+                                <td><b>Proveedor : </b>{{producto.proveedor}}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Catálogo : </b>{{producto.catalogo}}</td>
                             </tr>
                             <tr>
                                 <td><b>Disponibilidad: </b>En base a pedido</td>
-
+                            </tr>
+                            <tr>
+                                <td><b>Tiempo de Entrega: </b>De 8 a 10 días</td>
                             </tr>
                         </tbody>
                     </table>
@@ -110,10 +115,9 @@
                 <div class="m-t-15">
                     <button class="btn btn-primary-gradien m-r-10" type="button"
                         data-original-title="btn btn-info-gradien" [routerLink]="['/comercio/carrito']"
-                        (click)=addToCart(producto) title="">
-                        Añadir al carrito</button>
-                    <button class="btn btn-success-gradien" type="button" data-original-title="btn btn-info-gradien"
-                        (click)=buyNow(producto) title="">Comprar ahora</button>
+                        (click)=agregarProducto(producto) title="">Añadir al carrito</button>
+                    <button class="btn btn-success-gradien" type="button" data-original-title="btn btn-info-gradien" [routerLink]="['/comercio/finalizarpedido']"
+                        (click)=agregarProducto(producto) title="">Comprar ahora</button>
                     <button class="btn btn-primary-gradien m-r-10 m-l-10" type="button"
                         data-original-title="btn btn-info-gradien" [routerLink]="['/comercio/productos']"
                         title="">Regresar a productos</button>
