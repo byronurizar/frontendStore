@@ -244,6 +244,45 @@
               </div>
               <!-- Container-fluid Ends -->
 
+                            <!-- Container-fluid starts -->
+                            <div class="container-fluid">
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="card">
+                                    <div class="card-header">
+                                      <h5>Productos Relacionados</h5>
+                                    </div>
+                                    <div class="card-body smart-datatable">
+                                      <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                          <label for="ltaProveedorProdRelacionado">Proveedor</label>
+                                          <select id="ltaProveedorProdRelacionado" class="form-control" ngModel (ngModelChange)="listarCategoriasProdRelacionado($event)">
+                                            <option [value]="item.value" *ngFor="let item of proveedores">{{item.title}}</option>
+                                          </select>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                          <label for="ltaCategoriaProdRelacionado">Categoria</label>
+                                          <select id="ltaCategoriaProdRelacionado" class="form-control" ngModel (ngModelChange)="listarProductosxCategoria($event)">
+                                            <option [value]="item.value" *ngFor="let item of categoriasProdRelacionado">
+                                              {{item.title}}</option>
+                                          </select>
+                                        </div>
+                                      </div>
+                                      <div class="table-responsive">
+                                        <ng2-smart-table [settings]="configuracionProductosRelacionados" [source]="listaProductosRelacionados"
+                                          (editConfirm)="onAsignarProductoRelacionado($event)">
+                                        </ng2-smart-table>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+              
+                              </div>
+                            </div>
+                            <!-- Container-fluid Ends -->
+
+
               <!-- Container-fluid starts -->
               <div class="container-fluid">
                 <div class="row">

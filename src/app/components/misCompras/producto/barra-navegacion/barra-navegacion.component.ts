@@ -16,8 +16,26 @@ export class BarraNavegacionComponent implements OnInit {
   public validationForm: FormGroup;
   proveedores: ElementoLista[] = [];
   catalogos: ElementoLista[] = [];
+  categoriasProdRelacionado: ElementoLista[] = [];
   categorias: ElementoLista[] = [];
   idProducto = "0";
+  info: any[];
+  public configuracion: Object;
+  public configuracionTallas: Object;
+  public configuracionEtiquetas: Object;
+  colores: ElementoLista[] = [];
+  coloresDesc: ElementoLista[] = [];
+  coloresAsignados: any;
+  tallas: ElementoLista[] = [];
+  tallasDesc: ElementoLista[] = [];
+  tallasAsignados: any;
+  etiquetas: ElementoLista[] = [];
+  etiquedasDesc: ElementoLista[] = [];
+  etiquetasAsignadas: any;
+
+  public idProductoCruzado: 0;
+
+  listaProductosRelacionados: any;
 
   conImagenes = false;
 
@@ -39,6 +57,52 @@ export class BarraNavegacionComponent implements OnInit {
     });
   }
 
+  configuracionProductosRelacionados = {
+    mode: 'inline', // inline|external|click-to-edit
+    selectMode: 'single', // single|multi
+    hideHeader: false,
+    hideSubHeader: false,
+    actions: {
+      columnTitle: 'Acciones',
+      add: false,
+      edit: true,
+      delete: false,
+      custom: [{ name: 'ourCustomAction', title: '<i class="nb-compose"></i>' }],
+      position: 'left'
+    },
+    pager: {
+      display: true,
+      perPage: 10
+    },
+    add: {
+      confirmCreate: true
+    },
+    edit: {
+      confirmSave: true
+    },
+    delete: {
+      confirmDelete: true
+    },
+    columns: {
+      id: {
+        title: 'Id'
+      },
+      nombre: {
+        title: 'Producto'
+      },
+      codigo: {
+        title: 'Codigo'
+      }, precio: {
+        title: 'Precio'
+      },
+      oferta: {
+        title: 'Oferta'
+      }
+    },
+    noDataMessage: 'No existen registros',
+  };
+
+
   ngOnInit() {
 
     this.promProveedores.then((data1) => {
@@ -55,7 +119,7 @@ export class BarraNavegacionComponent implements OnInit {
       nombre: ['', Validators.required],
       codigo: ['', Validators.required],
       descripcion: ['', Validators.required],
-      descripcionCorta: ['',[]],
+      descripcionCorta: ['', []],
       precio: ['', Validators.required],
       oferta: ['', Validators.required],
       proveedor: ['', Validators.required],
@@ -70,6 +134,7 @@ export class BarraNavegacionComponent implements OnInit {
       this.conectorApi.Get('proveedores/listar').subscribe(
         async (data) => {
           let dat = data as ApiRest;
+          this.proveedores.push(new ElementoLista('', 'Seleccione un Proveedor'))
           await dat.data.forEach(item => {
             this.proveedores.push(new ElementoLista(item.id, item.nombre))
           });
@@ -106,27 +171,70 @@ export class BarraNavegacionComponent implements OnInit {
   async listarCatalogos(event) {
     try {
       this.catalogos = [];
-      let idProveedor =event;
-      if(idProveedor){
-      this.conectorApi.Get('catalogos/listar/' + idProveedor).subscribe(
-        async (data) => {
-          let dat = data as ApiRest;
-          await dat.data.forEach(item => {
-            this.catalogos.push(new ElementoLista(item.id, item.descripcion))
-          });
-        },
-        (dataError) => {
-          let dat = dataError as ApiRest;
-          this.toastrService.error(dat.error, 'Alerta!');
-        }
-      );
+      let idProveedor = event;
+      if (idProveedor) {
+        this.conectorApi.Get('catalogos/listar/' + idProveedor).subscribe(
+          async (data) => {
+            let dat = data as ApiRest;
+            await dat.data.forEach(item => {
+              this.catalogos.push(new ElementoLista(item.id, item.descripcion))
+            });
+          },
+          (dataError) => {
+            let dat = dataError as ApiRest;
+            this.toastrService.error(dat.error, 'Alerta!');
+          }
+        );
       }
     } catch (exce) {
       this.toastrService.error(exce, 'Alerta!');
     }
   }
 
+  async listarCategoriasProdRelacionado(event) {
+    try {
+      this.categoriasProdRelacionado = [];
+      let idProveedor = event;
+      if (idProveedor) {
+        this.categoriasProdRelacionado.push(new ElementoLista('', 'Seleccione una categoria'))
+        this.conectorApi.Get('categorias/listarproveedor/' + idProveedor).subscribe(
+          async (data) => {
+            let dat = data as ApiRest;
+            await dat.data.forEach(item => {
+              this.categoriasProdRelacionado.push(new ElementoLista(item.idCategoria, item.categoria))
+            });
+          },
+          (dataError) => {
+            let dat = dataError as ApiRest;
+            this.toastrService.error(dat.error, 'Alerta!');
+          }
+        );
+      }
+    } catch (exce) {
+      this.toastrService.error(exce.message, 'Alerta!');
+    }
+  }
 
+
+  async listarProductosxCategoria(event) {
+    try {
+      let idCatalogo = event;
+      if (idCatalogo) {
+        this.conectorApi.Get('productos/categoria/' + idCatalogo).subscribe(
+          async (data) => {
+            let dat = data as ApiRest;
+            this.listaProductosRelacionados = dat.data;
+          },
+          (dataError) => {
+            let dat = dataError as ApiRest;
+            this.toastrService.error(dat.error, 'Alerta!');
+          }
+        );
+      }
+    } catch (exce) {
+      this.toastrService.error(exce.message, 'Alerta!');
+    }
+  }
   async registrarProducto(form: any) {
     if (!form.valid) {
       return false;
@@ -445,21 +553,6 @@ export class BarraNavegacionComponent implements OnInit {
     }
   });
 
-
-  info: any[];
-  public configuracion: Object;
-  public configuracionTallas: Object;
-  public configuracionEtiquetas: Object;
-  colores: ElementoLista[] = [];
-  coloresDesc: ElementoLista[] = [];
-  coloresAsignados: any;
-  tallas: ElementoLista[] = [];
-  tallasDesc: ElementoLista[] = [];
-  tallasAsignados: any;
-  etiquetas: ElementoLista[] = [];
-  etiquedasDesc: ElementoLista[] = [];
-  etiquetasAsignadas: any;
-
   onAsignarColor(event): void {
     try {
       if (event.newData) {
@@ -661,6 +754,73 @@ export class BarraNavegacionComponent implements OnInit {
 
     } catch (error) {
       this.toastrService.error(error.message, 'Alerta!');
+    }
+  }
+
+  async onAsignarProductoRelacionado(event) {
+    try {
+      if (event.newData) {
+        if (this.idProductoCruzado == 0) {
+          let jsonSolicitud = JSON.stringify({
+            idProducto: this.idProducto,
+            idEstado: 1
+          });
+          this.conectorApi.Post("productoscruzados/registro", jsonSolicitud).subscribe(
+            async (data) => {
+              let apiResult = await data as ApiRest;
+              if (apiResult.codigo == 0) {
+                this.toastrService.success(apiResult.respuesta, 'Información!');
+                this.idProductoCruzado = await apiResult.data[0].id;
+                console.log("Data result ", apiResult.data);
+                console.log("idProducto cruzado", this.idProductoCruzado)
+                let jsonDetalle = await JSON.stringify({
+                  idProductoCruzado: this.idProductoCruzado,
+                  idProducto: event.newData["id"],
+                  idEstado: 1
+                });
+                this.registrarDetalleProductoCruzado(jsonDetalle);
+                event.confirm.resolve();
+              } else {
+                this.toastrService.success(apiResult.respuesta, 'Alerta!');
+                event.confirm.reject();
+              }
+            },
+            (dataError) => {
+              this.toastrService.error(dataError.message, 'Alerta!');
+            }
+          )
+        } else {
+          let jsonDetalle = JSON.stringify({
+            idProductoCruzado: this.idProductoCruzado,
+            idProducto: event.newData["id"],
+            idEstado: 1
+          });
+          this.registrarDetalleProductoCruzado(jsonDetalle);
+          event.confirm.resolve();
+        }
+      }
+    } catch (error) {
+      this.toastrService.error(error.message, 'Alerta!');
+    }
+  }
+
+  public registrarDetalleProductoCruzado(json) {
+    try {
+      this.conectorApi.Post("productoscruzados/detalle/registro", json).subscribe(
+        (data) => {
+          let apiResult = data as ApiRest;
+          if (apiResult.codigo == 0) {
+            this.toastrService.success(apiResult.respuesta, 'Información!');
+          } else {
+            this.toastrService.success(apiResult.respuesta, 'Alerta!');
+          }
+        },
+        (dataError) => {
+          this.toastrService.error(dataError.message, 'Alerta!');
+        }
+      )
+    } catch (error) {
+
     }
   }
 
