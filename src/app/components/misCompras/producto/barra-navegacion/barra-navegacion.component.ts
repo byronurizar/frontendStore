@@ -18,7 +18,7 @@ export class BarraNavegacionComponent implements OnInit {
   catalogos: ElementoLista[] = [];
   categoriasProdRelacionado: ElementoLista[] = [];
   categorias: ElementoLista[] = [];
-  idProducto = "0";
+  idProducto = 0;
   info: any[];
   public configuracion: Object;
   public configuracionTallas: Object;
@@ -33,13 +33,15 @@ export class BarraNavegacionComponent implements OnInit {
   etiquedasDesc: ElementoLista[] = [];
   etiquetasAsignadas: any;
 
-  public idProductoCruzado: 0;
+  public idProductoCruzado = 0;
 
   listaProductosRelacionados: any;
+  listaProductosRelacionadosAsignados: any;
 
   conImagenes = false;
 
   resultadoPadre: number;
+  idCatalogo=0;
   constructor(private fb: FormBuilder, private conectorApi: ConectorApi, private toastrService: ToastrService) {
 
     this.promListarColores.then((data1) => {
@@ -65,9 +67,11 @@ export class BarraNavegacionComponent implements OnInit {
     actions: {
       columnTitle: 'Acciones',
       add: false,
-      edit: true,
+      edit: false,
       delete: false,
-      custom: [{ name: 'ourCustomAction', title: '<i class="nb-compose"></i>' }],
+      custom: [
+        { name: 'relacionar', title: '&nbsp;&nbsp;<i class="fa  fa-pencil">Relacionar</i>' }
+      ],
       position: 'left'
     },
     pager: {
@@ -218,12 +222,31 @@ export class BarraNavegacionComponent implements OnInit {
 
   async listarProductosxCategoria(event) {
     try {
-      let idCatalogo = event;
-      if (idCatalogo) {
-        this.conectorApi.Get('productos/categoria/' + idCatalogo).subscribe(
+this.idCatalogo = event;
+      if (this.idCatalogo) {
+        this.conectorApi.Get(`productos/categoria/${this.idCatalogo}/${this.idProducto}`).subscribe(
           async (data) => {
             let dat = data as ApiRest;
             this.listaProductosRelacionados = dat.data;
+          },
+          (dataError) => {
+            let dat = dataError as ApiRest;
+            this.toastrService.error(dat.error, 'Alerta!');
+          }
+        );
+      }
+    } catch (exce) {
+      this.toastrService.error(exce.message, 'Alerta!');
+    }
+  }
+
+  async listaProductosCruzadosAsignados() {
+    try {
+      if (this.idProducto>0) {
+        this.conectorApi.Get(`productoscruzados/detalle/listar/producto/${this.idProducto}`).subscribe(
+          async (data) => {
+            let dat = data as ApiRest;
+            this.listaProductosRelacionadosAsignados = dat.data;
           },
           (dataError) => {
             let dat = dataError as ApiRest;
@@ -242,11 +265,11 @@ export class BarraNavegacionComponent implements OnInit {
 
     try {
       this.conectorApi.Post("productos/registro", form.value).subscribe(
-        (data) => {
+      async  (data) => {
           let info = data as ApiRest;
           if (info.codigo == 0) {
             this.toastrService.success(info.respuesta, 'Información!');
-            this.idProducto = info.data.id;
+            this.idProducto =await info.data.id;
           } else {
             this.toastrService.error(info.error, 'Alerta!');
           }
@@ -269,7 +292,7 @@ export class BarraNavegacionComponent implements OnInit {
       this.files.forEach(archivo => {
         const formData = new FormData();
         formData.append('imagen', archivo, archivo.name);
-        formData.append('idProducto', this.idProducto);
+        formData.append('idProducto',""+ this.idProducto);
         if (contador == 0) {
           formData.append('esImagenPrincipal', '1');
         } else {
@@ -757,32 +780,42 @@ export class BarraNavegacionComponent implements OnInit {
     }
   }
 
+  onCustomAction(event) {
+    console.log("Evento custom",event);
+    switch (event.action) {
+      case 'relacionar':
+        this.onAsignarProductoRelacionado(event);
+        break;
+    }
+  }
+
   async onAsignarProductoRelacionado(event) {
     try {
-      if (event.newData) {
-        if (this.idProductoCruzado == 0) {
+      if (event.data) {
+        console.log("id producto cruzado", this.idProductoCruzado);
+        if (this.idProductoCruzado === 0) {
+
           let jsonSolicitud = JSON.stringify({
             idProducto: this.idProducto,
             idEstado: 1
           });
+          console.log("Producto", event);
           this.conectorApi.Post("productoscruzados/registro", jsonSolicitud).subscribe(
             async (data) => {
               let apiResult = await data as ApiRest;
               if (apiResult.codigo == 0) {
                 this.toastrService.success(apiResult.respuesta, 'Información!');
-                this.idProductoCruzado = await apiResult.data[0].id;
+                this.idProductoCruzado = await apiResult.data.id;
                 console.log("Data result ", apiResult.data);
                 console.log("idProducto cruzado", this.idProductoCruzado)
                 let jsonDetalle = await JSON.stringify({
                   idProductoCruzado: this.idProductoCruzado,
-                  idProducto: event.newData["id"],
+                  idProducto: event.data["id"],
                   idEstado: 1
                 });
                 this.registrarDetalleProductoCruzado(jsonDetalle);
-                event.confirm.resolve();
               } else {
                 this.toastrService.success(apiResult.respuesta, 'Alerta!');
-                event.confirm.reject();
               }
             },
             (dataError) => {
@@ -792,11 +825,10 @@ export class BarraNavegacionComponent implements OnInit {
         } else {
           let jsonDetalle = JSON.stringify({
             idProductoCruzado: this.idProductoCruzado,
-            idProducto: event.newData["id"],
+            idProducto: event.data["id"],
             idEstado: 1
           });
           this.registrarDetalleProductoCruzado(jsonDetalle);
-          event.confirm.resolve();
         }
       }
     } catch (error) {
@@ -811,6 +843,8 @@ export class BarraNavegacionComponent implements OnInit {
           let apiResult = data as ApiRest;
           if (apiResult.codigo == 0) {
             this.toastrService.success(apiResult.respuesta, 'Información!');
+            this.listarProductosxCategoria(this.idCatalogo);
+            this.listaProductosCruzadosAsignados();
           } else {
             this.toastrService.success(apiResult.respuesta, 'Alerta!');
           }

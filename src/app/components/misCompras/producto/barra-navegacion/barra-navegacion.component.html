@@ -270,9 +270,16 @@
                                       </div>
                                       <div class="table-responsive">
                                         <ng2-smart-table [settings]="configuracionProductosRelacionados" [source]="listaProductosRelacionados"
-                                          (editConfirm)="onAsignarProductoRelacionado($event)">
+                                          (custom)="onCustomAction($event)">
                                         </ng2-smart-table>
                                       </div>
+<h5>Productos Asignados</h5>
+                                      <div class="table-responsive">
+                                        <ng2-smart-table [source]="listaProductosRelacionadosAsignados"
+                                          (custom)="onCustomAction($event)">
+                                        </ng2-smart-table>
+                                      </div>
+
                                     </div>
 
                                   </div>
