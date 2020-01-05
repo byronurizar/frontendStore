@@ -89,8 +89,8 @@
                             </div>
                             <div class="col-md-3 mb-3">
                               <label for="Precio">Precio Oferta</label>
-                              <input type="number" class="form-control" id="oferta" placeholder="Precio oferta" value="0"
-                                [formControl]="validationForm.controls['oferta']" required>
+                              <input type="number" class="form-control" id="oferta" placeholder="Precio oferta"
+                                value="0" [formControl]="validationForm.controls['oferta']" required>
                               <div
                                 *ngIf="validationForm.controls.oferta.touched && validationForm.controls.oferta.errors?.required"
                                 class="text text-danger">
@@ -101,7 +101,8 @@
                           <div class="form-row">
                             <div class="col-md-4 mb-3">
                               <label for="Precio">Proveedor</label>
-                              <select id="proveedor" class="form-control" ngModel (ngModelChange)="listarCatalogos($event)"
+                              <select id="proveedor" class="form-control" ngModel
+                                (ngModelChange)="listarCatalogos($event)"
                                 [formControl]="validationForm.controls['proveedor']" required>
                                 <option [value]="item.value" *ngFor="let item of proveedores">{{item.title}}</option>
                               </select>
@@ -244,50 +245,53 @@
               </div>
               <!-- Container-fluid Ends -->
 
-                            <!-- Container-fluid starts -->
-                            <div class="container-fluid">
-                              <div class="row">
-                                <div class="col-sm-12">
-                                  <div class="card">
-                                    <div class="card-header">
-                                      <h5>Productos Relacionados</h5>
-                                    </div>
-                                    <div class="card-body smart-datatable">
-                                      <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                          <label for="ltaProveedorProdRelacionado">Proveedor</label>
-                                          <select id="ltaProveedorProdRelacionado" class="form-control" ngModel (ngModelChange)="listarCategoriasProdRelacionado($event)">
-                                            <option [value]="item.value" *ngFor="let item of proveedores">{{item.title}}</option>
-                                          </select>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                          <label for="ltaCategoriaProdRelacionado">Categoria</label>
-                                          <select id="ltaCategoriaProdRelacionado" class="form-control" ngModel (ngModelChange)="listarProductosxCategoria($event)">
-                                            <option [value]="item.value" *ngFor="let item of categoriasProdRelacionado">
-                                              {{item.title}}</option>
-                                          </select>
-                                        </div>
-                                      </div>
-                                      <div class="table-responsive">
-                                        <ng2-smart-table [settings]="configuracionProductosRelacionados" [source]="listaProductosRelacionados"
-                                          (custom)="onCustomAction($event)">
-                                        </ng2-smart-table>
-                                      </div>
-<h5>Productos Asignados</h5>
-                                      <div class="table-responsive">
-                                        <ng2-smart-table [source]="listaProductosRelacionadosAsignados"
-                                          (custom)="onCustomAction($event)">
-                                        </ng2-smart-table>
-                                      </div>
+              <!-- Container-fluid starts -->
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h5>Productos Relacionados</h5>
+                      </div>
+                      <div class="card-body smart-datatable">
+                        <div class="form-row">
+                          <div class="col-md-6 mb-3">
+                            <label for="ltaProveedorProdRelacionado">Proveedor</label>
+                            <select id="ltaProveedorProdRelacionado" class="form-control" ngModel
+                              (ngModelChange)="listarCategoriasProdRelacionado($event)">
+                              <option [value]="item.value" *ngFor="let item of proveedores">{{item.title}}</option>
+                            </select>
+                          </div>
+                          <div class="col-md-6 mb-3">
+                            <label for="ltaCategoriaProdRelacionado">Categoria</label>
+                            <select id="ltaCategoriaProdRelacionado" class="form-control" ngModel
+                              (ngModelChange)="listarProductosxCategoria($event)">
+                              <option [value]="item.value" *ngFor="let item of categoriasProdRelacionado">
+                                {{item.title}}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="table-responsive">
+                          <ng2-smart-table [settings]="configuracionProductosRelacionados"
+                            [source]="listaProductosRelacionados" (custom)="onCustomAction($event)">
+                          </ng2-smart-table>
+                        </div>
+                        <div *ngIf="listaProductosRelacionadosAsignados?.length >0">
+                        <h5>Productos Asignados</h5>
+                        <div class="table-responsive">
+                          <ng2-smart-table [settings]="confiProductosAsignados"
+                            [source]="listaProductosRelacionadosAsignados" (deleteConfirm)="onElimnar1($event)">
+                          </ng2-smart-table>
+                        </div>
+                      </div>
+                      </div>
 
-                                    </div>
+                    </div>
+                  </div>
 
-                                  </div>
-                                </div>
-              
-                              </div>
-                            </div>
-                            <!-- Container-fluid Ends -->
+                </div>
+              </div>
+              <!-- Container-fluid Ends -->
 
 
               <!-- Container-fluid starts -->

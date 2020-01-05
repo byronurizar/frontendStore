@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ToastrService } from 'ngx-toastr';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
+declare var require
+const Swal = require('sweetalert2')
 
 @Component({
   selector: 'app-barra-navegacion',
@@ -35,8 +37,8 @@ export class BarraNavegacionComponent implements OnInit {
 
   public idProductoCruzado = 0;
 
-  listaProductosRelacionados: any;
-  listaProductosRelacionadosAsignados: any;
+  listaProductosRelacionados: any[] = [];
+  listaProductosRelacionadosAsignados:any[] = [];
 
   conImagenes = false;
 
@@ -106,6 +108,49 @@ export class BarraNavegacionComponent implements OnInit {
     noDataMessage: 'No existen registros',
   };
 
+  confiProductosAsignados = {
+    mode: 'inline', // inline|external|click-to-edit
+    selectMode: 'single', // single|multi
+    hideHeader: true,
+    hideSubHeader: true,
+    actions: {
+      columnTitle: 'Acciones',
+      add: false,
+      edit: false,
+      delete: true,
+      position: 'left'
+    },
+    pager: {
+      display: true,
+      perPage: 10
+    },
+    add: {
+      confirmCreate: true
+    },
+    edit: {
+      confirmSave: true
+    },
+    delete: {
+      confirmDelete: true
+    },
+    columns: {
+      id: {
+        title: 'Id'
+      },
+      nombre: {
+        title: 'Producto'
+      },
+      codigo: {
+        title: 'Codigo'
+      }, precio: {
+        title: 'Precio'
+      },
+      oferta: {
+        title: 'Oferta'
+      }
+    },
+    noDataMessage: 'No existen registros',
+  };
 
   ngOnInit() {
 
@@ -218,6 +263,58 @@ export class BarraNavegacionComponent implements OnInit {
       this.toastrService.error(exce.message, 'Alerta!');
     }
   }
+
+  onElimnar1(event) {
+    Swal.fire({
+      title: 'Alerta',
+      text: "Esta seguro de eliminar la fila?",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'No, cancelar!',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+  
+        try {
+          if (event.data) {
+            event.data["idEstado"] = '3';
+            this.conectorApi.Patch(`productoscruzados/detalle/actualizar/${event.data["id"]}`, event.data).subscribe(
+              (data) => {
+                let apiResult = data as ApiRest;
+                if (apiResult.codigo == 0) {
+                  this.toastrService.success("Fila eliminada exitosamente", 'Información!');
+                  event.confirm.resolve();
+                } else {
+                  this.toastrService.success(apiResult.respuesta, 'Alerta!');
+                  event.confirm.reject();
+                }
+              },
+              (dataError) => {
+                let apiResult = dataError.error as ApiRest;
+                this.toastrService.error(apiResult.respuesta, 'Alerta!');
+              }
+            );
+          } else {
+            this.toastrService.error("No existe información", 'Alerta!');
+          }
+        } catch (error) {
+          this.toastrService.error(error, 'Alerta!');
+        }
+      } else if (
+        // Read more about handling dismissals
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+
+      }
+    });
+  }
+
 
 
   async listarProductosxCategoria(event) {
