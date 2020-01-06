@@ -72,7 +72,7 @@ export class DetalleProductoComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = +params['id'];
       this.infoProducto(id);
-      this.listarProductosCruzados();
+      this.listarProductosCruzados(id);
 
       this.listarTallasDisponibles(id);
       this.listarColoresDisponibles(id);
@@ -174,8 +174,8 @@ export class DetalleProductoComponent implements OnInit {
     }
   }
 
-  async listarProductosCruzados() {
-    this.conectorApi.Get("productos/comercio/listar").subscribe(
+  async listarProductosCruzados(idProducto) {
+    this.conectorApi.Get(`productoscruzados/listar/producto/${idProducto}`).subscribe(
       async (data) => {
         let dat = data as ApiRest;
         if (dat.codigo == 0) {
