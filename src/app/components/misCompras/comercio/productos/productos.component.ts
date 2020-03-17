@@ -9,6 +9,7 @@ import { Producto } from 'src/app/modelos/producto.model';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
 import { Carrito } from 'src/app/servicios/carrito.service';
 import { ListaDeseos } from 'src/app/servicios/listadeseos.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-productos',
@@ -17,7 +18,6 @@ import { ListaDeseos } from 'src/app/servicios/listadeseos.service';
 })
 export class ProductosComponent implements OnInit {
   @Output() productDetail: any;
-
   @Output() productoDetalleVistaRapida: any;
   public productos: Producto[] = [];
 

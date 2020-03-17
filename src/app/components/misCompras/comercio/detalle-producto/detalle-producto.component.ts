@@ -119,6 +119,7 @@ export class DetalleProductoComponent implements OnInit {
             let dat = data as ApiRest;
             if (dat.codigo == 0) {
               this.imagenesProducto = dat.data;
+              console.log("DAta",this.imagenesProducto);
             } else {
               this.toastrService.error(dat.error, 'Alerta!');
             }
