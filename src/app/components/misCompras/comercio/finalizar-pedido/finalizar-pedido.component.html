@@ -6,20 +6,6 @@
           <h3>Finalizar Pedido</h3>
         </div>
       </div>
-      <div class="col">
-        <div class="bookmark pull-right">
-          <ul>
-            <li><a href="javascript:void(0)" data-container="body" data-toggle="popover" data-placement="top" title=""
-                data-original-title="Calendar"><i data-feather="calendar"></i></a></li>
-            <li><a href="javascript:void(0)" data-container="body" data-toggle="popover" data-placement="top" title=""
-                data-original-title="Mail"><i data-feather="mail"></i></a></li>
-            <li><a href="javascript:void(0)" data-container="body" data-toggle="popover" data-placement="top" title=""
-                data-original-title="Chat"><i data-feather="message-square"></i></a></li>
-            <li><a href="javascript:void(0)" data-container="body" data-toggle="popover" data-placement="top" title=""
-                data-original-title="Bookmark"><i data-feather="star"></i></a></li>
-          </ul>
-        </div>
-      </div>
     </div>
   </div>
 </div>
@@ -80,9 +66,9 @@
             </div>
             <div class="form-group">
               <label for="inputState">Departamento</label>
-              <select name="departamento" formControlName="departamento" class="form-control">
+              <select name="departamento" formControlName="departamento" class="form-control" (change)="listarMunicipios($event)">
                 <option [value]="item.value" *ngFor="let item of departamentos"
-                (click)="listarMunicipios($event)">{{item.title}}</option>
+                >{{item.title}}</option>
               </select>
               <div *ngIf="checkoutForm.controls['departamento'].touched && checkoutForm.controls['departamento'].errors?.required"
                 class="text text-danger">

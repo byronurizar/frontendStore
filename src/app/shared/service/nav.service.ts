@@ -75,6 +75,9 @@ export class NavService {
         },
         {
           path: '/comercio/listadeseos', title: 'Lista de deseos', type: 'link'
+        },
+        {
+          path: '/comercio/detallepedido/54', title: 'Detalle de pedido', type: 'link'
         }
       ]
     },

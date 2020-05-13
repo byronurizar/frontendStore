@@ -110,9 +110,9 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-form-label">Departamento</label>
-                                            <select name="departamento" class="form-control">
+                                            <select name="departamento" class="form-control" (change)="listarMunicipios($event)"> 
                                                 <option [value]="item.value" *ngFor="let item of departamentos"
-                                                    (click)="listarMunicipios($event)">{{item.title}}</option>
+                                                    >{{item.title}}</option>
                                             </select>
                                         </div>
                                     </div>

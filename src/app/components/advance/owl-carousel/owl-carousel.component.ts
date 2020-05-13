@@ -11,38 +11,38 @@ export class OwlCarouselComponent implements OnInit {
 
   // Carousel Images  
   public carouselImages = [{
-    image: 'assets/images/slider/1.jpg',
+    image: 'assets/images/1.png',
   },
   {
-    image: 'assets/images/slider/2.jpg',
+    image: 'assets/images/2.png',
   },
   {
-    image: 'assets/images/slider/3.jpg',
+    image: 'assets/images/3.png',
   },
   {
-    image: 'assets/images/slider/4.jpg',
+    image: 'assets/images/4.png',
   },
   {
-    image: 'assets/images/slider/5.jpg',
+    image: 'assets/images/5.png',
   },
   {
-    image: 'assets/images/slider/6.jpg',
+    image: 'assets/images/6.png',
   },
   {
-    image: 'assets/images/slider/7.jpg',
+    image: 'assets/images/1.png',
   },
   {
-    image: 'assets/images/slider/8.jpg',
+    image: 'assets/images/2.png',
   },
   {
-    image: 'assets/images/slider/9.jpg',
+    image: 'assets/images/3.png',
   },
   {
-    image: 'assets/images/slider/10.jpg',
+    image: 'assets/images/4.png',
   },
   {
-    image: 'assets/images/slider/11.jpg',
-  }]
+    image: 'assets/images/5.png',
+  }];
 
   carouselBasic = {
     loop: true,
@@ -295,7 +295,7 @@ export class OwlCarouselComponent implements OnInit {
   }
 
   carouselAutoHeight = {
-    items: 1,
+    items: 4,
     margin: 10,
     autoHeight: true,
     nav: false

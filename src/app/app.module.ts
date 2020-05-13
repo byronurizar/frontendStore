@@ -36,6 +36,11 @@ import { RegistroComponent } from './misCompras/registro/registro.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { InicioComponent } from './misCompras/inicio/inicio.component';
+import { HomeVentasComponent } from './misCompras/home-ventas/home-ventas.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ComercioModule } from './components/misCompras/comercio/comercio.module';
+import { CommonModule } from '@angular/common';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
@@ -52,9 +57,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     EnterpriseComponent,
     IngresoSistemaComponent,
     RegistroComponent,
-    InicioComponent
+    InicioComponent,
+    HomeVentasComponent
   ],
   imports: [
+      CarouselModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -74,7 +81,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AngularFireAuthModule,
     AngularFirestoreModule,
     NgbModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    CommonModule,
+    ComercioModule
   ],
   providers: [AuthService, AdminGuard, SecureInnerPagesGuard, CookieService, CategoriaService, ConectorApi],
   bootstrap: [AppComponent]

@@ -31,7 +31,7 @@ const routes: Routes = [{
   component:FinalizarPedidoComponent
 },
 {
-  path:'detallepedido',
+  path:'detallepedido/:id',
   component:DetallePedidoComponent
 }
 ]

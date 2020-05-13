@@ -32,6 +32,7 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
     ReactiveFormsModule,
     GalleryModule.forRoot()
   ],
+  exports:[ProductosComponent],
   providers: [NgbActiveModal,ProductsService]
 })
 export class ComercioModule { }

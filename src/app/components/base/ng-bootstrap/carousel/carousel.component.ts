@@ -12,7 +12,7 @@ export class NgbCarouselComponent implements OnInit {
 
   showNavigationArrows = false;
   showNavigationIndicators = false;
-  images = ['assets/images/c1.jpg','assets/images/c2.jpg','assets/images/c3.jpg']
+  images = ['assets/images/1.png','assets/images/2.png','assets/images/3.png','assets/images/4.png','assets/images/5.png','assets/images/6.png']
 
   constructor(config: NgbCarouselConfig) {
     // customize default values of carousels used by this component tree

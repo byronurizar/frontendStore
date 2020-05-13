@@ -10,6 +10,9 @@ import { ToastrService } from 'ngx-toastr';
 import { ConectorApi } from 'src/app/servicios/conectorApi.service';
 import { ApiRest } from 'src/app/modelos/apiResponse.model';
 import { Carrito } from 'src/app/servicios/carrito.service';
+import { Router } from '@angular/router';
+declare var require
+const Swal = require('sweetalert2')
 
 @Component({
   selector: 'app-finalizar-pedido',
@@ -29,14 +32,14 @@ export class FinalizarPedidoComponent implements OnInit {
   public amount: number;
   public submitted = false;
   public userInfo: string;
-  constructor(private fb: FormBuilder,private conectorApi: ConectorApi, private toastrService: ToastrService,private carrito:Carrito, public productService: ProductsService, private cartService: CartService, private invoiceService: InvoiceService) {
+  constructor(private router: Router,private fb: FormBuilder,private conectorApi: ConectorApi, private toastrService: ToastrService,private carrito:Carrito, public productService: ProductsService, private cartService: CartService, private invoiceService: InvoiceService) {
     this.createForm();
   }
 
   createForm() {
     this.checkoutForm = this.fb.group({
-      nombres: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
-      apellidos: ['', [Validators.required, Validators.pattern('[a-zA-Z][a-zA-Z ]+[a-zA-Z]$')]],
+      nombres: ['', [Validators.required, Validators.pattern('[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$')]],
+      apellidos: ['', [Validators.required, Validators.pattern('[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$')]],
       telefonos: ['', [Validators.required, Validators.pattern('[0-9]+')]],
       departamento: ['', Validators.required],
       municipio: ['', Validators.required],
@@ -49,7 +52,8 @@ export class FinalizarPedidoComponent implements OnInit {
     this.nuevoTipoPago=idtipo;
   }
   
-  onSubmit() {
+  async onSubmit() {
+    this.detallePedido=[];
     let dataPedido;
     this.submitted = true;
     // if (this.checkoutForm.invalid) {
@@ -57,6 +61,7 @@ export class FinalizarPedidoComponent implements OnInit {
     // }
     this.userInfo = this.checkoutForm.value;
     console.log("Info formulario",this.userInfo);
+    console.log("info",this.checkOutItems);
     this.checkOutItems.forEach(item=>{
      let itemPedido={
         id:item.producto.id,
@@ -73,13 +78,28 @@ let json={
   idTipoPago:this.tipoPagoSeleccionado
 }
 
-console.log("Data pedido",json);
-    this.conectorApi.Post("pedido/recibe/registro", json).subscribe(
+
+
+  await  this.conectorApi.Post("pedido/recibe/registro", json).subscribe(
       (data)=>{
-        console.log("Data Registro",data);
+        let dat = data as ApiRest;
+        if(dat.codigo==0){
+          const {idPedido}=dat.data;
+          Swal.fire({
+            title: 'Informacion?',
+            text: "Pedido generado exitosamente",
+            type: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+          }).then((result) => {
+            this.router.navigate(['/comercio/detallepedido/'+idPedido]);  
+          });
+        }else{
+          this.toastrService.error(dat.error, 'Alerta!');
+        }
       },
       (dataErrror)=>{
-        console.log("Data Registro Error",dataErrror);
+        this.toastrService.error(dataErrror.error, 'Alerta!');
       }
     )
   }
@@ -99,7 +119,7 @@ console.log("Data pedido",json);
       this.conectorApi.Get('departamentos/listar').subscribe(
         async (data) => {
           let dat = data as ApiRest;
-          console.log("Todos los departamentos", dat.data);
+          // console.log("Todos los departamentos", dat.data);
           await dat.data.forEach(departamento => {
             this.departamentos.push(new ElementoLista(departamento.id, departamento.descripcion))
           });
@@ -116,6 +136,7 @@ console.log("Data pedido",json);
   async listarMunicipios(event) {
     try {
       this.municipios = [];
+      console.log(event);
       let idDepto = event.target.value;
       if (idDepto > 0) {
         this.municipios.push(new ElementoLista('', 'Seleccione un municipio'))
@@ -139,11 +160,15 @@ console.log("Data pedido",json);
   }
   async listarTipoPago() {
     try {
+      this.tiposPago=[];
       this.conectorApi.Get('tipopago/listar').subscribe(
         (data) => {
           let dat = data as ApiRest;
           if(dat.codigo==0){
             this.tiposPago=dat.data;
+            if(this.tiposPago.length==1){
+              this.tipoPagoSeleccionado=1;
+            }
           }
         },
         (dataError) => {
@@ -153,7 +178,6 @@ console.log("Data pedido",json);
     } catch (ex) {
       this.toastrService.error(ex, 'Alerta!');
     }
-
   }
 
 

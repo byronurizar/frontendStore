@@ -49,7 +49,7 @@ export class ConectorApi {
     return this.resultado = this.http.get(urlBase + ruta, httpOptions);
   }
 
-  Patch(ruta, jsonSolicitud) {
+ Patch(ruta, jsonSolicitud) {
     return this.http.patch(urlBase + ruta, jsonSolicitud, httpOptions);
   }
   PostImagenes(ruta, jsonSolicitud) {
