@@ -1,118 +1,49 @@
-
 <!--page-wrapper Start-->
+<style>
+    .landing-main .navbar-expand-lg .navbar-collapse .navbar-nav .nav-item a {
+        color: #ab8ce4 !important;
+    }
+
+    .landing-main .landing-home {
+        background-image: none !important;
+        min-height: 0vh !important;
+    }
+</style>
 <div class="page-wrapper">
     <!--Page Body Start-->
     <div class="page-body-wrapper landing-main">
         <div class="landing-home">
             <div class="landing-header">
                 <div class="container-fluid">
-                    <nav class="navbar navbar-expand-lg">
-                        <a class="navbar-brand" href="javascript:void(0);"><img src="assets/images/logo-light.png"
-                                class="img-fluid" alt="" /></a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#collapsibleNavbar">
-                            <span class="navbar-toggler-icon">
-                                <i class="fa fa-bars"></i>
-                            </span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="landing#home">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="landing#pre-build">Layout</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="landing#cutomizer">customizer</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="landing#key-feature">key-feature</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="landing#support">Update</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="landing#rate">support</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+                   <app-encabezado></app-encabezado>
+                    <!-- Carrusel -->
+                    <app-carrusel></app-carrusel>
                 </div>
             </div>
         </div>
-
-        <!--admin option section start-->
-        <section class="section-space bg-white">
-            <div class="card">
-                <div class="card-body">
-                    <owl-carousel-o [options]="carouselMerge">
-                        <ng-container *ngFor="let img of carouselImages">
-                            <ng-template carouselSlide [id]="img.id">
-                                <img [src]="img.image">
-                            </ng-template>
-                        </ng-container>
-                    </owl-carousel-o>
-                </div>
-            </div>
-
-            
-            <div class="container">
-                <nav class="navbar navbar-expand-lg">
-                    <a class="navbar-brand" href="javascript:void(0);"><img src="assets/images/logo-light.png"
-                            class="img-fluid" alt="" /></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#collapsibleNavbar">
-                        <span class="navbar-toggler-icon">
-                            <i class="fa fa-bars"></i>
-                        </span>
-                    </button>
-                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="landing#home">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="landing#pre-build">Layout</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="landing#cutomizer">customizer</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="landing#key-feature">key-feature</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="landing#support">Update</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="landing#rate">support</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-              
-
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="landing-header">
-                            <h2>Productos</h2>
-                            <div class="line"></div>
-
-                            <!-- Componente de productos -->
-                            <app-productos></app-productos>
-                        </div>
+       
+        <!-- <div class="page-body-wrapper landing-main">
+            <div class="landing-home">
+                <div class="landing-header">
+                    <div class="container-fluid">
+                        <app-carrusel></app-carrusel>
                     </div>
                 </div>
-
-          
-
             </div>
-        </section>
+        </div> -->
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <app-productos></app-productos>
+            </div>
+        </div>
+
         <!--admin option section ends-->
 
-    
+
         <!--support section start-->
-        <section class="section-space advance-widget bg-white" id="support">
+        <!-- <section class="section-space advance-widget bg-white" id="support">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12">
@@ -147,28 +78,11 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <!--support section ends-->
-
+        <app-footer-inicio></app-footer-inicio>
         <!--footer start-->
-        <section class="section-space footer-bg" id="rate">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h2>if you like our products Please Rate Us</h2>
-                        <div class="star-rate">
-                            <i class="fa fa-star font-warning"></i>
-                            <i class="fa fa-star font-warning"></i>
-                            <i class="fa fa-star font-warning"></i>
-                            <i class="fa fa-star font-warning"></i>
-                            <i class="fa fa-star font-warning"></i>
-                        </div>
-                        <button type="button" class="btn btn-warning btn-lg" data-original-title="btn btn-info btn-lg"
-                            title="">Rate Us</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <!-- <app-footer></app-footer> -->
         <!--footer ends-->
         <!--Page Body Ends-->
     </div>

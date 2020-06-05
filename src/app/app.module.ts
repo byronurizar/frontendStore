@@ -40,6 +40,11 @@ import { HomeVentasComponent } from './misCompras/home-ventas/home-ventas.compon
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ComercioModule } from './components/misCompras/comercio/comercio.module';
 import { CommonModule } from '@angular/common';
+import { DetalledeProductoComponent } from './misCompras/detallede-producto/detallede-producto.component';
+import { EncabezadoComponent } from './misCompras/encabezado/encabezado.component';
+import { CarruselComponent } from './misCompras/carrusel/carrusel.component';
+import { FooterComponent } from './misCompras/footer/footer.component';
+import { FooterInicioComponent } from './misCompras/footer-inicio/footer-inicio.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -58,10 +63,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     IngresoSistemaComponent,
     RegistroComponent,
     InicioComponent,
-    HomeVentasComponent
+    HomeVentasComponent,
+    DetalledeProductoComponent,
+    EncabezadoComponent,
+    CarruselComponent,
+    FooterComponent,
+    FooterInicioComponent
   ],
   imports: [
-      CarouselModule,
+    CarouselModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
